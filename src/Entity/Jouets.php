@@ -29,6 +29,9 @@ class Jouets
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     private ?\DateTimeInterface $Date_publication = null;
 
+    #[ORM\ManyToOne(inversedBy: 'jouets')]
+    private ?User $user = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -90,6 +93,18 @@ class Jouets
     public function setDatePublication(\DateTimeInterface $Date_publication): static
     {
         $this->Date_publication = $Date_publication;
+
+        return $this;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(?User $user): static
+    {
+        $this->user = $user;
 
         return $this;
     }

@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\RecetteRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -28,6 +30,17 @@ class Recette
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     private ?\DateTimeInterface $date_mise_ajour = null;
+
+    /**
+     * @var Collection<int, CommentairesRecette>
+     */
+    #[ORM\OneToMany(targetEntity: CommentairesRecette::class, mappedBy: 'recette')]
+    private Collection $commentairesRecettes;
+
+    public function __construct()
+    {
+        $this->commentairesRecettes = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -90,6 +103,36 @@ class Recette
     public function setDateMiseAjour(\DateTimeInterface $date_mise_ajour): static
     {
         $this->date_mise_ajour = $date_mise_ajour;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, CommentairesRecette>
+     */
+    public function getCommentairesRecettes(): Collection
+    {
+        return $this->commentairesRecettes;
+    }
+
+    public function addCommentairesRecette(CommentairesRecette $commentairesRecette): static
+    {
+        if (!$this->commentairesRecettes->contains($commentairesRecette)) {
+            $this->commentairesRecettes->add($commentairesRecette);
+            $commentairesRecette->setRecette($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCommentairesRecette(CommentairesRecette $commentairesRecette): static
+    {
+        if ($this->commentairesRecettes->removeElement($commentairesRecette)) {
+            // set the owning side to null (unless already changed)
+            if ($commentairesRecette->getRecette() === $this) {
+                $commentairesRecette->setRecette(null);
+            }
+        }
 
         return $this;
     }

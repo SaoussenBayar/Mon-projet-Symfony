@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\JeuxEDUCRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -31,6 +33,17 @@ class JeuxEDUC
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
     private ?\DateTimeInterface $Date_mise_ajour = null;
+
+    /**
+     * @var Collection<int, CommentairesJeux>
+     */
+    #[ORM\OneToMany(targetEntity: CommentairesJeux::class, mappedBy: 'jeux')]
+    private Collection $commentairesJeuxes;
+
+    public function __construct()
+    {
+        $this->commentairesJeuxes = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -105,6 +118,36 @@ class JeuxEDUC
     public function setDateMiseAjour(?\DateTimeInterface $Date_mise_ajour): static
     {
         $this->Date_mise_ajour = $Date_mise_ajour;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, CommentairesJeux>
+     */
+    public function getCommentairesJeuxes(): Collection
+    {
+        return $this->commentairesJeuxes;
+    }
+
+    public function addCommentairesJeux(CommentairesJeux $commentairesJeux): static
+    {
+        if (!$this->commentairesJeuxes->contains($commentairesJeux)) {
+            $this->commentairesJeuxes->add($commentairesJeux);
+            $commentairesJeux->setJeux($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCommentairesJeux(CommentairesJeux $commentairesJeux): static
+    {
+        if ($this->commentairesJeuxes->removeElement($commentairesJeux)) {
+            // set the owning side to null (unless already changed)
+            if ($commentairesJeux->getJeux() === $this) {
+                $commentairesJeux->setJeux(null);
+            }
+        }
 
         return $this;
     }

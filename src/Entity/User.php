@@ -58,9 +58,37 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(targetEntity: CommentairesRecette::class, mappedBy: 'user')]
     private Collection $commentairesRecettes;
 
+    /**
+     * @var Collection<int, CommentairesStatut>
+     */
+    #[ORM\OneToMany(targetEntity: CommentairesStatut::class, mappedBy: 'user')]
+    private Collection $commentairesStatuts;
+
+    /**
+     * @var Collection<int, Statut>
+     */
+    #[ORM\OneToMany(targetEntity: Statut::class, mappedBy: 'user')]
+    private Collection $statuts;
+
+    /**
+     * @var Collection<int, Jouets>
+     */
+    #[ORM\OneToMany(targetEntity: Jouets::class, mappedBy: 'user')]
+    private Collection $jouets;
+
+    /**
+     * @var Collection<int, CommentairesJeux>
+     */
+    #[ORM\OneToMany(targetEntity: CommentairesJeux::class, mappedBy: 'user')]
+    private Collection $commentairesJeuxes;
+
     public function __construct()
     {
         $this->commentairesRecettes = new ArrayCollection();
+        $this->commentairesStatuts = new ArrayCollection();
+        $this->statuts = new ArrayCollection();
+        $this->jouets = new ArrayCollection();
+        $this->commentairesJeuxes = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -234,6 +262,126 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
             // set the owning side to null (unless already changed)
             if ($commentairesRecette->getUser() === $this) {
                 $commentairesRecette->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, CommentairesStatut>
+     */
+    public function getCommentairesStatuts(): Collection
+    {
+        return $this->commentairesStatuts;
+    }
+
+    public function addCommentairesStatut(CommentairesStatut $commentairesStatut): static
+    {
+        if (!$this->commentairesStatuts->contains($commentairesStatut)) {
+            $this->commentairesStatuts->add($commentairesStatut);
+            $commentairesStatut->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCommentairesStatut(CommentairesStatut $commentairesStatut): static
+    {
+        if ($this->commentairesStatuts->removeElement($commentairesStatut)) {
+            // set the owning side to null (unless already changed)
+            if ($commentairesStatut->getUser() === $this) {
+                $commentairesStatut->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Statut>
+     */
+    public function getStatuts(): Collection
+    {
+        return $this->statuts;
+    }
+
+    public function addStatut(Statut $statut): static
+    {
+        if (!$this->statuts->contains($statut)) {
+            $this->statuts->add($statut);
+            $statut->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeStatut(Statut $statut): static
+    {
+        if ($this->statuts->removeElement($statut)) {
+            // set the owning side to null (unless already changed)
+            if ($statut->getUser() === $this) {
+                $statut->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Jouets>
+     */
+    public function getJouets(): Collection
+    {
+        return $this->jouets;
+    }
+
+    public function addJouet(Jouets $jouet): static
+    {
+        if (!$this->jouets->contains($jouet)) {
+            $this->jouets->add($jouet);
+            $jouet->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeJouet(Jouets $jouet): static
+    {
+        if ($this->jouets->removeElement($jouet)) {
+            // set the owning side to null (unless already changed)
+            if ($jouet->getUser() === $this) {
+                $jouet->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, CommentairesJeux>
+     */
+    public function getCommentairesJeuxes(): Collection
+    {
+        return $this->commentairesJeuxes;
+    }
+
+    public function addCommentairesJeux(CommentairesJeux $commentairesJeux): static
+    {
+        if (!$this->commentairesJeuxes->contains($commentairesJeux)) {
+            $this->commentairesJeuxes->add($commentairesJeux);
+            $commentairesJeux->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCommentairesJeux(CommentairesJeux $commentairesJeux): static
+    {
+        if ($this->commentairesJeuxes->removeElement($commentairesJeux)) {
+            // set the owning side to null (unless already changed)
+            if ($commentairesJeux->getUser() === $this) {
+                $commentairesJeux->setUser(null);
             }
         }
 

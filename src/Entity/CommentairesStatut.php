@@ -20,6 +20,12 @@ class CommentairesStatut
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     private ?\DateTimeInterface $Date_commentaire = null;
 
+    #[ORM\ManyToOne(inversedBy: 'commentairesStatuts')]
+    private ?User $user = null;
+
+    #[ORM\ManyToOne(inversedBy: 'commentairesStatuts')]
+    private ?Statut $statut = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -45,6 +51,30 @@ class CommentairesStatut
     public function setDateCommentaire(\DateTimeInterface $Date_commentaire): static
     {
         $this->Date_commentaire = $Date_commentaire;
+
+        return $this;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(?User $user): static
+    {
+        $this->user = $user;
+
+        return $this;
+    }
+
+    public function getStatut(): ?Statut
+    {
+        return $this->statut;
+    }
+
+    public function setStatut(?Statut $statut): static
+    {
+        $this->statut = $statut;
 
         return $this;
     }

@@ -22,6 +22,12 @@ class CommentairesJeux
     #[ORM\Column(length: 255)]
     private ?string $Date_commentaire = null;
 
+    #[ORM\ManyToOne(inversedBy: 'commentairesJeuxes')]
+    private ?User $user = null;
+
+    #[ORM\ManyToOne(inversedBy: 'commentairesJeuxes')]
+    private ?JeuxEDUC $jeux = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -59,6 +65,30 @@ class CommentairesJeux
     public function setDateCommentaire(string $Date_commentaire): static
     {
         $this->Date_commentaire = $Date_commentaire;
+
+        return $this;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(?User $user): static
+    {
+        $this->user = $user;
+
+        return $this;
+    }
+
+    public function getJeux(): ?JeuxEDUC
+    {
+        return $this->jeux;
+    }
+
+    public function setJeux(?JeuxEDUC $jeux): static
+    {
+        $this->jeux = $jeux;
 
         return $this;
     }
