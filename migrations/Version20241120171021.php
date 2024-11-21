@@ -10,7 +10,7 @@ use Doctrine\Migrations\AbstractMigration;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20241119151942 extends AbstractMigration
+final class Version20241120171021 extends AbstractMigration
 {
     public function getDescription(): string
     {
@@ -20,16 +20,12 @@ final class Version20241119151942 extends AbstractMigration
     public function up(Schema $schema): void
     {
         // this up() migration is auto-generated, please modify it to your needs
-        $this->addSql('ALTER TABLE comment ADD book_id INT NOT NULL');
-        $this->addSql('ALTER TABLE comment ADD CONSTRAINT FK_9474526C16A2B381 FOREIGN KEY (book_id) REFERENCES book (id)');
-        $this->addSql('CREATE INDEX IDX_9474526C16A2B381 ON comment (book_id)');
+        $this->addSql('CREATE TABLE statut (id INT AUTO_INCREMENT NOT NULL, contenu LONGTEXT NOT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
     }
 
     public function down(Schema $schema): void
     {
         // this down() migration is auto-generated, please modify it to your needs
-        $this->addSql('ALTER TABLE comment DROP FOREIGN KEY FK_9474526C16A2B381');
-        $this->addSql('DROP INDEX IDX_9474526C16A2B381 ON comment');
-        $this->addSql('ALTER TABLE comment DROP book_id');
+        $this->addSql('DROP TABLE statut');
     }
 }

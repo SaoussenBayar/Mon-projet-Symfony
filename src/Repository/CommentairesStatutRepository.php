@@ -2,39 +2,39 @@
 
 namespace App\Repository;
 
-use App\Entity\Book;
+use App\Entity\CommentairesStatut;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
- * @extends ServiceEntityRepository<Book>
+ * @extends ServiceEntityRepository<CommentairesStatut>
  */
-class BookRepository extends ServiceEntityRepository
+class CommentairesStatutRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, Book::class);
+        parent::__construct($registry, CommentairesStatut::class);
     }
 
     //    /**
-    //     * @return Book[] Returns an array of Book objects
+    //     * @return CommentairesStatut[] Returns an array of CommentairesStatut objects
     //     */
     //    public function findByExampleField($value): array
     //    {
-    //        return $this->createQueryBuilder('b')
-    //            ->andWhere('b.exampleField = :val')
+    //        return $this->createQueryBuilder('c')
+    //            ->andWhere('c.exampleField = :val')
     //            ->setParameter('val', $value)
-    //            ->orderBy('b.id', 'ASC')
+    //            ->orderBy('c.id', 'ASC')
     //            ->setMaxResults(10)
     //            ->getQuery()
     //            ->getResult()
     //        ;
     //    }
 
-    //    public function findOneBySomeField($value): ?Book
+    //    public function findOneBySomeField($value): ?CommentairesStatut
     //    {
-    //        return $this->createQueryBuilder('b')
-    //            ->andWhere('b.exampleField = :val')
+    //        return $this->createQueryBuilder('c')
+    //            ->andWhere('c.exampleField = :val')
     //            ->setParameter('val', $value)
     //            ->getQuery()
     //            ->getOneOrNullResult()

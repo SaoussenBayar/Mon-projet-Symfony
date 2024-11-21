@@ -5,6 +5,7 @@ namespace App\Entity;
 use App\Repository\UserRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -34,28 +35,32 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private ?string $password = null;
 
     #[ORM\Column(length: 255)]
-    private ?string $Comment = null;
+    private ?string $Nom = null;
 
-    #[ORM\ManyToOne(targetEntity: self::class, inversedBy: 'users')]
-    #[ORM\JoinColumn(nullable: false)]
-    private ?self $comment = null;
+    #[ORM\Column(length: 255)]
+    private ?string $Prenom = null;
+
+    #[ORM\Column(type: Types::DATE_MUTABLE)]
+    private ?\DateTimeInterface $Date_naissance = null;
+
+    #[ORM\Column(length: 255)]
+    private ?string $ville = null;
+
+    #[ORM\Column(length: 255)]
+    private ?string $Pays = null;
+
+    #[ORM\Column(type: Types::DATETIME_MUTABLE)]
+    private ?\DateTimeInterface $Date_inscription = null;
 
     /**
-     * @var Collection<int, self>
+     * @var Collection<int, CommentairesRecette>
      */
-    #[ORM\OneToMany(targetEntity: self::class, mappedBy: 'comment')]
-    private Collection $users;
-
-    /**
-     * @var Collection<int, Comment>
-     */
-    #[ORM\OneToMany(targetEntity: Comment::class, mappedBy: 'user')]
-    private Collection $user;
+    #[ORM\OneToMany(targetEntity: CommentairesRecette::class, mappedBy: 'user')]
+    private Collection $commentairesRecettes;
 
     public function __construct()
     {
-        $this->users = new ArrayCollection();
-        $this->user = new ArrayCollection();
+        $this->commentairesRecettes = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -133,53 +138,105 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         // $this->plainPassword = null;
     }
 
-    public function getComment(): ?string
+    public function getNom(): ?string
     {
-        return $this->Comment;
+        return $this->Nom;
     }
 
-    public function setComment(string $Comment): static
+    public function setNom(string $Nom): static
     {
-        $this->Comment = $Comment;
+        $this->Nom = $Nom;
+
+        return $this;
+    }
+
+    public function getPrenom(): ?string
+    {
+        return $this->Prenom;
+    }
+
+    public function setPrenom(string $Prenom): static
+    {
+        $this->Prenom = $Prenom;
+
+        return $this;
+    }
+
+    public function getDateNaissance(): ?\DateTimeInterface
+    {
+        return $this->Date_naissance;
+    }
+
+    public function setDateNaissance(\DateTimeInterface $Date_naissance): static
+    {
+        $this->Date_naissance = $Date_naissance;
+
+        return $this;
+    }
+
+    public function getVille(): ?string
+    {
+        return $this->ville;
+    }
+
+    public function setVille(string $ville): static
+    {
+        $this->ville = $ville;
+
+        return $this;
+    }
+
+    public function getPays(): ?string
+    {
+        return $this->Pays;
+    }
+
+    public function setPays(string $Pays): static
+    {
+        $this->Pays = $Pays;
+
+        return $this;
+    }
+
+    public function getDateInscription(): ?\DateTimeInterface
+    {
+        return $this->Date_inscription;
+    }
+
+    public function setDateInscription(\DateTimeInterface $Date_inscription): static
+    {
+        $this->Date_inscription = $Date_inscription;
 
         return $this;
     }
 
     /**
-     * @return Collection<int, self>
+     * @return Collection<int, CommentairesRecette>
      */
-    public function getUsers(): Collection
+    public function getCommentairesRecettes(): Collection
     {
-        return $this->users;
+        return $this->commentairesRecettes;
     }
 
-    public function addUser(self $user): static
+    public function addCommentairesRecette(CommentairesRecette $commentairesRecette): static
     {
-        if (!$this->users->contains($user)) {
-            $this->users->add($user);
-            $user->setComment($this);
+        if (!$this->commentairesRecettes->contains($commentairesRecette)) {
+            $this->commentairesRecettes->add($commentairesRecette);
+            $commentairesRecette->setUser($this);
         }
 
         return $this;
     }
 
-    public function removeUser(self $user): static
+    public function removeCommentairesRecette(CommentairesRecette $commentairesRecette): static
     {
-        if ($this->users->removeElement($user)) {
+        if ($this->commentairesRecettes->removeElement($commentairesRecette)) {
             // set the owning side to null (unless already changed)
-            if ($user->getComment() === $this) {
-                $user->setComment(null);
+            if ($commentairesRecette->getUser() === $this) {
+                $commentairesRecette->setUser(null);
             }
         }
 
         return $this;
-    }
-
-    /**
-     * @return Collection<int, Comment>
-     */
-    public function getUser(): Collection
-    {
-        return $this->user;
     }
 }
