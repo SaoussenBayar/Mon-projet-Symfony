@@ -37,59 +37,43 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(length: 255)]
     private ?string $Nom = null;
 
-    #[ORM\Column(length: 255)]
-    private ?string $Prenom = null;
+  /*   //#[ORM\Column(length: 255)]
+    //private ?string $Prenom = null;
 
-    #[ORM\Column(type: Types::DATE_MUTABLE)]
-    private ?\DateTimeInterface $Date_naissance = null;
+   // #[ORM\Column(type: Types::DATE_MUTABLE)]
+    //private ?\DateTimeInterface $Date_naissance = null;
 
-    #[ORM\Column(length: 255)]
-    private ?string $ville = null;
+   // #[ORM\Column(length: 255)]
+   // private ?string $ville = null;
 
-    #[ORM\Column(length: 255)]
-    private ?string $Pays = null;
+   // #[ORM\Column(length: 255)]
+   // private ?string $Pays = null;
 
-    #[ORM\Column(type: Types::DATETIME_MUTABLE)]
-    private ?\DateTimeInterface $Date_inscription = null;
+   // #[ORM\Column(type: Types::DATETIME_MUTABLE)]
+    //private ?\DateTimeInterface $Date_inscription = null;
 
-    /**
-     * @var Collection<int, CommentairesRecette>
-     */
+    
+    // @var Collection<int, CommentairesRecette>
+    
     #[ORM\OneToMany(targetEntity: CommentairesRecette::class, mappedBy: 'user')]
-    private Collection $commentairesRecettes;
+    private Collection $commentairesRecettes; 
 
     /**
      * @var Collection<int, CommentairesStatut>
      */
-    #[ORM\OneToMany(targetEntity: CommentairesStatut::class, mappedBy: 'user')]
+    /* #[ORM\OneToMany(targetEntity: CommentairesStatut::class, mappedBy: 'user')]
     private Collection $commentairesStatuts;
 
     /**
      * @var Collection<int, Statut>
      */
-    #[ORM\OneToMany(targetEntity: Statut::class, mappedBy: 'user')]
+/*     #[ORM\OneToMany(targetEntity: Statut::class, mappedBy: 'user')]
     private Collection $statuts;
 
     /**
      * @var Collection<int, Jouets>
      */
-    #[ORM\OneToMany(targetEntity: Jouets::class, mappedBy: 'user')]
-    private Collection $jouets;
-
-    /**
-     * @var Collection<int, CommentairesJeux>
-     */
-    #[ORM\OneToMany(targetEntity: CommentairesJeux::class, mappedBy: 'user')]
-    private Collection $commentairesJeuxes;
-
-    public function __construct()
-    {
-        $this->commentairesRecettes = new ArrayCollection();
-        $this->commentairesStatuts = new ArrayCollection();
-        $this->statuts = new ArrayCollection();
-        $this->jouets = new ArrayCollection();
-        $this->commentairesJeuxes = new ArrayCollection();
-    }
+     
 
     public function getId(): ?int
     {
@@ -108,11 +92,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    /**
-     * A visual identifier that represents this user.
-     *
-     * @see UserInterface
-     */
+   
     public function getUserIdentifier(): string
     {
         return (string) $this->email;
@@ -159,7 +139,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     /**
      * @see UserInterface
-     */
+     */ 
     public function eraseCredentials(): void
     {
         // If you store any temporary, sensitive data on the user, clear it here
@@ -178,7 +158,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function getPrenom(): ?string
+   
+    /**public function getPrenom(): ?string
     {
         return $this->Prenom;
     }
@@ -217,9 +198,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function getPays(): ?string
     {
         return $this->Pays;
-    }
+    }  */
 
-    public function setPays(string $Pays): static
+/*     public function setPays(string $Pays): static
     {
         $this->Pays = $Pays;
 
@@ -240,8 +221,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     /**
      * @return Collection<int, CommentairesRecette>
-     */
-    public function getCommentairesRecettes(): Collection
+     */ /* */
+    
+    /**public function getCommentairesRecettes(): Collection
     {
         return $this->commentairesRecettes;
     }
@@ -271,7 +253,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     /**
      * @return Collection<int, CommentairesStatut>
      */
-    public function getCommentairesStatuts(): Collection
+    
+    /**public function getCommentairesStatuts(): Collection
     {
         return $this->commentairesStatuts;
     }
@@ -301,7 +284,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     /**
      * @return Collection<int, Statut>
      */
-    public function getStatuts(): Collection
+    
+    /**public function getStatuts(): Collection
     {
         return $this->statuts;
     }
@@ -331,7 +315,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     /**
      * @return Collection<int, Jouets>
      */
-    public function getJouets(): Collection
+    
+    /**public function getJouets(): Collection
     {
         return $this->jouets;
     }
@@ -361,7 +346,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     /**
      * @return Collection<int, CommentairesJeux>
      */
-    public function getCommentairesJeuxes(): Collection
+    
+    /**public function getCommentairesJeuxes(): Collection
     {
         return $this->commentairesJeuxes;
     }
@@ -386,5 +372,5 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         }
 
         return $this;
-    }
+    }*/
 }

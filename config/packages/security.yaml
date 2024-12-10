@@ -17,14 +17,20 @@ security:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
         main:
-            lazy: true
-            provider: app_user_provider
-            custom_authenticator: App\Security\LoginFormAuthenticator
-            logout:
-                path: app_logout
+            pattern: ^/  # Cela couvre toutes les routes qui commencent par '/' (toutes les routes de l'application)
+            provider: app_user_provider  # Utilise le fournisseur d'utilisateurs défini ci-dessus
+            
+            
+            form_login:  # Authentification par formulaire
+              login_path: app_login  # La route pour afficher le formulaire de connexion
+              check_path: /login  # La route où les informations de connexion sont envoyées via une requête POST
+              default_target_path: /users  # Après une connexion réussie, l'utilisateur est redirigé vers la page /users
+            security: false  
+            logout:  # Gestion de la déconnexion
+              path: /logout  # La route pour se déconnecter
                 # where to redirect after logout
                 # target: app_any_route
-
+                
             # activate different ways to authenticate
             # https://symfony.com/doc/current/security.html#the-firewall
 
@@ -34,8 +40,17 @@ security:
     # Easy way to control access for large sections of your site
     # Note: Only the *first* access control that matches will be used
     access_control:
-        # - { path: ^/admin, roles: ROLE_ADMIN }
-        # - { path: ^/profile, roles: ROLE_USER }
+        - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }  # La page /login est publique (tout le monde peut y accéder)
+
+    # Autorise l'accès à la page de déconnexion sans être authentifié
+        - { path: ^/logout, roles: IS_AUTHENTICATED_ANONYMOUSLY }  # La page /logout est publique (tout le monde peut y accéder)
+
+    # Autorise l'accès à la page d'inscription sans être authentifié
+        - { path: ^/users/new, roles: Roles: ADMIN }  # La page /users/new (inscription) est publique (tout le monde peut y accéder)
+        - { path: ^/users/edit, roles: Roles: ADMIN }
+        - { path: ^/users/delete, roles: Roles: ADMIN }
+    # Restreint l'accès à la page des utilisateurs (/users) uniquement aux utilisateurs complètement authentifiés
+        - { path: ^/users, roles: ADMIN }
 
 when@test:
     security:
