@@ -53,7 +53,7 @@ class UserController extends AbstractController // Déclaration de la classe Use
     {
         if ($request->isMethod('POST')) { // Si la requête est de type POST (formulaire soumis)
             // Récupère et met à jour les informations de l'utilisateur
-            $user->setName($request->request->get('name')); // Modifie le nom de l'utilisateur
+            $user->setNom($request->request->get('name')); // Modifie le nom de l'utilisateur
             $user->setEmail($request->request->get('email')); // Modifie l'email de l'utilisateur
 
             $role = $request->request->get('role', 'ROLE_USER'); // Récupère et met à jour le rôle de l'utilisateur
