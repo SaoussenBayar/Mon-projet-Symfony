@@ -21,10 +21,8 @@ class Article
     private ?string $contenu = null;
 
     #[ORM\Column(type: Types::OBJECT)]
-    private ?object $image = null;
+    private ?string $image = null;
 
-    #[ORM\Column(length: 255)]
-    private ?string $description = null;
 
     public function getId(): ?int
     {
@@ -55,27 +53,16 @@ class Article
         return $this;
     }
 
-    public function getImage(): ?object
+    public function getImage(): ?string
     {
         return $this->image;
     }
 
-    public function setImage(object $image): static
+    public function setImage(string $image): static
     {
         $this->image = $image;
 
         return $this;
     }
 
-    public function getDescription(): ?string
-    {
-        return $this->description;
-    }
-
-    public function setDescription(string $description): static
-    {
-        $this->description = $description;
-
-        return $this;
-    }
 }

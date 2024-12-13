@@ -48,7 +48,10 @@ security:
         - { path: ^/users/\d+/delete, roles: ROLE_ADMIN }
     # Restreint l'accès à la page des utilisateurs (/users) uniquement aux utilisateurs complètement authentifiés
         - { path: ^/users, roles: ROLE_ADMIN }
-        #- { path: ^/, roles: IS_AUTHENTICATED_FULLY }
+
+        - { path: ^/articles/new, roles: ROLE_ADMIN }  # La page /users/new (inscription) est publique (tout le monde peut y accéder)
+        - { path: ^/articles/\d+/edit, roles: ROLE_ADMIN }
+        - { path: ^/articles/\d+/delete, roles: ROLE_ADMIN }
 
 when@test:
     security:

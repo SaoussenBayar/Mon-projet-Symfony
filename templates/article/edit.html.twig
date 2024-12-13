@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<div class="container mt-5">
+<h1>Modifier l'article</h1>
+
+<form method="post" action="{{ path('article_edit', {'id': article.id}) }}" enctype="multipart/form-data">
+    <div>
+        <label for="titre">Titre :</label>
+        <input type="text" id="titre" name="titre" value="{{ article.titre }}" required>
+    </div>
+    <div>
+        <label for="contenu">Contenu :</label>
+        <textarea id="contenu" name="contenu" required>{{ article.contenu }}</textarea>
+    </div>
+    <div>
+        <label for="image">Télécharger une nouvelle image :</label>
+        <input type="file" id="image" name="image">
+    </div>
+    <div>
+        <p>Image actuelle :</p>
+        <img src="{{ asset('uploads/' ~ article.image) }}" alt="Image actuelle" style="max-width: 200px;">
+    </div>
+    <button type="submit">Enregistrer</button>
+</form>
+{% endblock %}
