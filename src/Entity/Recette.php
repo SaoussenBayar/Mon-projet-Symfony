@@ -20,7 +20,13 @@ class Recette
     private ?string $titre = null;
 
     #[ORM\Column(type: Types::TEXT)]
-    private ?string $description = null;
+    private ?string $ingredients = null;
+    
+    #[ORM\Column(type: Types::TEXT)]
+    private ?string $detail = null;
+
+    #[ORM\Column(length: 120)]
+    private ?string $image = null;
 
     #[ORM\Column]
     private ?int $age_recommende = null;
@@ -59,17 +65,42 @@ class Recette
         return $this;
     }
 
-    public function getDescription(): ?string
+    public function getIngredients(): ?string
     {
-        return $this->description;
+        return $this->ingredients;
     }
 
-    public function setDescription(string $description): static
+    public function setIngredients(string $ingredients): static
     {
-        $this->description = $description;
+        $this->ingredients = $ingredients;
+
+        return $this;
+    }   
+
+    public function getDetail(): ?string
+    {
+        return $this->detail;
+    }
+
+    public function setDetail(string $detail): static
+    {
+        $this->detail = $detail;
 
         return $this;
     }
+
+    public function getImage(): ?string
+    {
+        return $this->image;
+    }
+
+    public function setImage(string $image): static
+    {
+        $this->image = $image;
+
+        return $this;
+    }
+
 
     public function getAgeRecommende(): ?int
     {

@@ -1,0 +1,366 @@
+@import url('https://fonts.googleapis.com/css2?family=Kanit:wght@400;700&display=swap');
+
+.navbar{
+    background-image: url('../images/nav.webp');
+    background-size: 100% auto;
+    background-position: center;
+    background-repeat: no-repeat;
+    opacity: 0.97;
+}
+.btn{
+    background-color: #447387;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-family: Kanit;
+    font-size: 18px;
+    border: none;
+    border-radius: 1rem;
+    font-size: 16px;
+    padding: 0.575rem 0.95rem;
+    cursor: pointer;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Ajoute une ombre légère */
+    transition: transform 0.2s;
+}
+.btn:hover {
+    transform: scale(1.05); /* Agrandit légèrement au survol */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+.logo{
+    border: 3px solid #ffd1dc; /* Bordure rose pâle autour du logo */
+    border-radius: 50%;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    
+}
+
+ /* Style des liens de navigation */
+.nav-link {
+    color:#683d12e0;
+    font-size: 19px; /* Taille de police réduite */
+    padding: 8px 15px; /* Espace entre chaque élément */
+    margin: 0 5px; /* Ajoute de l'espace horizontal entre les liens */
+    font-family: Kanit;
+    transition: color 0.3s, transform 0.3s;
+    position: relative;          
+}
+
+/* Effet de survol avec couleur et effet 3D */
+.nav-link:hover {
+    color: #ff99b3;
+    transform: translateY(-3px) scale(1.05);
+}
+/* Style pour les icônes */
+.nav-link i {
+    margin-right: 4px; /* Réduit l'espace entre l'icône et le texte */
+    font-size: 0.9em; /* Taille de l'icône légèrement réduite */
+    color: white;
+    transition: transform 0.3s, text-shadow 0.3s;
+}
+/* Effet "shadow-glow" au survol */
+.nav-link:hover i {
+    transform: rotate(10deg);
+    text-shadow: 0px 3px 6px rgba(255, 153, 179, 0.5);
+}
+.nav-item {
+    margin: 0 8px; /* Espace horizontal entre chaque item */
+} 
+
+
+
+.text-h1{
+    color: #683d12e0;
+    text-align: center;
+    padding-top: 25px;
+    margin-bottom: 20px;
+    font-family: Kanit;
+    font-size: 48px;
+}
+
+.text-p2{
+    color: #683d12e0;
+    text-align: justify;
+    margin: 0 auto;
+    max-width:600px;
+    line-height: 1.6;
+    font-family: Kanit;
+    font-size: 19px;
+    
+}
+
+.btninscription{
+    background-color: #63a8c5;
+    color: white;
+    text-decoration: none;
+    font-family: Kanit;
+    font-size: 20px;
+    border: none;
+    border-radius: 1rem;
+    cursor: pointer;
+    text-align: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Ajoute une ombre légère */
+    transition: transform 0.2s;
+}
+
+.btninscription:hover {
+    transform: scale(1.05); /* Agrandit légèrement au survol */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.image-header {
+    background-image: url('../images/accueil6.webp');
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    padding: 0px; 
+    margin: 0px;
+    height:800px;
+}
+
+
+.row {
+height: auto;
+background-color:  #f7fae4;
+padding: 3.5em;}
+
+.right { 
+display: flex;
+justify-content: center;
+}
+
+
+.left {
+  padding: 50px;
+  font-family: Kanit;  
+}
+
+.section-title { 
+  font-size: 2.8rem;
+  font-weight: bold; 
+  color: #874e4e; 
+  margin-bottom: 20px;
+ } 
+.section-description { 
+  font-size: 1.8rem; 
+  color: #8c6969; 
+  margin-bottom: 30px; 
+  line-height: 1.6; }
+
+   /* Service List */ 
+   .services-section {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 30px;
+  }
+  
+
+   .services {
+    display: flex;
+    flex-direction: column;
+    gap: 20px; /* Espace entre chaque service */
+  }
+  
+  .service {
+    display: flex;
+    align-items: flex-start;
+    gap: 20px; /* Augmente l'espace entre l'icône et le texte */
+    margin-bottom: 15px; /* Ajoute de l'espace entre chaque service */
+  }
+  
+  .icon {
+    flex-shrink: 0;
+    width: 70px;
+    height: 70px;
+    font-size: 35px;
+    background-color: #ffe5d0; /* Couleur d'arrière-plan pour les icônes */
+    border-radius: 50%; /* Cercle pour les icônes */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  h3 {
+    font-size: 22px; /* Rendre les titres un peu plus grands */
+    color: #5c3b28; /* Teinte légèrement plus sombre */
+  }
+  
+  .service p {
+    font-size: 18px;
+    color: #76615b; /* Texte secondaire plus doux */
+  }
+
+  /* Conteneur principal */
+.carousel {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 460px; /* Occupe toute la largeur */
+  height: 648px;
+  margin: auto; /* Centre le carrousel */
+  border-radius: 15px; /* Coins arrondis */
+  box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.2);/* Ombre douce */
+  overflow: hidden; 
+}
+
+/* Images */
+.carousel-item img {
+  width: 460px; /* Occupe toute la largeur */
+  height: 648px; /* Hauteur fixe */
+  object-fit: cover; /* Recadre l'image */
+  border-radius: 15px; /* Coins arrondis pour les images */
+}
+
+/* Superposition du texte */
+.carousel-caption {
+  position: absolute;
+  bottom: 7%;
+  width: 300px;
+  height: 190px;
+  background: rgba(0, 0, 0, 1); /* Fond semi-transparent */
+  border-radius: 10px;
+  color: #fff; /* Texte blanc */
+  text-align: center;
+  padding: 10px;
+  box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.2); /* Ombre douce */
+}
+
+/* Boutons */
+.carousel-caption .btn {
+  margin-top: 10px;
+  background-color: #f28c6e; /* Couleur personnalisée */
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  transition: background-color 0.3s ease;
+}
+
+.carousel-caption .btn:hover {
+  background-color: #d97156; /* Couleur au survol */
+}
+
+/* Indicateurs */
+.carousel-indicators {
+  bottom: -20px; /* Ajuste la position des indicateurs */
+}
+
+.carousel-indicators button {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%; /* Cercles */
+  background-color: #ccc; /* Couleur par défaut */
+}
+
+.carousel-indicators .active {
+  background-color: #f28c6e; /* Couleur pour l'indicateur actif */
+}
+
+
+/* Adjust section styles to ensure spacing */
+.top-section {
+  background-color: #fff8e1; /* Example background color */
+
+
+}
+
+.bottom-section {
+  background-color: #f9f7e7; /* Matches the divider fill color */
+}
+
+/* Section Container */
+
+.baby-development {
+  background-color: #fffbf7;
+  font-family: "Kanit", sans-serif;
+  padding: 50px 20px;
+  text-align: center;
+  height: 800px;
+}
+
+.baby-development h2 {
+  font-size: 22px;
+  color: #5c3b28;
+  margin-bottom: 15px;
+}
+
+.baby-development p {
+  font-family: Kanit;
+
+  font-size: 1rem;
+  color: #555;
+  margin-bottom: 40px;
+}
+
+/* Articles Grid */
+.articles {
+  display: grid;
+  grid-template-columns: repeat(3,350px);
+  justify-items: center;
+  gap: 80px;
+  margin: auto;
+}
+
+/* Article Card */
+.article {
+  background-color: #fff;
+  font-family: Kanit;
+
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  transition: transform 0.3s ease;
+}
+
+.article:hover {
+  transform: translateY(-10px);
+}
+
+.article img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+
+.article h3 {
+  font-family: Kanit;
+
+  font-size: 1.25rem;
+  color: #333;
+  margin: 15px;
+}
+
+.article p {
+  font-family: Kanit;
+
+  font-size: 0.9rem;
+  color: #666;
+  margin: 0 15px 15px;
+  line-height: 1.6;
+}
+
+.article .btn {
+  display: inline-block;
+  margin: 15px;
+  padding: 10px 20px;
+  background-color: #f28c6e;
+  font-family: Kanit;
+
+  color: #fff;
+  text-decoration: none;
+  border-radius: 5px;
+  font-size: 0.9rem;
+  transition: background-color 0.3s ease;
+}
+
+.article .btn:hover {
+  background-color: #f28c6e;
+}
+
+.section {
+  display: flex;               /* Active Flexbox dans chaque section */
+  align-items: center;         /* Centrage vertical */
+  justify-content: center;     /* Centrage horizontal */
+  box-sizing: border-box;      /* Pour inclure le padding et les bordures dans la largeur totale */
+  text-align: center;          /* Centrer le texte */
+  font-family: "Kanit", sans-serif;
+  margin: 0; padding: 0;
+} 

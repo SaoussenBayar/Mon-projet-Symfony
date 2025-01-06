@@ -1,20 +1,148 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello HomeController!{% endblock %}
+{% block title %}Page d'Accueil{% endblock %}
+
+{% block stylesheets %}
+    {{ encore_entry_link_tags('app') }}
+    {{ encore_entry_link_tags('Home') }}    
+{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
+    {# Section de la barre de navigation #}
+    <nav class="navbar navbar-expand-lg">
+        <div class="container-fluid">
+            <img src="{{ asset('images/logo2.png') }}" alt="logo" class="img-fluid logo" width="85" height="85">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+                    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mx-auto me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link d-flex flex-column align-items-center text-p" aria-current="page"
+                           href="{{ path('app_home') }}">Accueil</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link d-flex flex-column align-items-center text-p" href="#">Recettes</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link d-flex flex-column align-items-center text-p" href="#">Jeux éducatifs</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link d-flex flex-column align-items-center text-p" href="#">Échange jouets</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link d-flex flex-column align-items-center text-p" href="#">Forum</a>
+                    </li>
+                </ul>
+                <form class="d-flex" role="connexion">
+                    <a class="btn btn-primary" href="{{ path('app_login') }}">Se connecter</a>
+                </form>
+            </div>
+        </div>
+    </nav>
 
-<div class="example-wrapper">
-    <h1>Hello ! ✅</h1>
+    {# Section top #}
+    <section class="top-section">
+        <div class="container-fluid image-header">
+            <h1 class="text-h1">Rejoignez-nous !</h1>
+            <p class="text-p2">Inscrivez-vous dès maintenant pour échanger des jouets, partager des astuces, et découvrir des recettes et jeux éducatifs adaptés à l'âge de vos enfants !</p>
+            <form class="d-flex justify-content-center" >
+                <a class="btn btn-primary" href="{{ path('app_register') }}">S'inscrire</a>
+            </form>
+        </div>
+    </section>
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code>C:/Users/33753/Desktop/defi/my_project/src/Controller/HomeController.php</code></li>
-        <li>Your template at <code>C:/Users/33753/Desktop/defi/my_project/templates/home/index.html.twig</code></li>
-    </ul>
-</div>
+    {# Section des services et du carousel #}
+    <section class="bottom-section">
+        <div class="row">
+            <div class="left col-md-7">
+                <h2 class="section-title">Tout ce dont vous avez besoin, au même endroit ! 😃</h2>
+                <p class="section-description">Simplifiez votre quotidien avec nos services pour accompagner vos enfants à chaque étape.</p>
+                <div class="services-section">
+                    <div class="services">
+                        {% set services = [
+                            {icon: '🧸', title: 'Echange de Jouets', description: 'Partagez et recevez des jouets en bon état.'},
+                            {icon: '📚', title: 'Recettes et Activités', description: 'Explorez nos idées pour cuisiner et apprendre ensemble.'},
+                            {icon: '🤝', title: 'Forum et Communauté', description: 'Connectez-vous avec des parents qui partagent vos valeurs.'},
+                            {icon: '💡', title: 'Conseils et Astuces', description: 'Obtenez des conseils et astuces pour le développement de vos enfants.'}
+                        ] %}
+                        {% for service in services %}
+                            <div class="service">
+                                <div class="icon">{{ service.icon }}</div>
+                                <div>
+                                    <h3>{{ service.title }}</h3>
+                                    <p>{{ service.description }}</p>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-5 right">
+                <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+                    <ol class="carousel-indicators">
+                        {% for i in 0..2 %}
+                            <li data-bs-target="#carouselExampleIndicators" data-bs-slide-to="{{ i }}" class="{% if i == 0 %}active{% endif %}"></li>
+                        {% endfor %}
+                    </ol>
+                    <div class="carousel-inner">
+                        {% set slides = [
+                            {image: 'images/echanger.jpg', title: 'Echanger des Jouets', text: 'Echangez des jouets de manière sécurisée', link: '#'},
+                            {image: 'images/recette.avif', title: 'Recettes Saines', text: 'Découvrez des recettes nutritives', link: '#'},
+                            {image: 'images/jeux.avif', title: 'Jeux Éducatifs', text: 'Stimulez l’éveil de vos enfants', link: '#'}
+                        ] %}
+                        {% for slide in slides %}
+                            <div class="carousel-item {% if loop.first %}active{% endif %}">
+                                <img src="{{ asset(slide.image) }}" class="d-block w-100" alt="{{ slide.title }}">
+                                <div class="carousel-caption d-none d-md-block bg-dark opacity-75 p-3 rounded">
+                                    <h5>{{ slide.title }}</h5>
+                                    <p>{{ slide.text }}</p>
+                                    <a href="{{ slide.link }}" class="btn btn-primary">Découvrir</a>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                    <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="sr-only">Previous</span>
+                    </a>
+                    <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="sr-only">Next</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+    </section>      
+          <section class="baby-development">
+            <div class="container">
+              <h2>Accompagnez chaque étape du développement de votre bébé</h2>
+              <p>Découvrez des conseils pratiques pour stimuler et soutenir votre enfant dans ses premiers mois et années de vie.</p>
+              <div class="articles">
+                <!-- Article 1 -->
+                <div class="article">
+                  <img src="{{ asset('images/2.jpg') }}" alt="Bébé qui rampe">
+                  <h3>Les premières étapes : Quand et comment aider bébé à se déplacer</h3>
+                  <p>Apprenez à reconnaître les étapes clés du développement moteur et encouragez votre bébé à bouger en toute sécurité.</p>
+                  <a href="#" class="btn">En savoir plus</a>
+                </div>
+                <!-- Article 2 -->
+                <div class="article">
+                  <img src="{{ asset('images/3.jpg') }}" alt="Jeux sensoriels pour bébé">
+                  <h3>Jouer pour grandir : Activités pour éveiller les sens de bébé</h3>
+                  <p>Explorez des jeux et activités qui stimulent les sens de votre bébé pour un développement cognitif optimal.</p>
+                  <a href="#" class="btn">En savoir plus</a>
+                </div>
+                <!-- Article 3 -->
+                <div class="article">
+                  <img src="{{ asset('images/4.jpg') }}" alt="Bébé câliné par un parent">
+                  <h3>Comprendre et répondre aux émotions de votre bébé</h3>
+                  <p>Créez un lien affectif fort avec votre enfant en comprenant ses besoins émotionnels dès le plus jeune âge.</p>
+                  <a href="#" class="btn">En savoir plus</a>
+                </div>
+              </div>
+            </div>
+          </section>
 {% endblock %}
