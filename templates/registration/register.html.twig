@@ -32,15 +32,16 @@
                     {{ form_row(registrationForm.ville) }}
                     {{ form_row(registrationForm.pays) }}
                     {{ form_row(registrationForm.password) }}
+                    <div class="d-flex justify-content-center">
+                <button type="submit" class="btn registerbtn w-50 mt-4 mx-auto">
+                    S'inscrire
+                </button>
+                    </div>
                 {{ form_end(registrationForm) }}
             </div>
 
             <!-- Bouton d'inscription -->
-            <div class="d-flex justify-content-center">
-                <button type="submit" class="btn registerbtn w-50 mt-4 mx-auto">
-                    S'inscrire
-                </button>
-            </div>
+            
 
             <!-- Lien vers la page de connexion -->
             <div class="login-link text-center mt-5">

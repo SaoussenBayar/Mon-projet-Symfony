@@ -15,7 +15,7 @@ class RegistrationFormType extends AbstractType
     {
         $builder
             ->add('nom', TextType::class, [
-                'label' => 'Nom et Prénom',
+                'label' => 'Nom',
                 'attr' => ['placeholder' => 'Votre nom et prénom'],
             ])
             ->add('prenom', TextType::class, [

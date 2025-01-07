@@ -53,6 +53,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
    private ?\DateTimeInterface $Date_inscription = null;
 
     
+  
     // @var Collection<int, CommentairesRecette>
     
     #[ORM\OneToMany(targetEntity: CommentairesRecette::class, mappedBy: 'user')]

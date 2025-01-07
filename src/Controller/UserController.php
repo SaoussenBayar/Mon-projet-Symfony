@@ -1,6 +1,5 @@
 <?php
-// Déclaration du namespace. Cela permet de définir à quel "espace" ou "dossier" cette classe appartient
-// Ici, la classe UserController appartient à l'espace "App\Controller"
+
 namespace App\Controller;
 
 use App\Entity\User; // On importe la classe User. Cela permet de manipuler les entités User
