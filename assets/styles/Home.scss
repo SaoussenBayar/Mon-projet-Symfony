@@ -12,11 +12,8 @@
     color: white;
     border: none;
     border-radius: 5px;
-    font-family: Kanit;
+    font-family: "Kanit", sans-serif;
     font-size: 18px;
-    border: none;
-    border-radius: 1rem;
-    font-size: 16px;
     padding: 0.575rem 0.95rem;
     cursor: pointer;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Ajoute une ombre légère */
@@ -39,7 +36,7 @@
     font-size: 19px; /* Taille de police réduite */
     padding: 8px 15px; /* Espace entre chaque élément */
     margin: 0 5px; /* Ajoute de l'espace horizontal entre les liens */
-    font-family: Kanit;
+    font-family: "Kanit", sans-serif;
     transition: color 0.3s, transform 0.3s;
     position: relative;          
 }
@@ -72,7 +69,7 @@
     text-align: center;
     padding-top: 25px;
     margin-bottom: 20px;
-    font-family: Kanit;
+    font-family: "Kanit", sans-serif;
     font-size: 48px;
 }
 
@@ -82,7 +79,7 @@
     margin: 0 auto;
     max-width:600px;
     line-height: 1.6;
-    font-family: Kanit;
+    font-family: "Kanit", sans-serif;
     font-size: 19px;
     
 }
@@ -91,7 +88,7 @@
     background-color: #63a8c5;
     color: white;
     text-decoration: none;
-    font-family: Kanit;
+    font-family: "Kanit", sans-serif;
     font-size: 20px;
     border: none;
     border-radius: 1rem;
@@ -129,7 +126,7 @@ justify-content: center;
 
 .left {
   padding: 50px;
-  font-family: Kanit;  
+  font-family: "Kanit", sans-serif;  
 }
 
 .section-title { 
@@ -282,7 +279,7 @@ justify-content: center;
 }
 
 .baby-development p {
-  font-family: Kanit;
+  font-family: "Kanit", sans-serif;
 
   font-size: 1rem;
   color: #555;
@@ -301,7 +298,7 @@ justify-content: center;
 /* Article Card */
 .article {
   background-color: #fff;
-  font-family: Kanit;
+  font-family: "Kanit", sans-serif;
 
   border: 1px solid #ddd;
   border-radius: 8px;
@@ -321,7 +318,7 @@ justify-content: center;
 }
 
 .article h3 {
-  font-family: Kanit;
+  font-family: "Kanit", sans-serif;
 
   font-size: 1.25rem;
   color: #333;
@@ -329,7 +326,7 @@ justify-content: center;
 }
 
 .article p {
-  font-family: Kanit;
+  font-family: "Kanit", sans-serif;
 
   font-size: 0.9rem;
   color: #666;
@@ -342,7 +339,7 @@ justify-content: center;
   margin: 15px;
   padding: 10px 20px;
   background-color: #f28c6e;
-  font-family: Kanit;
+  font-family: "Kanit", sans-serif;
 
   color: #fff;
   text-decoration: none;

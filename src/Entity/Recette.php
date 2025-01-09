@@ -29,13 +29,11 @@ class Recette
     private ?string $image = null;
 
     #[ORM\Column]
-    private ?int $age_recommende = null;
+    public ?int $age_recommende = null;
 
-    #[ORM\Column(type: Types::DATETIME_MUTABLE)]
-    private ?\DateTimeInterface $date_creation = null;
+    #[ORM\Column(type:"integer", name:"tempsPrep")]
+    private ?int $tempsPrep = null;
 
-    #[ORM\Column(type: Types::DATETIME_MUTABLE)]
-    private ?\DateTimeInterface $date_mise_ajour = null;
 
     /**
      * @var Collection<int, CommentairesRecette>
@@ -89,6 +87,18 @@ class Recette
         return $this;
     }
 
+    public function getTempsPrep(): ?int
+    {
+        return $this->tempsPrep;
+    }
+
+    public function setTempsPrep(int $tempsPrep): static
+    {
+        $this->tempsPrep = $tempsPrep;
+
+        return $this;
+    }
+
     public function getImage(): ?string
     {
         return $this->image;
@@ -110,30 +120,6 @@ class Recette
     public function setAgeRecommende(int $age_recommende): static
     {
         $this->age_recommende = $age_recommende;
-
-        return $this;
-    }
-
-    public function getDateCreation(): ?\DateTimeInterface
-    {
-        return $this->date_creation;
-    }
-
-    public function setDateCreation(\DateTimeInterface $date_creation): static
-    {
-        $this->date_creation = $date_creation;
-
-        return $this;
-    }
-
-    public function getDateMiseAjour(): ?\DateTimeInterface
-    {
-        return $this->date_mise_ajour;
-    }
-
-    public function setDateMiseAjour(\DateTimeInterface $date_mise_ajour): static
-    {
-        $this->date_mise_ajour = $date_mise_ajour;
 
         return $this;
     }

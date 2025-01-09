@@ -1,14 +1,35 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Liste des Recettes{% endblock %}
+{% block title %}Recettes pour Bébés{% endblock %}
+{% block stylesheets %}
+    {{ encore_entry_link_tags('app') }}
+    {{ encore_entry_link_tags('recette') }}
+{% endblock %}
 
 {% block body %}
-    <h1>Liste des Recettes</h1>
-    <ul>
+    <h1>Liste des Recettes pour Bébés de moins de 3 ans</h1>
+
+    <!-- Filtrer par âge (mais ici, seulement un groupe : moins de 3 ans) -->
+    <div class="filter">
+        <label for="age">Filtrer par âge :</label>
+        <select id="age" name="age">
+            <option value="under3">Moins de 3 ans</option>
+        </select>
+    </div>
+
+    <!-- Liste des recettes -->
+    <ul class="recipes-list">
         {% for recette in recettes %}
-            <li>
+            <li class="recipe-item">
                 <a href="{{ path('recette_details', { id: recette.id }) }}">
-                    {{ recette.titre }}
+                    <div class="recipe-image">
+                        <img src="{{ asset('images/' ~ recette.image) }}" alt="Image de {{ recette.titre }}" />
+                    </div>
+                    <div class="recipe-details">
+                        <h2>{{ recette.titre }}</h2>
+                        <p><strong>Âge recommandé :</strong> {{ recette.age_recommende }}</p>
+                        <p><strong>Temps de préparation :</strong> {{ recette.tempsPrep }} minutes</p>
+                    </div>
                 </a>
             </li>
         {% endfor %}

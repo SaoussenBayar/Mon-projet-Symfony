@@ -1,0 +1,97 @@
+/* SCSS Styling for the Baby Recipes Twig Template */
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f9f9f9;
+    color: #333;
+  }
+  
+  h1 {
+    text-align: center;
+    margin: 20px 0;
+    font-size: 2rem;
+    color: #4CAF50;
+  }
+  
+  .filter {
+    display: flex;
+    justify-content: center;
+    margin: 20px 0;
+  
+    label {
+      font-size: 1rem;
+      margin-right: 10px;
+    }
+  
+    select {
+      padding: 5px;
+      font-size: 1rem;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+  }
+  
+  .recipes-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  
+  .recipe-item {
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+  
+    &:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    }
+  
+    a {
+      text-decoration: none;
+      color: inherit;
+      display: block;
+    }
+  }
+  
+  .recipe-image {
+    width: 100%;
+    height: 200px;
+    overflow: hidden;
+    
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+  }
+  
+  .recipe-details {
+    padding: 15px;
+  
+    h2 {
+      font-size: 1.5rem;
+      margin: 0 0 10px;
+      color: #333;
+    }
+  
+    p {
+      margin: 5px 0;
+      font-size: 0.9rem;
+  
+      strong {
+        color: #555;
+      }
+    }
+  }
+  

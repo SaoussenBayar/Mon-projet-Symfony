@@ -14,6 +14,8 @@ Encore
     .addStyleEntry('Home', './assets/styles/Home.scss')
     .addStyleEntry('Inscription', './assets/styles/Inscription.scss')
     .addStyleEntry('Connexion', './assets/styles/Connexion.scss')
+    .addStyleEntry('recette', './assets/styles/Recette.scss')
+
 
     .splitEntryChunks()
 
