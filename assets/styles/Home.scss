@@ -352,6 +352,7 @@ justify-content: center;
   background-color: #f28c6e;
 }
 
+
 .section {
   display: flex;               /* Active Flexbox dans chaque section */
   align-items: center;         /* Centrage vertical */
@@ -361,3 +362,17 @@ justify-content: center;
   font-family: "Kanit", sans-serif;
   margin: 0; padding: 0;
 } 
+
+.circle {
+  width: 80px !important;
+  height: 80px !important;
+  border-radius: 50% !important;
+  background-color: #4CAF50 !important;
+  color: white !important;
+  font-size: 24px !important;
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  margin-top: 20px !important;
+}
+

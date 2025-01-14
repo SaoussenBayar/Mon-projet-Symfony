@@ -15,6 +15,7 @@ Encore
     .addStyleEntry('Inscription', './assets/styles/Inscription.scss')
     .addStyleEntry('Connexion', './assets/styles/Connexion.scss')
     .addStyleEntry('recette', './assets/styles/Recette.scss')
+    .addStyleEntry('recetteDetail', './assets/styles/RecetteDetail.scss')
 
 
     .splitEntryChunks()
@@ -32,6 +33,7 @@ Encore
     })
 
     .enableSassLoader()
-
+    .enableSourceMaps(false)
+      
    
 module.exports = Encore.getWebpackConfig();

@@ -2,35 +2,102 @@
 
 {% block title %}Détails de la recette{% endblock %}
 
-{% block body %}
-    <h1>{{ recette.titre }}</h1>
-    <p>{{ recette.description }}</p>
+{% block stylesheets %}
+    {{ encore_entry_link_tags('app') }}
+    {{ encore_entry_link_tags('recetteDetail') }}
+{% endblock %}
 
-    <h2>Commentaires</h2>
-    {% for commentaire in recette.commentaires %}
-        <div>
-            <p><strong>{{ commentaire.date|date('d/m/Y H:i') }}</strong>: {{ commentaire.contenu }}</p>
-            {% if app.user == commentaire.auteur %}
-                <a href="{{ path('commentaire_editer', { id: commentaire.id }) }}">Éditer</a>
-                <form action="{{ path('commentaire_supprimer', { id: commentaire.id }) }}" method="post" style="display:inline;">
-                    <input type="hidden" name="_token" value="{{ csrf_token('supprimer' ~ commentaire.id) }}">
-                    <button type="submit">Supprimer</button>
-                </form>
+{% block body %}
+<div class="recette-details">
+    <!-- Section Détails de la recette -->
+    <div class="recette-header">
+        <img src="{{ asset('images/' ~ recette.image) }}" alt="Image de la recette" class="recette-image">
+        <div class="recette-info">
+            <h1>{{ recette.titre }}</h1>
+            <p><strong>Temps de préparation:</strong> {{ recette.tempsPrep }} minutes</p>
+            <p><strong>Âge recommandé:</strong> {{ recette.age_recommende }} ans et plus</p>
+        </div>
+    </div>
+
+    <!-- Section Ingrédients -->
+    <div class="recette-ingredients">
+        <h2>Ingrédients</h2>
+        <ul>
+            {% for ingredient in ingredients %}
+                <li>{{ ingredient|trim }}</li>  <!-- Utilisation de trim() pour supprimer les espaces excédentaires -->
+            {% endfor %}
+        </ul>
+    </div>
+
+    <!-- Section Détails -->
+    <div class="recette-detail">
+        <h2>Description</h2>
+        <ul>
+            {% for detail in details %}
+                <li>{{ detail|trim }}</li>  <!-- Utilisation de trim() pour supprimer les espaces excédentaires -->
+            {% endfor %}
+        </ul>
+    </div>
+
+    <!-- Section Commentaires -->
+    <div class="recette-commentaires">
+        <h2>Commentaires et Notes</h2>
+
+        <!-- Formulaire pour ajouter un commentaire -->
+        <h3>Ajouter un commentaire</h3>
+        {{ form_start(formNouveau) }}
+            <div class="form-group">
+                {{ form_label(formNouveau.note, 'Votre note (1 à 5)') }}
+                {{ form_widget(formNouveau.note, { 'attr': {'class': 'form-control'} }) }}
+            </div>
+            <div class="form-group">
+                {{ form_label(formNouveau.contenu, 'Votre commentaire') }}
+                {{ form_widget(formNouveau.contenu, { 'attr': {'class': 'form-control'} }) }}
+            </div>
+            <button type="submit" class="btn btn-primary">Envoyer</button>
+        {{ form_end(formNouveau) }}
+
+<!-- Liste des commentaires -->
+<div class="commentaires-list">
+    {% for commentaire in recette.commentairesRecettes %}
+        <div class="commentaire">
+            <p><strong>{{ commentaire.user.Prenom }}</strong></p>
+
+            <!-- Affichage des étoiles de notation -->
+            <div class="rating-stars">
+                {% for i in 1..5 %}
+                    <span class="star {% if i <= commentaire.note %}filled{% endif %}"></span>
+                {% endfor %}
+            </div>
+
+            <p>{{ commentaire.contenu }}</p>
+
+{% if commentaire.id == commentaireEnEdition %}
+    <!-- Formulaire d'édition du commentaire -->
+    <h4>Modifier votre commentaire</h4>
+    {{ form_start(formEdit) }}
+        <div class="form-group">
+            {{ form_label(formEdit.note, 'Votre note (1 à 5)') }}
+            {{ form_widget(formEdit.note, { 'attr': {'class': 'form-control'} }) }}
+        </div>
+        <div class="form-group">
+            {{ form_label(formEdit.contenu, 'Votre commentaire') }}
+            {{ form_widget(formEdit.contenu, { 'attr': {'class': 'form-control'} }) }}
+        </div>
+        <button type="submit" class="btn btn-success">Enregistrer</button>
+        <a href="{{ path('recette_details', {id: recette.id}) }}" class="btn btn-secondary">Annuler</a>
+    {{ form_end(formEdit) }}
+            {% else %}
+                {% if commentaire.user == app.user %}
+                    <a href="{{ path('recette_details', {id: recette.id, edit: commentaire.id}) }}" class="btn btn-sm btn-warning">Modifier</a>
+                    <form method="post" action="{{ path('commentaire_delete', {id: commentaire.id}) }}" class="d-inline"
+                          onsubmit="return confirm('Voulez-vous vraiment supprimer ce commentaire ?');">
+                        <input type="hidden" name="_token" value="{{ csrf_token('supprimer' ~ commentaire.id) }}">
+                        <button type="submit" class="btn btn-sm btn-danger">Supprimer</button>
+                    </form>
+                {% endif %}
             {% endif %}
         </div>
-    {% else %}
-        <p>Aucun commentaire pour cette recette.</p>
     {% endfor %}
-
-    <h2>Ajouter un commentaire</h2>
-    {{ form_start(form) }}
-        {{ form_widget(form) }}
-        <button type="submit">Envoyer</button>
-    {{ form_end(form) }}
-
-    {% for message in app.flashes('success') %}
-        <div class="alert alert-success">
-            {{ message }}
-        </div>
-    {% endfor %}
+</div>
 {% endblock %}
