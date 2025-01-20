@@ -20,6 +20,10 @@ class RegistrationFormType extends AbstractType
                 'label' => 'Prénom',
                 'attr' => ['placeholder' => 'Votre prénom'],
             ])
+            ->add('pseudo', TextType::class, [
+                'label' => 'Pseudo',
+                'attr' => ['placeholder' => 'pseudo'],
+            ])
             ->add('email', EmailType::class, [
                 'label' => 'Email',
                 'attr' => ['placeholder' => 'Votre email'],

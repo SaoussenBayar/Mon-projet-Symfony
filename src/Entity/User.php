@@ -31,6 +31,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     /**
      * @var string The hashed password
      */
+
+    /**
+     * @Assert\NotBlank(message="Le mot de passe ne peut pas être vide.")
+     * @Assert\Length(
+     *     min=12,
+     *     minMessage="Le mot de passe doit contenir au moins {{ limit }} caractères."
+     * )
+     * @Assert\Regex(
+     *     pattern="/(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])/",
+     *     message="Le mot de passe doit contenir au moins une lettre majuscule, une lettre minuscule, un chiffre et un caractère spécial."
+     * )
+     */
     #[ORM\Column]
     private ?string $password = null;
 
@@ -49,10 +61,38 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
    #[ORM\Column(length: 255)]
    private ?string $Pays = null;
 
+   #[ORM\Column(type: 'string', length: 255, nullable: true)]
+   private ?string $pseudo = null;
+
+   public function getPseudo(): ?string
+   {
+       return $this->pseudo;
+   }
+
+   public function setPseudo(?string $pseudo): self
+   {
+       $this->pseudo = $pseudo;
+       return $this;
+   }
+
    #[ORM\Column(type: Types::DATETIME_MUTABLE)]
    private ?\DateTimeInterface $Date_inscription = null;
 
-    
+   private $isVerified = false;
+
+   // Getter
+   public function getIsVerified(): bool
+   {
+       return $this->isVerified;
+   }
+
+   // Setter
+   public function setIsVerified(bool $isVerified): self
+   {
+       $this->isVerified = $isVerified;
+       return $this;
+   }
+
   
     // @var Collection<int, CommentairesRecette>
     
@@ -176,17 +216,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return (string) $this->email;
     }
 
-    public function isVerified(): bool
-    {
-        return $this->isVerified;
-    }
-
-    public function setVerified(bool $isVerified): static
-    {
-        $this->isVerified = $isVerified;
-
-        return $this;
-    }
 
     public function getPrenom(): ?string
     {
@@ -341,65 +370,5 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    /**
-     * @return Collection<int, Jouets>
-     */
     
-    public function getJouets(): Collection
-    {
-        return $this->jouets;
-    }
-
-    public function addJouet(Jouets $jouet): static
-    {
-        if (!$this->jouets->contains($jouet)) {
-            $this->jouets->add($jouet);
-            $jouet->setUser($this);
-        }
-
-        return $this;
-    }
-
-    public function removeJouet(Jouets $jouet): static
-    {
-        if ($this->jouets->removeElement($jouet)) {
-            // set the owning side to null (unless already changed)
-            if ($jouet->getUser() === $this) {
-                $jouet->setUser(null);
-            }
-        }
-
-        return $this;
-    }
-
-    /**
-     * @return Collection<int, CommentairesJeux>
-     */
-    
-    public function getCommentairesJeuxes(): Collection
-    {
-        return $this->commentairesJeuxes;
-    }
-
-    public function addCommentairesJeux(CommentairesJeux $commentairesJeux): static
-    {
-        if (!$this->commentairesJeuxes->contains($commentairesJeux)) {
-            $this->commentairesJeuxes->add($commentairesJeux);
-            $commentairesJeux->setUser($this);
-        }
-
-        return $this;
-    }
-
-    public function removeCommentairesJeux(CommentairesJeux $commentairesJeux): static
-    {
-        if ($this->commentairesJeuxes->removeElement($commentairesJeux)) {
-            // set the owning side to null (unless already changed)
-            if ($commentairesJeux->getUser() === $this) {
-                $commentairesJeux->setUser(null);
-            }
-        }
-
-        return $this;
-    }
 }
