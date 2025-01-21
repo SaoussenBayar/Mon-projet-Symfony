@@ -16,6 +16,27 @@ use Symfony\Component\Security\Core\Exception\UserNotFoundException;
 
 class SecurityController extends AbstractController 
 {
+    #[Route('/api/login', name: 'api_login', methods: ['POST'])]
+    public function apiLogin(Request $request): JsonResponse
+    {
+        $data = json_decode($request->getContent(), true);
+
+        // Valider que l'email et le mot de passe sont présents
+        if (empty($data['email']) || empty($data['password'])) {
+            return $this->json(['message' => 'Email and password are required'], 400);
+        }
+
+        $user = $this->getDoctrine()->getRepository(User::class)->findOneByEmail($data['email']);
+        if (!$user || !$this->encoder->isPasswordValid($user, $data['password'])) {
+            return $this->json(['message' => 'Invalid credentials'], 401);
+        }
+
+        // Générer le JWT
+        $token = $this->jwtManager->create($user);
+
+        return $this->json(['token' => $token]);
+    }
+
     #[Route('/login', name: 'app_login')] 
     public function login(AuthenticationUtils $authenticationUtils): Response 
     {

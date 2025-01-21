@@ -30,6 +30,23 @@ class CommentairesRecette
     #[ORM\ManyToOne(inversedBy: 'commentairesRecettes')]
     private ?Recette $recette = null;
 
+        
+    #[ORM\Column(type:"boolean")]
+    
+    private $isApproved = false;
+
+    public function getIsApproved(): ?bool
+    {
+        return $this->isApproved;
+    }
+
+    public function setIsApproved(bool $isApproved): self
+    {
+        $this->isApproved = $isApproved;
+
+        return $this;
+    }
+
     public function getId(): ?int
     {
         return $this->id;

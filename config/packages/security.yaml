@@ -60,6 +60,8 @@ security:
         - { path: ^/articles/new, roles: ROLE_ADMIN }  # La page /users/new (inscription) est publique (tout le monde peut y accéder)
         - { path: ^/articles/\d+/edit, roles: ROLE_ADMIN }
         - { path: ^/articles/\d+/delete, roles: ROLE_ADMIN }
+        - { path: ^/api, roles: IS_AUTHENTICATED_FULLY }
+        
 
 when@test:
     security:

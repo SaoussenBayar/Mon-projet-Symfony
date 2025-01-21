@@ -2,7 +2,7 @@
 
 namespace App\Controller;
 
-use App\Entity\CommentairesRecette; // Utiliser la bonne classe
+use App\Entity\CommentairesRecette; 
 use App\Entity\Recette;
 use App\Form\CommentairesRecetteType;
 use App\Repository\CommentairesRecetteRepository;
@@ -13,6 +13,8 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Serializer\SerializerInterface;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+
 
 class RecetteController extends AbstractController
 {
@@ -139,6 +141,51 @@ class RecetteController extends AbstractController
 
         return $this->redirectToRoute('recette_details', ['id' => $commentaire->getRecette()->getId()]);
     }
+       
+    #[Route("/api/commentaires", name:"api_commentaires", methods: ['GET'])]
+    #[IsGranted("ROLE_ADMIN")]
+     
+    public function getCommentaires(CommentairesRecetteRepository $commentaireRepo): JsonResponse
+    {
+        // Récupérer les commentaires non approuvés
+        $commentaires = $commentaireRepo->findBy(['isApproved' => false]);
 
+        // Sérialiser les données pour les envoyer sous forme JSON
+        $commentaireData = array_map(function ($commentaire) {
+            return [
+                'id' => $commentaire->getId(),
+                'texte' => $commentaire->getContenu(),
+                'dateCommentaire' => $commentaire->getDateCommentaire()->format('Y-m-d H:i:s'),
+                'utilisateur' => $commentaire->getUser()->getNom(),
+                'isApproved' => $commentaire->getIsApproved(),
+            ];
+        }, $commentaires);
+
+        return $this->json($commentaireData);
+    }
+
+   
+    #[Route("/api/commentaire/{id}/approuver", name:"api_commentaire_approuver", methods: ['GET'])]
+    #[IsGranted("ROLE_ADMIN")]
+     
+    public function approuverCommentaire(CommentairesRecette $commentaire, EntityManagerInterface $em): JsonResponse
+    {
+        $commentaire->setIsApproved(true);
+        $em->flush();
+
+        return $this->json(['message' => 'Commentaire approuvé avec succès.']);
+    }
+
+    
+    #[Route("/api/commentaire/{id}/supprimer", name:"api_commentaire_supprimer", methods: ['GET'])]
+    #[IsGranted("ROLE_ADMIN")]
+     
+    public function supprimerCommentaire(CommentairesRecette $commentaire, EntityManagerInterface $em): JsonResponse
+    {
+        $em->remove($commentaire);
+        $em->flush();
+
+        return $this->json(['message' => 'Commentaire supprimé avec succès.']);
+    }
 
 }
