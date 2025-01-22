@@ -19,14 +19,39 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 class RecetteController extends AbstractController
 {
     #[Route('/recettes', name: 'recette_liste')]
-    public function liste(EntityManagerInterface $em): Response
+    public function liste(Request $request, EntityManagerInterface $em): Response
     {
-        $recettes = $em->getRepository(Recette::class)->findAll();
+        // Récupérer les valeurs des paramètres de recherche et du filtre d'âge
+        $search = $request->query->get('search', '');
+        $age = $request->query->get('age', null);
 
+        // Création du query builder pour la récupération des recettes
+        $queryBuilder = $em->getRepository(Recette::class)->createQueryBuilder('r');
+
+        // Recherche par titre (mot-clé)
+        if (!empty($search)) {
+            $queryBuilder->andWhere('r.titre LIKE :search')
+                         ->setParameter('search', '%' . $search . '%');
+        }
+
+        // Filtrer par âge recommandé
+        if ($age) {
+            // Vérifier si l'âge est l'une des valeurs valides
+            $queryBuilder->andWhere('r.age_recommende = :age')
+                         ->setParameter('age', $age);
+        }
+        // Exécuter la requête et récupérer les résultats
+        $recettes = $queryBuilder->getQuery()->getResult();
+
+        // Retourner la réponse avec les résultats de recherche et de filtrage
         return $this->render('recette/liste.html.twig', [
             'recettes' => $recettes,
+            'search' => $search,
+            'age' => $age,
         ]);
     }
+
+
 
     #[Route('/recette/{id}', name: 'recette_details')]
     public function details(Recette $recette, Request $request, EntityManagerInterface $em): Response

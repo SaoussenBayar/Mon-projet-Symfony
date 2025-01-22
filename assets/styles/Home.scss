@@ -286,71 +286,80 @@ justify-content: center;
   margin-bottom: 40px;
 }
 
-/* Articles Grid */
-.articles {
-  display: grid;
-  grid-template-columns: repeat(3,350px);
-  justify-items: center;
-  gap: 80px;
-  margin: auto;
+/* Section title */
+.development-title {
+  text-align: center;
+  font-family: "Kanit", sans-serif;
+  color: #333;
+  margin-bottom: 3rem;
 }
 
-/* Article Card */
-.article {
-  background-color: #fff;
-  font-family: "Kanit", sans-serif;
+/* Development Stages Grid */
+.development-stages {
+  display: grid;
+  grid-template-columns: repeat(3, 350px);
+  justify-content: center;
+  gap: 80px;
+  margin: auto;
+  padding: 2rem 0;
+}
 
+/* Stage Card */
+.stage-card {
+  background-color: #fff;
   border: 1px solid #ddd;
   border-radius: 8px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   overflow: hidden;
   transition: transform 0.3s ease;
+  height: 100%;
 }
 
-.article:hover {
+.stage-card:hover {
   transform: translateY(-10px);
 }
 
-.article img {
+.stage-card img {
   width: 100%;
   height: 200px;
   object-fit: cover;
 }
 
-.article h3 {
-  font-family: "Kanit", sans-serif;
+.stage-card-content {
+  padding: 20px;
+}
 
+.stage-card h3 {
+  font-family: "Kanit", sans-serif;
   font-size: 1.25rem;
   color: #333;
-  margin: 15px;
+  margin-bottom: 15px;
 }
 
-.article p {
+.stage-card p {
   font-family: "Kanit", sans-serif;
-
   font-size: 0.9rem;
   color: #666;
-  margin: 0 15px 15px;
   line-height: 1.6;
+  margin-bottom: 20px;
 }
 
-.article .btn {
+.stage-card .btn {
   display: inline-block;
-  margin: 15px;
   padding: 10px 20px;
   background-color: #f28c6e;
-  font-family: "Kanit", sans-serif;
-
   color: #fff;
   text-decoration: none;
   border-radius: 5px;
+  font-family: "Kanit", sans-serif;
   font-size: 0.9rem;
   transition: background-color 0.3s ease;
 }
 
-.article .btn:hover {
-  background-color: #f28c6e;
+.stage-card .btn:hover {
+  background-color: #e67e5c;
 }
+
 
 
 .section {
@@ -376,3 +385,129 @@ justify-content: center;
   margin-top: 20px !important;
 }
 
+.footer {
+  background-color: #FDF6F0;
+  padding: 4rem 0;
+  margin-top: 4rem;
+  position: relative;
+}
+
+/* Effet de vague sur le footer */
+.footer::before {
+  content: '';
+  position: absolute;
+  top: -50px;
+  left: 0;
+  width: 100%;
+  height: 50px;
+}
+
+.footer h5 {
+  color: #B17A65;
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+  position: relative;
+}
+
+/* Petit soulignement décoratif sous les titres */
+.footer h5::after {
+  content: '';
+  position: absolute;
+  bottom: -8px;
+  left: 0;
+  width: 40px;
+  height: 2px;
+  background-color: #B17A65;
+  opacity: 0.5;
+}
+
+.footer p {
+  color: #6D4C41;
+  line-height: 1.6;
+}
+
+.footer ul {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+.footer ul li a {
+  color: #6D4C41;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  display: inline-block;
+  padding: 4px 0;
+}
+
+.footer ul li a:hover {
+  color: #B17A65;
+  transform: translateX(5px);
+}
+
+/* Style des icônes réseaux sociaux */
+.footer .social-icons a {
+  display: inline-flex;
+  align-items: center;
+}
+
+.footer .social-icons i {
+  color: #B17A65;
+  font-size: 1.2rem;
+  transition: all 0.3s ease;
+}
+
+.footer .social-icons a:hover i {
+  transform: scale(1.2);
+}
+
+/* Séparateur */
+.footer hr {
+  border-color: #B17A65;
+  opacity: 0.2;
+  margin: 2rem 0;
+}
+
+/* Section bas de footer */
+.footer .bottom-footer {
+  text-align: center;
+  color: #8D6E63;
+  font-size: 0.9rem;
+}
+
+.footer .bottom-footer a {
+  color: #8D6E63;
+  text-decoration: none;
+  margin: 0 15px;
+  transition: color 0.3s ease;
+}
+
+.footer .bottom-footer a:hover {
+  color: #B17A65;
+}
+
+/* Animation hover sur le logo */
+.footer .logo img {
+  transition: transform 0.3s ease;
+}
+
+.footer .logo img:hover {
+  transform: scale(1.05);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .footer {
+      padding: 3rem 0;
+  }
+  
+  .footer h5 {
+      margin-top: 1.5rem;
+  }
+  
+  .footer .bottom-footer a {
+      display: block;
+      margin: 10px 0;
+  }
+}

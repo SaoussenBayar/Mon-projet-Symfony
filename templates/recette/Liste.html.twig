@@ -1,21 +1,32 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}Recettes pour Bébés{% endblock %}
+
 {% block stylesheets %}
     {{ encore_entry_link_tags('app') }}
     {{ encore_entry_link_tags('recette') }}
 {% endblock %}
 
 {% block body %}
-    <h1>Liste des Recettes pour Bébés de moins de 3 ans</h1>
+    <h1>Liste des Recettes pour Bébés</h1>
 
-    <!-- Filtrer par âge (mais ici, seulement un groupe : moins de 3 ans) -->
-    <div class="filter">
-        <label for="age">Filtrer par âge :</label>
-        <select id="age" name="age">
-            <option value="under3">Moins de 3 ans</option>
-        </select>
-    </div>
+    <!-- Barre de recherche et filtre -->
+    <form method="get" action="{{ path('recette_liste') }}" class="search-filter-form">
+        <div class="search-bar">
+            <input type="text" name="search" placeholder="Rechercher une recette" value="{{ search }}" />
+            <button type="submit">Rechercher</button>
+        </div>
+        <div class="filter">
+            <label for="age">Filtrer par âge :</label>
+            <select id="age" name="age" onchange="this.form.submit()">
+                <option value="">Tous les âges</option>
+                <option value="4 à 6 mois" {% if age == '4 à 6 mois' %}selected{% endif %}>4 à 6 mois</option>
+                <option value="6 à 8 mois" {% if age == '6 à 8 mois' %}selected{% endif %}>6 à 8 mois</option>
+                <option value="9 à 12 mois" {% if age == '9 à 12 mois' %}selected{% endif %}>9 à 12 mois</option>
+                <option value="12 mois et +" {% if age == '12 mois et +' %}selected{% endif %}>12 mois et plus</option>
+            </select>
+        </div>
+    </form>
 
     <!-- Liste des recettes -->
     <ul class="recipes-list">
@@ -27,11 +38,13 @@
                     </div>
                     <div class="recipe-details">
                         <h2>{{ recette.titre }}</h2>
-                        <p><strong>Âge recommandé :</strong> {{ recette.age_recommende }}</p>
+                        <p><strong>Âge recommandé :</strong> {{ recette.ageRecommende }}</p>
                         <p><strong>Temps de préparation :</strong> {{ recette.tempsPrep }} minutes</p>
                     </div>
                 </a>
             </li>
+        {% else %}
+            <li>Aucune recette trouvée.</li>
         {% endfor %}
     </ul>
 {% endblock %}

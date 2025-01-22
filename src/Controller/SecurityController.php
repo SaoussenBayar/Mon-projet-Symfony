@@ -13,30 +13,39 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Mime\Email;
 use Symfony\Component\Security\Core\Exception\UserNotFoundException;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;  // Pour Symfony 5.3+
+use Symfony\Component\HttpFoundation\JsonResponse;
+
 
 class SecurityController extends AbstractController 
 {
     #[Route('/api/login', name: 'api_login', methods: ['POST'])]
-    public function apiLogin(Request $request): JsonResponse
+    public function apiLogin(Request $request, UserPasswordHasherInterface $passwordHasher): JsonResponse
     {
         $data = json_decode($request->getContent(), true);
-
-        // Valider que l'email et le mot de passe sont présents
+    
+        // Vérifiez que l'email et le mot de passe sont fournis
         if (empty($data['email']) || empty($data['password'])) {
             return $this->json(['message' => 'Email and password are required'], 400);
         }
-
-        $user = $this->getDoctrine()->getRepository(User::class)->findOneByEmail($data['email']);
-        if (!$user || !$this->encoder->isPasswordValid($user, $data['password'])) {
+    
+        // Récupérez l'utilisateur depuis la base de données
+        $user = $this->getDoctrine()->getRepository(User::class)->findOneBy(['email' => $data['email']]);
+        if (!$user) {
             return $this->json(['message' => 'Invalid credentials'], 401);
         }
-
-        // Générer le JWT
-        $token = $this->jwtManager->create($user);
-
+        dump($user);
+        // Vérifiez que le mot de passe est valide
+        if (!$passwordHasher->isPasswordValid($user, $data['password'])) {
+            return $this->json(['message' => 'Invalid credentials'], 401);
+        }
+    
+        // Génération du token JWT (vous pouvez utiliser LexikJWTAuthenticationBundle ou un autre outil)
+        $token = 'votre_token_jwt'; // Remplacez ceci par votre logique de génération JWT.
+    
         return $this->json(['token' => $token]);
     }
-
+    
     #[Route('/login', name: 'app_login')] 
     public function login(AuthenticationUtils $authenticationUtils): Response 
     {

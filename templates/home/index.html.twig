@@ -120,33 +120,104 @@
         </div>
     </section>
     </section>      
-          <section class="baby-development">
-            <div class="container">
-              <h2>Accompagnez chaque étape du développement de votre bébé</h2>
-              <p>Découvrez des conseils pratiques pour stimuler et soutenir votre enfant dans ses premiers mois et années de vie.</p>
-              <div class="articles">
-                <!-- Article 1 -->
-                <div class="article">
-                  <img src="{{ asset('images/2.jpg') }}" alt="Bébé qui rampe">
-                  <h3>Les premières étapes : Quand et comment aider bébé à se déplacer</h3>
-                  <p>Apprenez à reconnaître les étapes clés du développement moteur et encouragez votre bébé à bouger en toute sécurité.</p>
-                  <a href="#" class="btn">En savoir plus</a>
-                </div>
-                <!-- Article 2 -->
-                <div class="article">
-                  <img src="{{ asset('images/3.jpg') }}" alt="Jeux sensoriels pour bébé">
-                  <h3>Jouer pour grandir : Activités pour éveiller les sens de bébé</h3>
-                  <p>Explorez des jeux et activités qui stimulent les sens de votre bébé pour un développement cognitif optimal.</p>
-                  <a href="#" class="btn">En savoir plus</a>
-                </div>
-                <!-- Article 3 -->
-                <div class="article">
-                  <img src="{{ asset('images/4.jpg') }}" alt="Bébé câliné par un parent">
-                  <h3>Comprendre et répondre aux émotions de votre bébé</h3>
-                  <p>Créez un lien affectif fort avec votre enfant en comprenant ses besoins émotionnels dès le plus jeune âge.</p>
-                  <a href="#" class="btn">En savoir plus</a>
-                </div>
-              </div>
+<section class="development-section">
+    <h2 class="development-title">Accompagnez chaque étape du développement de votre bébé</h2>
+    <p class="text-center">Découvrez des conseils pratiques pour stimuler et soutenir votre enfant dans ses premiers mois et années de vie</p>
+    
+    <div class="development-stages">
+        <div class="stage-card">
+            <img src="{{ asset('images/2.jpg') }}" alt="Les premières étapes">
+            <div class="stage-card-content">
+                <h3>Les premières étapes : Quand et comment aider bébé à se déplacer</h3>
+                <p>Apprenez à reconnaître les étapes clés du développement moteur et encouragez votre bébé à bouger en toute sécurité</p>
+                <a href="#" class="btn">En savoir plus</a>
             </div>
-          </section>
+        </div>
+
+        <div class="stage-card">
+            <img src="{{ asset('images/3.jpg') }}" alt="Jouer pour grandir">
+            <div class="stage-card-content">
+                <h3>Jouer pour grandir : Activités pour éveiller les sens de bébé</h3>
+                <p>Explorez des jeux et activités qui stimulent les sens de votre bébé pour un développement cognitif optimal</p>
+                <a href="#" class="btn">En savoir plus</a>
+            </div>
+        </div>
+
+        <div class="stage-card">
+            <img src="{{ asset('images/4.jpg') }}" alt="Comprendre les émotions">
+            <div class="stage-card-content">
+                <h3>Comprendre et répondre aux émotions de votre bébé</h3>
+                <p>Créez un lien affectif fort avec votre enfant en comprenant ses besoins émotionnels dès le plus jeune âge</p>
+                <a href="#" class="btn">En savoir plus</a>
+            </div>
+        </div>
+    </div>
+</section>          
+     <footer class="footer py-5" style="background-color: #FDF6F0;">
+    <div class="container">
+        <div class="row g-4">
+            <div class="col-md-4">
+                <h5 style="color: #B17A65;">À propos de nous</h5>
+                <p style="color: #6D4C41;">Notre communauté accompagne les parents dans chaque étape du développement de leur enfant, en favorisant le partage et l'entraide.</p>
+                <img src="{{ asset('images/logo3.png') }}" alt="Logo" class="mb-3" style="max-width: 120px;">
+            </div>
+            <div class="col-md-4">
+                <h5 style="color: #B17A65;">Nos services</h5>
+                <ul class="list-unstyled">
+                    <li class="mb-2"><a href="#" class="text-decoration-none" style="color: #6D4C41;">Échange de jouets</a></li>
+                    <li class="mb-2"><a href="{{ path('recette_liste') }}" class="text-decoration-none" style="color: #6D4C41;">Recettes et activités</a></li>
+                    <li class="mb-2"><a href="#" class="text-decoration-none" style="color: #6D4C41;">Jeux éducatifs</a></li>
+                    <li class="mb-2"><a href="#" class="text-decoration-none" style="color: #6D4C41;">Forum et communauté</a></li>
+                </ul>
+            </div>
+            <div class="col-md-4">
+                <h5 style="color: #B17A65;">Rejoignez la communauté</h5>
+                <ul class="list-unstyled social-icons">
+                    <li class="mb-3">
+                        <a href="#" class="text-decoration-none" style="color: #6D4C41;">
+                            <i class="fa-brands fa-instagram fa-lg me-2" style="color: #B17A65;"></i>
+                            Instagram
+                        </a>
+                    </li>
+                    <li class="mb-3">
+                        <a href="#" class="text-decoration-none" style="color: #6D4C41;">
+                            <i class="fa-brands fa-facebook fa-lg me-2" style="color: #B17A65;"></i>
+                            Facebook
+                        </a>
+                    </li>
+                    <li class="mb-3">
+                        <a href="#" class="text-decoration-none" style="color: #6D4C41;">
+                            <i class="fa-brands fa-pinterest fa-lg me-2" style="color: #B17A65;"></i>
+                            Pinterest
+                        </a>
+                    </li>
+                    <li class="mb-3">
+                        <a href="#" class="text-decoration-none" style="color: #6D4C41;">
+                            <i class="fa-brands fa-tiktok fa-lg me-2" style="color: #B17A65;"></i>
+                            TikTok
+                        </a>
+                    </li>
+                    <li class="mb-3">
+                        <a href="#" class="text-decoration-none" style="color: #6D4C41;">
+                            <i class="fa-regular fa-envelope fa-lg me-2" style="color: #B17A65;"></i>
+                            Contact
+                        </a>
+                    </li>
+                                    </ul>
+            </div>
+        </div>
+        <hr class="my-4" style="color: #B17A65;">
+        <div class="row">
+            <div class="col-12 text-center">
+                <p class="mb-2" style="color: #6D4C41;">© {{ "now"|date("Y") }} - Tous droits réservés</p>
+                <div class="small" style="color: #8D6E63;">
+                    <a href="#" class="text-decoration-none me-3" style="color: #8D6E63;">Mentions légales</a>
+                    <a href="#" class="text-decoration-none me-3" style="color: #8D6E63;">Politique de confidentialité</a>
+                    <a href="#" class="text-decoration-none" style="color: #8D6E63;">CGU</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+     
 {% endblock %}

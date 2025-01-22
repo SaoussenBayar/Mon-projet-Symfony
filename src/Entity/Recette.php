@@ -28,8 +28,8 @@ class Recette
     #[ORM\Column(length: 120)]
     private ?string $image = null;
 
-    #[ORM\Column]
-    public ?int $age_recommende = null;
+    #[ORM\Column(length: 120)]
+    public ?string $age_recommende = null;
 
     #[ORM\Column(type:"integer", name:"tempsPrep")]
     private ?int $tempsPrep = null;
@@ -112,12 +112,12 @@ class Recette
     }
 
 
-    public function getAgeRecommende(): ?int
+    public function getAgeRecommende(): ?string
     {
         return $this->age_recommende;
     }
 
-    public function setAgeRecommende(int $age_recommende): static
+    public function setAgeRecommende(string $age_recommende): static
     {
         $this->age_recommende = $age_recommende;
 
