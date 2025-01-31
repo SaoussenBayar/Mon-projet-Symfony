@@ -35,14 +35,6 @@ class RegistrationFormType extends AbstractType
                 'label' => 'Date de naissance',
                 'widget' => 'single_text',
             ])
-            ->add('ville', TextType::class, [
-                'label' => 'Ville',
-                'attr' => ['placeholder' => 'Votre ville'],
-            ])
-            ->add('pays', TextType::class, [
-                'label' => 'Pays',
-                'attr' => ['placeholder' => 'Votre pays'],
-            ])
             ->add('password', PasswordType::class, [
                 'label' => 'Mot de passe',
                 'attr' => ['placeholder' => 'Votre mot de passe'],

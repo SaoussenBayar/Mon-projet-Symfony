@@ -1,134 +1,123 @@
 @import url('https://fonts.googleapis.com/css2?family=Kanit:wght@400;700&display=swap');
 
-.navbar{
-    background-image: url('../images/nav.webp');
-    background-size: 100% auto;
-    background-position: center;
-    background-repeat: no-repeat;
-    opacity: 0.97;
-}
-.btn{
-    background-color: #447387;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    font-family: "Kanit", sans-serif;
-    font-size: 18px;
-    padding: 0.575rem 0.95rem;
-    cursor: pointer;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Ajoute une ombre légère */
-    transition: transform 0.2s;
-}
-.btn:hover {
-    transform: scale(1.05); /* Agrandit légèrement au survol */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-}
-.logo{
-    border: 3px solid #ffd1dc; /* Bordure rose pâle autour du logo */
-    border-radius: 50%;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    
+/* Appliquer la police et la couleur à tout le corps de la page */
+body {
+  font-family: "Kanit", sans-serif;
+  color: #683d12e0; /* Utilisation de la couleur définie précédemment (couleur par défaut) */
 }
 
- /* Style des liens de navigation */
+/* Navbar */
+.navbar {
+  background-image: url('../images/nav.webp');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  //background-attachment: fixed;
+  opacity: 0.965;
+}
+
+/* Boutons */
+.btn, .btninscription {
+  background-color: #447387;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 18px;
+  padding: 0.575rem 0.95rem;
+  cursor: pointer;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  transition: transform 0.2s;
+}
+
+.btn:hover, .btninscription:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+/* Logo */
+.logo {
+  border: 3px solid #ffd1dc;
+  border-radius: 50%;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Liens de navigation */
 .nav-link {
-    color:#683d12e0;
-    font-size: 19px; /* Taille de police réduite */
-    padding: 8px 15px; /* Espace entre chaque élément */
-    margin: 0 5px; /* Ajoute de l'espace horizontal entre les liens */
-    font-family: "Kanit", sans-serif;
-    transition: color 0.3s, transform 0.3s;
-    position: relative;          
+  color: inherit; /* Hérite de la couleur globale définie dans body */
+  font-size: 19px;
+  padding: 8px 15px;
+  margin: 0 5px;
+  transition: color 0.3s, transform 0.3s;
 }
 
-/* Effet de survol avec couleur et effet 3D */
 .nav-link:hover {
-    color: #ff99b3;
-    transform: translateY(-3px) scale(1.05);
+  color: #ff99b3;
+  transform: translateY(-3px) scale(1.05);
 }
-/* Style pour les icônes */
+
+/* Icônes des liens de navigation */
 .nav-link i {
-    margin-right: 4px; /* Réduit l'espace entre l'icône et le texte */
-    font-size: 0.9em; /* Taille de l'icône légèrement réduite */
-    color: white;
-    transition: transform 0.3s, text-shadow 0.3s;
+  margin-right: 4px;
+  font-size: 0.9em;
+  color: white;
+  transition: transform 0.3s, text-shadow 0.3s;
 }
-/* Effet "shadow-glow" au survol */
+
 .nav-link:hover i {
-    transform: rotate(10deg);
-    text-shadow: 0px 3px 6px rgba(255, 153, 179, 0.5);
-}
-.nav-item {
-    margin: 0 8px; /* Espace horizontal entre chaque item */
-} 
-
-
-
-.text-h1{
-    color: #683d12e0;
-    text-align: center;
-    padding-top: 25px;
-    margin-bottom: 20px;
-    font-family: "Kanit", sans-serif;
-    font-size: 48px;
+  transform: rotate(10deg);
+  text-shadow: 0px 3px 6px rgba(255, 153, 179, 0.5);
 }
 
-.text-p2{
-    color: #683d12e0;
-    text-align: justify;
-    margin: 0 auto;
-    max-width:600px;
-    line-height: 1.6;
-    font-family: "Kanit", sans-serif;
-    font-size: 19px;
-    
+/* Textes principaux */
+.text-h1 {
+  text-align: center;
+  padding-top:5px;
+  font-size: 48px;
 }
 
-.btninscription{
-    background-color: #63a8c5;
-    color: white;
-    text-decoration: none;
-    font-family: "Kanit", sans-serif;
-    font-size: 20px;
-    border: none;
-    border-radius: 1rem;
-    cursor: pointer;
-    text-align: center;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Ajoute une ombre légère */
-    transition: transform 0.2s;
+.text-p2 {
+  text-align: justify;
+  max-width: 600px;
+  margin: auto;
+  line-height: 1.6;
+  font-size: 19px;
 }
 
-.btninscription:hover {
-    transform: scale(1.05); /* Agrandit légèrement au survol */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-}
-
+/* Image header */
 .image-header {
-    background-image: url('../images/accueil6.webp');
-    background-size: 100% 100%;
-    background-repeat: no-repeat;
-    padding: 0px; 
-    margin: 0px;
-    height:800px;
+  background-image: url('../images/accueil.jpg');
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  height: 570px;
 }
 
-
+/* Sections */
 .row {
-height: auto;
-background-color:  #f7fae4;
-padding: 3.5em;}
-
-.right { 
-display: flex;
-justify-content: center;
+  background-color: #f7fae4;
+  padding: 3.5em;
 }
 
+.right {
+  display: flex;
+  justify-content: center;
+}
 
 .left {
   padding: 50px;
-  font-family: "Kanit", sans-serif;  
 }
 
+/* Services */
+.services-section {
+  display: flex;
+  justify-content: space-between;
+  gap: 30px;
+}
+
+.service {
+  display: flex;
+  gap: 20px;
+  margin-bottom: 15px;
+}
 .section-title { 
   font-size: 2.8rem;
   font-weight: bold; 
@@ -140,31 +129,8 @@ justify-content: center;
   color: #8c6969; 
   margin-bottom: 30px; 
   line-height: 1.6; }
-
-   /* Service List */ 
-   .services-section {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    gap: 30px;
-  }
-  
-
-   .services {
-    display: flex;
-    flex-direction: column;
-    gap: 20px; /* Espace entre chaque service */
-  }
-  
-  .service {
-    display: flex;
-    align-items: flex-start;
-    gap: 20px; /* Augmente l'espace entre l'icône et le texte */
-    margin-bottom: 15px; /* Ajoute de l'espace entre chaque service */
-  }
-  
-  .icon {
-    flex-shrink: 0;
+.icon {
+   flex-shrink: 0;
     width: 70px;
     height: 70px;
     font-size: 35px;
@@ -173,57 +139,44 @@ justify-content: center;
     display: flex;
     justify-content: center;
     align-items: center;
-  }
-  
-  h3 {
-    font-size: 22px; /* Rendre les titres un peu plus grands */
-    color: #5c3b28; /* Teinte légèrement plus sombre */
-  }
-  
-  .service p {
-    font-size: 18px;
-    color: #76615b; /* Texte secondaire plus doux */
-  }
+}
 
-  /* Conteneur principal */
+/* Carrousel */
 .carousel {
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 460px; /* Occupe toute la largeur */
+  width: 460px;
   height: 648px;
-  margin: auto; /* Centre le carrousel */
-  border-radius: 15px; /* Coins arrondis */
-  box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.2);/* Ombre douce */
-  overflow: hidden; 
+  margin: auto;
+  border-radius: 15px;
+  box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.2);
+  overflow: hidden;
 }
 
-/* Images */
 .carousel-item img {
-  width: 460px; /* Occupe toute la largeur */
-  height: 648px; /* Hauteur fixe */
-  object-fit: cover; /* Recadre l'image */
-  border-radius: 15px; /* Coins arrondis pour les images */
+  width: 460px;
+  height: 648px;
+  object-fit: cover;
+  border-radius: 15px;
 }
 
-/* Superposition du texte */
 .carousel-caption {
   position: absolute;
   bottom: 7%;
   width: 300px;
   height: 190px;
-  background: rgba(0, 0, 0, 1); /* Fond semi-transparent */
+  background: rgba(0, 0, 0, 1);
   border-radius: 10px;
-  color: #fff; /* Texte blanc */
+  color: #fff;
   text-align: center;
   padding: 10px;
-  box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.2); /* Ombre douce */
+  box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.2);
 }
 
-/* Boutons */
 .carousel-caption .btn {
   margin-top: 10px;
-  background-color: #f28c6e; /* Couleur personnalisée */
+  background-color: #f28c6e;
   border: none;
   border-radius: 5px;
   padding: 10px 20px;
@@ -231,160 +184,118 @@ justify-content: center;
 }
 
 .carousel-caption .btn:hover {
-  background-color: #d97156; /* Couleur au survol */
+  background-color: #d97156;
 }
 
-/* Indicateurs */
-.carousel-indicators {
-  bottom: -20px; /* Ajuste la position des indicateurs */
-}
-
-.carousel-indicators button {
-  width: 12px;
-  height: 12px;
-  border-radius: 50%; /* Cercles */
-  background-color: #ccc; /* Couleur par défaut */
-}
-
-.carousel-indicators .active {
-  background-color: #f28c6e; /* Couleur pour l'indicateur actif */
-}
-
-
-/* Adjust section styles to ensure spacing */
-.top-section {
-  background-color: #fff8e1; /* Example background color */
-
-
-}
-
-.bottom-section {
-  background-color: #f9f7e7; /* Matches the divider fill color */
-}
-
-/* Section Container */
-
-.baby-development {
-  background-color: #fffbf7;
-  font-family: "Kanit", sans-serif;
-  padding: 50px 20px;
+/* Article */
+/* Section Articles */
+.articles-section {
+  background-color: #f7fae4;
+  padding: 4rem 2rem;
   text-align: center;
-  height: 800px;
 }
 
-.baby-development h2 {
-  font-size: 22px;
-  color: #5c3b28;
-  margin-bottom: 15px;
+.articles-section h2 {
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: #874e4e;
+  margin-bottom: 1.5rem;
 }
 
-.baby-development p {
-  font-family: "Kanit", sans-serif;
-
-  font-size: 1rem;
-  color: #555;
-  margin-bottom: 40px;
+.articles-section p {
+  font-size: 1.2rem;
+  color: #8c6969;
+  margin-bottom: 2rem;
 }
 
-/* Section title */
-.development-title {
-  text-align: center;
-  font-family: "Kanit", sans-serif;
-  color: #333;
-  margin-bottom: 3rem;
-}
-
-/* Development Stages Grid */
-.development-stages {
-  display: grid;
-  grid-template-columns: repeat(3, 350px);
+/* Grille des articles */
+.articles-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
   justify-content: center;
-  gap: 80px;
-  margin: auto;
-  padding: 2rem 0;
+  align-items: stretch;
 }
 
-/* Stage Card */
-.stage-card {
-  background-color: #fff;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  overflow: hidden;
-  transition: transform 0.3s ease;
-  height: 100%;
+/* Cartes des articles */
+.article-card {
+  background-color: white;
+  border-radius: 15px;
+  box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.15);
+  padding: 20px;
+  width: 320px;
+  text-align: center;
+  transition: transform 0.3s, box-shadow 0.3s;
 }
 
-.stage-card:hover {
-  transform: translateY(-10px);
+.article-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.25);
 }
 
-.stage-card img {
+/* Image des articles */
+.article-card img {
   width: 100%;
   height: 200px;
   object-fit: cover;
+  border-radius: 10px;
 }
 
-.stage-card-content {
-  padding: 20px;
+/* Contenu des articles */
+.article-card-content {
+  padding: 15px;
 }
 
-.stage-card h3 {
-  font-family: "Kanit", sans-serif;
-  font-size: 1.25rem;
-  color: #333;
+.article-card h3 {
+  font-size: 22px;
+  margin-bottom: 10px;
+  color: #683d12e0;
+}
+
+.article-card p {
+  font-size: 1rem;
+  color: #6D4C41;
   margin-bottom: 15px;
 }
 
-.stage-card p {
-  font-family: "Kanit", sans-serif;
-  font-size: 0.9rem;
-  color: #666;
-  line-height: 1.6;
-  margin-bottom: 20px;
-}
-
-.stage-card .btn {
+/* Bouton des articles */
+.article-card .btn {
   display: inline-block;
-  padding: 10px 20px;
-  background-color: #f28c6e;
-  color: #fff;
-  text-decoration: none;
+  background-color: #447387;
+  color: white;
   border-radius: 5px;
-  font-family: "Kanit", sans-serif;
-  font-size: 0.9rem;
-  transition: background-color 0.3s ease;
+  padding: 10px 15px;
+  font-size: 16px;
+  text-decoration: none;
+  transition: background 0.3s;
 }
 
-.stage-card .btn:hover {
-  background-color: #e67e5c;
+.article-card .btn:hover {
+  background-color: #365a6b;
 }
 
-
-
-.section {
-  display: flex;               /* Active Flexbox dans chaque section */
-  align-items: center;         /* Centrage vertical */
-  justify-content: center;     /* Centrage horizontal */
-  box-sizing: border-box;      /* Pour inclure le padding et les bordures dans la largeur totale */
-  text-align: center;          /* Centrer le texte */
-  font-family: "Kanit", sans-serif;
-  margin: 0; padding: 0;
-} 
+/* Ajustements responsive */
+@media (max-width: 768px) {
+  .articles-grid {
+    flex-direction: column;
+    align-items: center;
+  }
+}
 
 .circle {
-  width: 80px !important;
-  height: 80px !important;
+  width: 60px !important;
+  height: 60px !important;
   border-radius: 50% !important;
-  background-color: #4CAF50 !important;
+  background-color: #447387 !important;
   color: white !important;
   font-size: 24px !important;
   display: flex !important;
   justify-content: center !important;
   align-items: center !important;
-  margin-top: 20px !important;
 }
 
+
+/* Footer */
 .footer {
   background-color: #FDF6F0;
   padding: 4rem 0;
@@ -392,34 +303,11 @@ justify-content: center;
   position: relative;
 }
 
-/* Effet de vague sur le footer */
-.footer::before {
-  content: '';
-  position: absolute;
-  top: -50px;
-  left: 0;
-  width: 100%;
-  height: 50px;
-}
-
 .footer h5 {
   color: #B17A65;
   font-size: 1.25rem;
   font-weight: 600;
   margin-bottom: 1.5rem;
-  position: relative;
-}
-
-/* Petit soulignement décoratif sous les titres */
-.footer h5::after {
-  content: '';
-  position: absolute;
-  bottom: -8px;
-  left: 0;
-  width: 40px;
-  height: 2px;
-  background-color: #B17A65;
-  opacity: 0.5;
 }
 
 .footer p {
@@ -427,18 +315,10 @@ justify-content: center;
   line-height: 1.6;
 }
 
-.footer ul {
-  padding: 0;
-  margin: 0;
-  list-style: none;
-}
-
 .footer ul li a {
   color: #6D4C41;
   text-decoration: none;
   transition: all 0.3s ease;
-  display: inline-block;
-  padding: 4px 0;
 }
 
 .footer ul li a:hover {
@@ -446,66 +326,16 @@ justify-content: center;
   transform: translateX(5px);
 }
 
-/* Style des icônes réseaux sociaux */
-.footer .social-icons a {
-  display: inline-flex;
-  align-items: center;
-}
-
-.footer .social-icons i {
-  color: #B17A65;
-  font-size: 1.2rem;
-  transition: all 0.3s ease;
-}
-
-.footer .social-icons a:hover i {
-  transform: scale(1.2);
-}
-
-/* Séparateur */
-.footer hr {
-  border-color: #B17A65;
-  opacity: 0.2;
-  margin: 2rem 0;
-}
-
-/* Section bas de footer */
-.footer .bottom-footer {
-  text-align: center;
-  color: #8D6E63;
-  font-size: 0.9rem;
-}
-
-.footer .bottom-footer a {
-  color: #8D6E63;
-  text-decoration: none;
-  margin: 0 15px;
-  transition: color 0.3s ease;
-}
-
-.footer .bottom-footer a:hover {
-  color: #B17A65;
-}
-
-/* Animation hover sur le logo */
-.footer .logo img {
-  transition: transform 0.3s ease;
-}
-
-.footer .logo img:hover {
-  transform: scale(1.05);
-}
-
 /* Responsive adjustments */
 @media (max-width: 768px) {
   .footer {
       padding: 3rem 0;
   }
-  
+
   .footer h5 {
       margin-top: 1.5rem;
   }
-  
+
   .footer .bottom-footer a {
       display: block;
       margin: 10px 0;

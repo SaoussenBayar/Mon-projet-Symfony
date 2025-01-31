@@ -6,10 +6,11 @@ nelmio_cors:
         allow_headers: ['Content-Type', 'Authorization']
         expose_headers: ['Link']
         max_age: 3600
+        allow_credentials: true
     paths:
         '^/api/': # Autoriser les CORS uniquement pour les routes commençant par /api/
-            allow_origin: ['*']  # Remplacez '*' par l'origine autorisée si besoin (par exemple 'http://localhost:4200')
+            allow_origin: ['http://localhost:4200']  # Remplacez '*' par l'origine autorisée si besoin (par exemple 'http://localhost:4200')
             allow_headers: ['Content-Type', 'Authorization']  # En-têtes autorisés
             allow_methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS']  # Méthodes HTTP autorisées
-            allow_credentials: true  # Autoriser les informations d'identification (cookies, authentification)
+              # Autoriser les informations d'identification (cookies, authentification)
 

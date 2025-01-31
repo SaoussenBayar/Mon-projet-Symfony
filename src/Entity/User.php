@@ -55,12 +55,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
    #[ORM\Column(type: Types::DATE_MUTABLE)]
     private ?\DateTimeInterface $Date_naissance = null;
 
-   #[ORM\Column(length: 255)]
-   private ?string $ville = null;
-
-   #[ORM\Column(length: 255)]
-   private ?string $Pays = null;
-
    #[ORM\Column(type: 'string', length: 255, nullable: true)]
    private ?string $pseudo = null;
 
@@ -116,6 +110,20 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     #[ORM\Column(type: 'string', nullable: true)]
     private ?string $resetToken = null;
+
+   
+
+    /**
+     * @var Collection<int, Article>
+     */
+    #[ORM\ManyToMany(targetEntity: Article::class, mappedBy: 'user')]
+    private Collection $articles;
+
+    public function __construct()
+    {
+        $this->article = new ArrayCollection();
+        $this->articles = new ArrayCollection();
+    }
 
     public function getResetToken(): ?string
     {
@@ -241,29 +249,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function getVille(): ?string
-    {
-        return $this->ville;
-    }
-
-    public function setVille(string $ville): static
-    {
-        $this->ville = $ville;
-
-        return $this;
-    }
-
-    public function getPays(): ?string
-    {
-        return $this->Pays;
-    }  
-
-    public function setPays(string $Pays): static
-    {
-        $this->Pays = $Pays;
-
-        return $this;
-    }
 
     public function getDateInscription(): ?\DateTimeInterface
     {
@@ -369,6 +354,35 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
         return $this;
     }
+
+    /**
+     * @return Collection<int, Article>
+     */
+    public function getArticles(): Collection
+    {
+        return $this->articles;
+    }
+
+    public function addArticle(Article $article): static
+    {
+        if (!$this->articles->contains($article)) {
+            $this->articles->add($article);
+            $article->addUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeArticle(Article $article): static
+    {
+        if ($this->articles->removeElement($article)) {
+            $article->removeUser($this);
+        }
+
+        return $this;
+    }
+
+    
 
     
 }

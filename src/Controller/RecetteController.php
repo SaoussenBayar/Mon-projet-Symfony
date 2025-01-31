@@ -168,7 +168,7 @@ class RecetteController extends AbstractController
     }
        
     #[Route("/api/commentaires", name:"api_commentaires", methods: ['GET'])]
-    #[IsGranted("ROLE_ADMIN")]
+    
      
     public function getCommentaires(CommentairesRecetteRepository $commentaireRepo): JsonResponse
     {
@@ -191,7 +191,6 @@ class RecetteController extends AbstractController
 
    
     #[Route("/api/commentaire/{id}/approuver", name:"api_commentaire_approuver", methods: ['GET'])]
-    #[IsGranted("ROLE_ADMIN")]
      
     public function approuverCommentaire(CommentairesRecette $commentaire, EntityManagerInterface $em): JsonResponse
     {
@@ -203,7 +202,6 @@ class RecetteController extends AbstractController
 
     
     #[Route("/api/commentaire/{id}/supprimer", name:"api_commentaire_supprimer", methods: ['GET'])]
-    #[IsGranted("ROLE_ADMIN")]
      
     public function supprimerCommentaire(CommentairesRecette $commentaire, EntityManagerInterface $em): JsonResponse
     {

@@ -51,12 +51,18 @@
     {# Section top #}
     <section class="top-section">
         <div class="container-fluid image-header">
+        {% if not is_granted('IS_AUTHENTICATED_FULLY') %}
             <h1 class="text-h1">Rejoignez-nous !</h1>
             <p class="text-p2">Inscrivez-vous dès maintenant pour échanger des jouets, partager des astuces, et découvrir des recettes et jeux éducatifs adaptés à l'âge de vos enfants !</p>
             <form class="d-flex justify-content-center" >
                 <a class="btn btn-primary" href="{{ path('app_register') }}">S'inscrire</a>
             </form>
         </div>
+        {% else %}
+            <h1 class="text-h1">Bienvenue sur BabyCare Hub! 😃</h1>
+            <p class="text-p2">Nous sommes heureux de vous accueillir parmi nous. Prenez le temps d'explorer notre site, et profitez pleinement de l'expérience que nous avons conçue pour vous. <br>
+            Bonne navigation !</p>
+        {% endif %}    
     </section>
 
     {# Section des services et du carousel #}
@@ -119,40 +125,34 @@
             </div>
         </div>
     </section>
-    </section>      
-<section class="development-section">
-    <h2 class="development-title">Accompagnez chaque étape du développement de votre bébé</h2>
-    <p class="text-center">Découvrez des conseils pratiques pour stimuler et soutenir votre enfant dans ses premiers mois et années de vie</p>
-    
-    <div class="development-stages">
-        <div class="stage-card">
-            <img src="{{ asset('images/2.jpg') }}" alt="Les premières étapes">
-            <div class="stage-card-content">
-                <h3>Les premières étapes : Quand et comment aider bébé à se déplacer</h3>
-                <p>Apprenez à reconnaître les étapes clés du développement moteur et encouragez votre bébé à bouger en toute sécurité</p>
-                <a href="#" class="btn">En savoir plus</a>
-            </div>
-        </div>
+    <section id="articles" class="articles-section">
+        <h2 class="articles-title">Accompagnez chaque étape du développement de votre bébé</h2>
+        <p class="articles-description">Découvrez des conseils pratiques pour stimuler et soutenir votre enfant dans ses premiers mois et années de vie.</p>
 
-        <div class="stage-card">
-            <img src="{{ asset('images/3.jpg') }}" alt="Jouer pour grandir">
-            <div class="stage-card-content">
-                <h3>Jouer pour grandir : Activités pour éveiller les sens de bébé</h3>
-                <p>Explorez des jeux et activités qui stimulent les sens de votre bébé pour un développement cognitif optimal</p>
-                <a href="#" class="btn">En savoir plus</a>
-            </div>
-        </div>
+        <div class="articles-grid">
+            {% for article in articles %}
+                <div class="article-card">
+                    <!-- Afficher l'image si elle existe -->
+                    {% if article.image %}
+                        <img src="{{ asset('images/' ~ article.image) }}" alt="{{ article.titre }}">
+                    {% else %}
+                        <img src="{{ asset('images/default.jpg') }}" alt="Image par défaut">
+                    {% endif %}
 
-        <div class="stage-card">
-            <img src="{{ asset('images/4.jpg') }}" alt="Comprendre les émotions">
-            <div class="stage-card-content">
-                <h3>Comprendre et répondre aux émotions de votre bébé</h3>
-                <p>Créez un lien affectif fort avec votre enfant en comprenant ses besoins émotionnels dès le plus jeune âge</p>
-                <a href="#" class="btn">En savoir plus</a>
-            </div>
+                    <div class="article-card-content">
+                        <h3>{{ article.titre }}</h3>
+                        <p>{{ article.description }}</p>
+                        <a href="{{ article.contenu }}" class="btn">Lire la suite</a>
+                    </div>
+                </div>
+            {% else %}
+                <p>Aucun article trouvé.</p>
+            {% endfor %}
         </div>
-    </div>
-</section>          
+    </section>
+
+
+          
      <footer class="footer py-5" style="background-color: #FDF6F0;">
     <div class="container">
         <div class="row g-4">
