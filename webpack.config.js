@@ -11,11 +11,11 @@ Encore
     .setPublicPath('/build')
 
     .addEntry('app', './assets/app.js')
-    .addStyleEntry('Home', './assets/styles/Home.scss')
-    .addStyleEntry('Inscription', './assets/styles/Inscription.scss')
-    .addStyleEntry('Connexion', './assets/styles/Connexion.scss')
-    .addStyleEntry('recette', './assets/styles/Recette.scss')
-    .addStyleEntry('recetteDetail', './assets/styles/RecetteDetail.scss')
+    .addStyleEntry('Home', './assets/styles/Home.css')
+    .addStyleEntry('Inscription', './assets/styles/Inscription.css')
+    .addStyleEntry('Connexion', './assets/styles/Connexion.css')
+    .addStyleEntry('recette', './assets/styles/Recette.css')
+    .addStyleEntry('recetteDetail', './assets/styles/RecetteDetail.css')
 
 
     .splitEntryChunks()

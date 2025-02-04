@@ -101,7 +101,7 @@
                     <div class="carousel-inner">
                         {% set slides = [
                             {image: 'images/echanger.jpg', title: 'Echanger des Jouets', text: 'Echangez des jouets de manière sécurisée', link: '#'},
-                            {image: 'images/recette.avif', title: 'Recettes Saines', text: 'Découvrez des recettes nutritives', link: '#'},
+                            {image: 'images/recette.avif', title: 'Recettes Saines', text: 'Découvrez des recettes nutritives', link: "{{ path('recette_liste') }}"},
                             {image: 'images/jeux.avif', title: 'Jeux Éducatifs', text: 'Stimulez l’éveil de vos enfants', link: '#'}
                         ] %}
                         {% for slide in slides %}
@@ -124,96 +124,103 @@
                 </div>
             </div>
         </div>
-    </section>
-    <section id="articles" class="articles-section">
-        <h2 class="articles-title">Accompagnez chaque étape du développement de votre bébé</h2>
-        <p class="articles-description">Découvrez des conseils pratiques pour stimuler et soutenir votre enfant dans ses premiers mois et années de vie.</p>
+    </section>    
 
-        <div class="articles-grid">
-            {% for article in articles %}
-                <div class="article-card">
-                    <!-- Afficher l'image si elle existe -->
+    {# Section des articles #}
+<section class="articles-section">
+    <h2 class="articles-title">Accompagnez chaque étape du développement de votre bébé</h2>
+    <p class="articles-description">
+        Découvrez des conseils pratiques pour stimuler et soutenir votre enfant dans ses premiers mois et années de vie.
+    </p>
+
+    <div class="articles-grid">
+        {% for article in articles %}
+            <div class="article-card">
+                <!-- Affichage de l'image -->
+                <div class="article-image">
                     {% if article.image %}
                         <img src="{{ asset('images/' ~ article.image) }}" alt="{{ article.titre }}">
                     {% else %}
                         <img src="{{ asset('images/default.jpg') }}" alt="Image par défaut">
                     {% endif %}
-
-                    <div class="article-card-content">
-                        <h3>{{ article.titre }}</h3>
-                        <p>{{ article.description }}</p>
-                        <a href="{{ article.contenu }}" class="btn">Lire la suite</a>
-                    </div>
                 </div>
-            {% else %}
-                <p>Aucun article trouvé.</p>
-            {% endfor %}
-        </div>
-    </section>
+
+                <div class="article-card-content">
+                    <h3 class="article-title">{{ article.titre }}</h3>
+                    <p class="article-text">{{ article.description }}</p>
+                    <a href="{{ article.contenu }}" class="btn btn-primary">Lire la suite</a>
+                </div>
+            </div>
+        {% else %}
+            <p class="no-articles">Aucun article trouvé.</p>
+        {% endfor %}
+    </div>
+</section>
+
 
 
           
-     <footer class="footer py-5" style="background-color: #FDF6F0;">
+<footer class="footer py-5">
     <div class="container">
         <div class="row g-4">
             <div class="col-md-4">
-                <h5 style="color: #B17A65;">À propos de nous</h5>
-                <p style="color: #6D4C41;">Notre communauté accompagne les parents dans chaque étape du développement de leur enfant, en favorisant le partage et l'entraide.</p>
-                <img src="{{ asset('images/logo3.png') }}" alt="Logo" class="mb-3" style="max-width: 120px;">
+                <h5>À propos de nous</h5>
+                <p>Notre communauté accompagne les parents dans chaque étape du développement de leur enfant, en favorisant le partage et l'entraide.</p>
+                <img src="{{ asset('images/logo3.png') }}" alt="Logo" class="mb-3">
             </div>
             <div class="col-md-4">
-                <h5 style="color: #B17A65;">Nos services</h5>
+                <h5>Nos services</h5>
                 <ul class="list-unstyled">
-                    <li class="mb-2"><a href="#" class="text-decoration-none" style="color: #6D4C41;">Échange de jouets</a></li>
-                    <li class="mb-2"><a href="{{ path('recette_liste') }}" class="text-decoration-none" style="color: #6D4C41;">Recettes et activités</a></li>
-                    <li class="mb-2"><a href="#" class="text-decoration-none" style="color: #6D4C41;">Jeux éducatifs</a></li>
-                    <li class="mb-2"><a href="#" class="text-decoration-none" style="color: #6D4C41;">Forum et communauté</a></li>
+                    <li class="mb-2"><a href="#">Échange de jouets</a></li>
+                    <li class="mb-2"><a href="{{ path('recette_liste') }}">Recettes et activités</a></li>
+                    <li class="mb-2"><a href="#">Jeux éducatifs</a></li>
+                    <li class="mb-2"><a href="#">Forum et communauté</a></li>
                 </ul>
             </div>
             <div class="col-md-4">
-                <h5 style="color: #B17A65;">Rejoignez la communauté</h5>
+                <h5>Rejoignez la communauté</h5>
                 <ul class="list-unstyled social-icons">
                     <li class="mb-3">
-                        <a href="#" class="text-decoration-none" style="color: #6D4C41;">
-                            <i class="fa-brands fa-instagram fa-lg me-2" style="color: #B17A65;"></i>
+                        <a href="#">
+                            <i class="fa-brands fa-instagram fa-lg me-2"></i>
                             Instagram
                         </a>
                     </li>
                     <li class="mb-3">
-                        <a href="#" class="text-decoration-none" style="color: #6D4C41;">
-                            <i class="fa-brands fa-facebook fa-lg me-2" style="color: #B17A65;"></i>
+                        <a href="#">
+                            <i class="fa-brands fa-facebook fa-lg me-2"></i>
                             Facebook
                         </a>
                     </li>
                     <li class="mb-3">
-                        <a href="#" class="text-decoration-none" style="color: #6D4C41;">
-                            <i class="fa-brands fa-pinterest fa-lg me-2" style="color: #B17A65;"></i>
+                        <a href="#">
+                            <i class="fa-brands fa-pinterest fa-lg me-2"></i>
                             Pinterest
                         </a>
                     </li>
                     <li class="mb-3">
-                        <a href="#" class="text-decoration-none" style="color: #6D4C41;">
-                            <i class="fa-brands fa-tiktok fa-lg me-2" style="color: #B17A65;"></i>
+                        <a href="#">
+                            <i class="fa-brands fa-tiktok fa-lg me-2"></i>
                             TikTok
                         </a>
                     </li>
                     <li class="mb-3">
-                        <a href="#" class="text-decoration-none" style="color: #6D4C41;">
-                            <i class="fa-regular fa-envelope fa-lg me-2" style="color: #B17A65;"></i>
+                        <a href="#">
+                            <i class="fa-regular fa-envelope fa-lg me-2"></i>
                             Contact
                         </a>
                     </li>
-                                    </ul>
+                </ul>
             </div>
         </div>
-        <hr class="my-4" style="color: #B17A65;">
+        <hr class="my-4">
         <div class="row">
             <div class="col-12 text-center">
-                <p class="mb-2" style="color: #6D4C41;">© {{ "now"|date("Y") }} - Tous droits réservés</p>
-                <div class="small" style="color: #8D6E63;">
-                    <a href="#" class="text-decoration-none me-3" style="color: #8D6E63;">Mentions légales</a>
-                    <a href="#" class="text-decoration-none me-3" style="color: #8D6E63;">Politique de confidentialité</a>
-                    <a href="#" class="text-decoration-none" style="color: #8D6E63;">CGU</a>
+                <p class="mb-2">© {{ "now"|date("Y") }} - Tous droits réservés</p>
+                <div class="small">
+                    <a href="#" class="me-3">Mentions légales</a>
+                    <a href="#" class="me-3">Politique de confidentialité</a>
+                    <a href="#">CGU</a>
                 </div>
             </div>
         </div>
