@@ -221,7 +221,8 @@ body {
 /* Section Articles */
 .articles-section {
   text-align: center;
-  background: #f5e0ca;
+  background: #fef2f1;
+  opacity: 0.9;
   min-height: 700px;
   padding: 80px 25px; /* 100px en haut et en bas, 25px à droite et à gauche */
   display: flex;
