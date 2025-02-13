@@ -1,26 +1,11 @@
 version: '4.38'
+
 services:
   php:
     image: php:8.3-fpm
     container_name: symfony_php
     volumes:
-      - C:/Users/33753/Desktop/Projet_finale/Defi:/var/www/html  # Assure-toi de partager le répertoire public
-    networks:
-      - defi_symfony_network
-
-  nginx:
-    image: nginx:latest
-    container_name: symfony_nginx
-    ports:
-      - "8080:80"
-      - "443:443" # Ajoute le port 443 pour le HTTPS
-    volumes:
-      - C:/Users/33753/Desktop/Projet_finale/Defi/public:/var/www/html/public  # Assure-toi de partager le répertoire public
-      - ./nginx.conf:/etc/nginx/conf.d/default.conf  # Assure-toi que ce fichier est bien configuré
-      - ./ssl:/etc/nginx/ssl  # Monter les certificats SSL dans Docker
-
-    depends_on:
-      - php  
+      - C:/Users/33753/Desktop/Projet_finale/Defi:/var/www/html
     networks:
       - defi_symfony_network
 
@@ -55,10 +40,26 @@ services:
     networks:
       - defi_symfony_network
 
+  jenkins:
+    image: jenkins/jenkins:lts
+    container_name: jenkins
+    ports:
+      - "9090:8080"  # Jenkins sera accessible sur http://localhost:9090
+      - "50000:50000" # Utilisé pour les agents Jenkins
+    volumes:
+      - jenkins_home:/var/jenkins_home  # Pour stocker les configurations et jobs de Jenkins
+    networks:
+      - defi_symfony_network
+    environment:
+      JENKINS_OPTS: "--httpPort=8080"  # Choisir le port sur lequel Jenkins va tourner
+    restart: unless-stopped  # Redémarre Jenkins en cas d'échec
+
 networks:
   defi_symfony_network:
     driver: bridge
 
 volumes:
   mysql_data:
+    driver: local
+  jenkins_home:
     driver: local

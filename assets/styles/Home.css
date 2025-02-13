@@ -71,13 +71,12 @@ body {
 .text-h1 {
   text-align: center;
   padding-top:5px;
-  font-size: 48px;
+  font-size: 46px;
 }
 
 .text-p2 {
-  text-align: justify;
+  text-align: center;
   max-width: 600px;
-  margin: auto;
   line-height: 1.6;
   font-size: 19px;
 }

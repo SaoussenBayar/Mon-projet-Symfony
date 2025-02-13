@@ -39,14 +39,15 @@
                         <div class="circle" onclick="toggleMenu()">
                             <span>{{ app.user.prenom|first|upper }}</span>
                         </div>
-                        <div id="dropdown-menu" class="dropdown-menu hidden">
+                        <div id="dropdown-menu" class="dropdown-menu d-none">
                             <a href="#">Profil</a>
                             <a href="{{ path('app_logout') }}">Déconnexion</a>
-                         </div>
+                        </div>
                     </div>
-            {% else %}
-                <a class="btn btn-primary d-flex position-absolute top-0 end-0 m-3" href="{{ path('app_login') }}">Se connecter</a>
-            {% endif %}                
+
+                {% else %}
+                    <a class="btn btn-primary d-flex position-absolute top-0 end-0 m-3" href="{{ path('app_login') }}">Se connecter</a>
+                {% endif %}                
             </form>
         </div>
     </div>
@@ -252,15 +253,16 @@
 
     function toggleMenu() {
         var menu = document.getElementById("dropdown-menu");
-        menu.classList.toggle("hidden");
+        menu.classList.toggle("d-none");
     }
 
     document.addEventListener("click", function(event) {
         var circle = document.querySelector(".circle");
         var menu = document.getElementById("dropdown-menu");
 
+        // Vérifie si le clic est en dehors du menu et du cercle
         if (!circle.contains(event.target) && !menu.contains(event.target)) {
-            menu.classList.add("hidden");
+            menu.classList.add("d-none");
         }
     });
 </script>
