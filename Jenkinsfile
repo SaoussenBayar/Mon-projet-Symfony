@@ -10,19 +10,19 @@ pipeline {
 
         stage('Build Docker Image') {
             steps {
-                sh 'docker build -t DEFI .'
+                sh 'docker build -t babycare-hub .'
             }
         }
 
         stage('Stop Old Container') {
             steps {
-                sh 'docker stop DEFI || true && docker rm DEFI || true'
+                sh 'docker stop babycare-hub || true && docker rm babycare-hub || true'
             }
         }
 
         stage('Run New Container') {
             steps {
-                sh 'docker run -d --name DEFI -p 8080:80 DEFI'
+                sh 'docker run -d --name babycare-hub -p 8080:80 babycare-hub'
             }
         }
     }
