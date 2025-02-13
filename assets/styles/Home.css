@@ -17,8 +17,6 @@ body {
 
 /* Boutons */
 .btn, .btninscription {
-  background-color: #447387;
-  color: white;
   border: none;
   border-radius: 5px;
   font-size: 18px;
@@ -222,7 +220,6 @@ body {
 .articles-section {
   text-align: center;
   background: #fef2f1;
-  opacity: 0.9;
   min-height: 700px;
   padding: 80px 25px; /* 100px en haut et en bas, 25px à droite et à gauche */
   display: flex;
@@ -394,18 +391,103 @@ body {
   color: #8D6E63;
 }
 
+.profile-container {
+  position: relative;
+  display: inline-block;
+}
+
+
+
+.dropdown-menu {
+  position: absolute;
+  top: 50px;
+  right: 0;
+  background-color: white;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  border-radius: 5px;
+  width: 120px;
+  display: flex;
+  flex-direction: column;
+}
+
+.dropdown-menu a {
+  padding: 10px;
+  text-decoration: none;
+  color: black;
+  display: block;
+}
+
+.dropdown-menu a:hover {
+  background-color: #f0f0f0;
+}
+
+.hidden {
+  display: none;
+}
+
 /* Responsive adjustments */
 @media (max-width: 768px) {
+  /* Reduire la taille des titres et des textes */
+  .text-h1 {
+    font-size: 32px; /* Réduction de la taille sur petits écrans */
+  }
+
+  .text-p2 {
+    font-size: 16px; /* Plus petit sur téléphone */
+    margin: 0 15px; /* Réduire les marges */
+  }
+
+  .services-section {
+    flex-direction: column; /* Placer les services en colonne */
+    align-items: center; 
+  }
+
+  .service {
+    flex-direction: column; /* Ajustement pour un affichage en colonne */
+    align-items: center; 
+  }
+
+  .carousel {
+    width: 100%;
+    height: auto;
+    margin: 10px 0;
+  }
+
+  .carousel-item img {
+    width: 100%;
+    height: auto; /* Ajuster l'image pour qu'elle prenne toute la largeur sans déformer */
+  }
+
+  .articles-grid {
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Ajouter une taille plus petite pour les articles */
+    gap: 15px; /* Réduire l'écart entre les articles */
+  }
+
   .footer {
-      padding: 3rem 0;
+    padding: 3rem 0;
   }
 
   .footer h5 {
-      margin-top: 1.5rem;
+    font-size: 20px; /* Ajustement de la taille du titre */
+  }
+
+  .footer ul.list-unstyled {
+    text-align: center; /* Centrer les éléments */
   }
 
   .footer .bottom-footer a {
-      display: block;
-      margin: 10px 0;
+    display: block;
+    margin: 10px 0;
+  }
+
+  .circle {
+    width: 50px;
+    height: 50px;
+    font-size: 20px;
+  }
+
+  .logo {
+    width: 120px;
+    height: 120px;
   }
 }

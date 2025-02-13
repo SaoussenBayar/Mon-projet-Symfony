@@ -9,124 +9,132 @@
 
 {% block body %}
     {# Section de la barre de navigation #}
-    <nav class="navbar navbar-expand-lg">
-        <div class="container-fluid">
-            <img src="{{ asset('images/logo2.png') }}" alt="logo" class="img-fluid logo" width="85" height="85">
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
-                    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav mx-auto me-auto mb-2 mb-lg-0">
-                    <li class="nav-item">
-                        <a class="nav-link d-flex flex-column align-items-center text-p" aria-current="page"
-                           href="{{ path('app_home') }}">Accueil</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link d-flex flex-column align-items-center text-p" href="/recettes">Recettes</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link d-flex flex-column align-items-center text-p" href="#">Jeux éducatifs</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link d-flex flex-column align-items-center text-p" href="#">Échange jouets</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link d-flex flex-column align-items-center text-p" href="#">Forum</a>
-                    </li>
-                </ul>
-                <form class="d-flex align-items-center">
-                    {% if is_granted('IS_AUTHENTICATED_FULLY') %}
-            <div class="circle">
-                <span>{{ app.user.prenom|first|upper }}</span>
-            </div>
-                {% else %}
-                    <a class="btn btn-primary" href="{{ path('app_login') }}">Se connecter</a>
-                {% endif %}                
-                </form>
-            </div>
-        </div>
-    </nav>
-
-    {# Section top #}
-    <section class="top-section">
-        <div class="container-fluid image-header">
-        {% if not is_granted('IS_AUTHENTICATED_FULLY') %}
-            <h1 class="text-h1">Rejoignez-nous !</h1>
-            <p class="text-p2">Inscrivez-vous dès maintenant pour échanger des jouets, partager des astuces, et découvrir des recettes et jeux éducatifs adaptés à l'âge de vos enfants !</p>
-            <form class="d-flex justify-content-center" >
-                <a class="btn btn-primary" href="{{ path('app_register') }}">S'inscrire</a>
+<nav class="navbar navbar-expand-lg">
+    <div class="container-fluid">
+        <img src="{{ asset('images/logo2.png') }}" alt="logo" class="img-fluid logo" width="85" height="85">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mx-auto me-auto mb-2 mb-lg-0">
+            {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                <li class="nav-item">
+                    <a class="nav-link d-flex flex-column align-items-center text-p" href="/recettes">Recettes</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link d-flex flex-column align-items-center text-p" href="#">Jeux éducatifs</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link d-flex flex-column align-items-center text-p" href="#">Échange jouets</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link d-flex flex-column align-items-center text-p" href="#">Forum</a>
+                </li>
+            </ul>
+            {% endif %}
+            <form class="d-flex align-items-center">
+                {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                    <div class="profile-container">
+                        <div class="circle" onclick="toggleMenu()">
+                            <span>{{ app.user.prenom|first|upper }}</span>
+                        </div>
+                        <div id="dropdown-menu" class="dropdown-menu hidden">
+                            <a href="#">Profil</a>
+                            <a href="{{ path('app_logout') }}">Déconnexion</a>
+                         </div>
+                    </div>
+            {% else %}
+                <a class="btn btn-primary d-flex position-absolute top-0 end-0 m-3" href="{{ path('app_login') }}">Se connecter</a>
+            {% endif %}                
             </form>
         </div>
-        {% else %}
-            <h1 class="text-h1">Bienvenue sur BabyCare Hub! 😃</h1>
-            <p class="text-p2">Nous sommes heureux de vous accueillir parmi nous. Prenez le temps d'explorer notre site, et profitez pleinement de l'expérience que nous avons conçue pour vous. <br>
-            Bonne navigation !</p>
-        {% endif %}    
-    </section>
-
-    {# Section des services et du carousel #}
-    <section class="bottom-section">
-        <div class="row">
-            <div class="left col-md-7">
-                <h2 class="section-title">Tout ce dont vous avez besoin, au même endroit ! 😃</h2>
-                <p class="section-description">Simplifiez votre quotidien avec nos services pour accompagner vos enfants à chaque étape.</p>
-                <div class="services-section">
-                    <div class="services">
-                        {% set services = [
-                            {icon: '🧸', title: 'Echange de Jouets', description: 'Partagez et recevez des jouets en bon état.'},
-                            {icon: '📚', title: 'Recettes et Activités', description: 'Explorez nos idées pour cuisiner et apprendre ensemble.'},
-                            {icon: '🤝', title: 'Forum et Communauté', description: 'Connectez-vous avec des parents qui partagent vos valeurs.'},
-                            {icon: '💡', title: 'Conseils et Astuces', description: 'Obtenez des conseils et astuces pour le développement de vos enfants.'}
-                        ] %}
-                        {% for service in services %}
-                            <div class="service">
-                                <div class="icon">{{ service.icon }}</div>
-                                <div>
-                                    <h3>{{ service.title }}</h3>
-                                    <p>{{ service.description }}</p>
-                                </div>
+    </div>
+</nav>
+{# Section top #}
+<section class="top-section">
+    <div class="container-fluid image-header">
+    {% if not is_granted('IS_AUTHENTICATED_FULLY') %}
+        <h1 class="text-h1">Rejoignez-nous !</h1>
+        <p class="text-p2">Inscrivez-vous dès maintenant pour échanger des jouets, partager des astuces, et découvrir des recettes et jeux éducatifs adaptés à l'âge de vos enfants !</p>
+        <form class="d-flex justify-content-center" >
+            <a class="btn btn-primary" href="{{ path('app_register') }}">S'inscrire</a>
+        </form>
+    </div>
+    {% else %}
+        <h1 class="text-h1">Bienvenue sur BabyCare Hub! 😃</h1>
+        <p class="text-p2">Nous sommes heureux de vous accueillir parmi nous. Prenez le temps d'explorer notre site, et profitez pleinement de l'expérience que nous avons conçue pour vous. <br>
+        Bonne navigation !</p>
+    {% endif %}    
+</section>
+{# Section des services et du carousel #}
+<section class="bottom-section">
+    <div class="row">
+        <div class="left col-md-7">
+            <h2 class="section-title">Tout ce dont vous avez besoin, au même endroit ! 😃</h2>
+            <p class="section-description">Simplifiez votre quotidien avec nos services pour accompagner vos enfants à chaque étape.</p>
+            <div class="services-section">
+                <div class="services">
+                    {% set services = [
+                        {icon: '🧸', title: 'Echange de Jouets', description: 'Partagez et recevez des jouets en bon état.'},
+                        {icon: '📚', title: 'Recettes et Activités', description: 'Explorez nos idées pour cuisiner et apprendre ensemble.'},
+                        {icon: '🤝', title: 'Forum et Communauté', description: 'Connectez-vous avec des parents qui partagent vos valeurs.'},
+                        {icon: '💡', title: 'Conseils et Astuces', description: 'Obtenez des conseils et astuces pour le développement de vos enfants.'}
+                    ] %}
+                    {% for service in services %}
+                        <div class="service">
+                            <div class="icon">{{ service.icon }}</div>
+                            <div>
+                                <h3>{{ service.title }}</h3>
+                                <p>{{ service.description }}</p>
                             </div>
-                        {% endfor %}
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-5 right">
-                <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
-                    <ol class="carousel-indicators">
-                        {% for i in 0..2 %}
-                            <li data-bs-target="#carouselExampleIndicators" data-bs-slide-to="{{ i }}" class="{% if i == 0 %}active{% endif %}"></li>
-                        {% endfor %}
-                    </ol>
-                    <div class="carousel-inner">
-                        {% set slides = [
-                            {image: 'images/echanger.jpg', title: 'Echanger des Jouets', text: 'Echangez des jouets de manière sécurisée', link: '#'},
-                            {image: 'images/recette.avif', title: 'Recettes Saines', text: 'Découvrez des recettes nutritives', link: "{{ path('recette_liste') }}"},
-                            {image: 'images/jeux.avif', title: 'Jeux Éducatifs', text: 'Stimulez l’éveil de vos enfants', link: '#'}
-                        ] %}
-                        {% for slide in slides %}
-                            <div class="carousel-item {% if loop.first %}active{% endif %}">
-                                <img src="{{ asset(slide.image) }}" class="d-block w-100" alt="{{ slide.title }}">
-                                <div class="carousel-caption d-none d-md-block bg-dark opacity-75 p-3 rounded">
-                                    <h5>{{ slide.title }}</h5>
-                                    <p>{{ slide.text }}</p>
-                                    <a href="{{ slide.link }}" class="btn btn-primary">Découvrir</a>
-                                </div>
-                            </div>
-                        {% endfor %}
-                    </div>
-                    <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-bs-slide="prev">
-                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                    </a>
-                    <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-bs-slide="next">
-                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                    </a>
+                        </div>
+                    {% endfor %}
                 </div>
             </div>
         </div>
-    </section>    
+        <div class="col-md-5 right">
+            <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+                <ol class="carousel-indicators">
+                    {% for i in 0..2 %}
+                        <li data-bs-target="#carouselExampleIndicators" data-bs-slide-to="{{ i }}" class="{% if i == 0 %}active{% endif %}"></li>
+                    {% endfor %}
+                </ol>
+                <div class="carousel-inner">
+                    {% set slides = [
+                        {image: 'images/echanger.jpg', title: 'Echanger des Jouets', text: 'Echangez des jouets de manière sécurisée', link: '#'},
+                        {image: 'images/recette.avif', title: 'Recettes Saines', text: 'Découvrez des recettes nutritives', link: "{{ path('recette_liste') }}"},
+                        {image: 'images/jeux.avif', title: 'Jeux Éducatifs', text: 'Stimulez l’éveil de vos enfants', link: '#'}
+                    ] %}
+                    {% for slide in slides %}
+                        <div class="carousel-item {% if loop.first %}active{% endif %}">
+                            <img src="{{ asset(slide.image) }}" class="d-block w-100" alt="{{ slide.title }}">
+                            <div class="carousel-caption d-none d-md-block bg-dark opacity-75 p-3 rounded">
+                                <h5>{{ slide.title }}</h5>
+                                <p>{{ slide.text }}</p>
 
-    {# Section des articles #}
+                                {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                                    <!-- Si connecté, on affiche le lien normal -->
+                                    <a href="{{ slide.link }}" class="btn btn-primary">Découvrir</a>
+                                {% else %}
+                                    <!-- Si non connecté, on affiche un bouton qui déclenche la popup -->
+                                    <button class="btn btn-primary" onclick="showLoginPopup()">Découvrir</button>
+                                {% endif %}
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+                <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                </a>
+                <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                </a>
+            </div>
+        </div>
+    </div>
+</section>    
+{# Section des articles #}
 <section class="articles-section">
     <h2 class="articles-title">Accompagnez chaque étape du développement de votre bébé</h2>
     <p class="articles-description">
@@ -148,9 +156,18 @@
                 <div class="article-card-content">
                     <h3 class="article-title">{{ article.titre }}</h3>
                     <p class="article-text">{{ article.description }}</p>
-                    <a href="{{ article.contenu }}" class="btn btn-primary">Lire la suite</a>
+
+                    {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                        <!-- Afficher le contenu si l'utilisateur est connecté -->
+                        <div class="article-full-content">
+                            <a href="{{ article.contenu|raw }}" class="btn btn-primary">Lire la suite</a>
+                        </div>
+                    {% else %}
+                        <!-- Bouton qui déclenche une alerte si l'utilisateur n'est pas connecté -->
+                        <button class="btn btn-primary" onclick="showLoginPopup()">Lire la suite</button>
+                    {% endif %}
                 </div>
-            </div>
+            </div>    
         {% else %}
             <p class="no-articles">Aucun article trouvé.</p>
         {% endfor %}
@@ -226,5 +243,26 @@
         </div>
     </div>
 </footer>
+<script>
+
+    function showLoginPopup() {
+        alert("Oops! 😔 Vous devez vous connecter pour voir ce contenu.");
+        window.location.href = "{{ path('app_login') }}"; // Rediriger vers la page de connexion
+    }
+
+    function toggleMenu() {
+        var menu = document.getElementById("dropdown-menu");
+        menu.classList.toggle("hidden");
+    }
+
+    document.addEventListener("click", function(event) {
+        var circle = document.querySelector(".circle");
+        var menu = document.getElementById("dropdown-menu");
+
+        if (!circle.contains(event.target) && !menu.contains(event.target)) {
+            menu.classList.add("hidden");
+        }
+    });
+</script>
      
 {% endblock %}

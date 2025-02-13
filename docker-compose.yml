@@ -1,3 +1,4 @@
+version: '4.38'
 services:
   php:
     image: php:8.3-fpm
@@ -5,37 +6,59 @@ services:
     volumes:
       - C:/Users/33753/Desktop/Projet_finale/Defi:/var/www/html  # Assure-toi de partager le répertoire public
     networks:
-      - symfony_network
+      - defi_symfony_network
 
   nginx:
     image: nginx:latest
     container_name: symfony_nginx
     ports:
       - "8080:80"
+      - "443:443" # Ajoute le port 443 pour le HTTPS
     volumes:
-    - C:/Users/33753/Desktop/Projet_finale/Defi/public:/var/www/html/public # Assure-toi de partager le répertoire public
-    - ./nginx.conf:/etc/nginx/conf.d/default.conf  # Assure-toi que ce fichier est bien configuré
+      - C:/Users/33753/Desktop/Projet_finale/Defi/public:/var/www/html/public  # Assure-toi de partager le répertoire public
+      - ./nginx.conf:/etc/nginx/conf.d/default.conf  # Assure-toi que ce fichier est bien configuré
+      - ./ssl:/etc/nginx/ssl  # Monter les certificats SSL dans Docker
+
     depends_on:
       - php  
     networks:
-      - symfony_network
+      - defi_symfony_network
 
-  mysql:  # 👈 Assure-toi que le bon service est utilisé ici
-    image: mysql:8.3  # 👈 Vérifie qu'il y a bien "image:"
+  mysql:
+    image: mysql:8.3
     container_name: symfony_mysql
     ports:
-      - "3307:3306"
+      - "3307:3306"  # Port 3307 sur l'hôte, mais la DB écoute sur 3306 dans le conteneur
     environment:
-        MYSQL_ALLOW_EMPTY_PASSWORD: "yes"  # ✅ Autorise un root sans mot de passe
-        MYSQL_DATABASE: my_project            # 📌 Crée une base de données "symfony"
+      MYSQL_ALLOW_EMPTY_PASSWORD: "yes"  # ✅ Autorise un root sans mot de passe
+      MYSQL_DATABASE: my_project
+      MYSQL_USER: symfony_user  # Ajout d'un utilisateur personnalisé
+      MYSQL_PASSWORD: symfony_password  # Mot de passe pour l'utilisateur
     volumes:
       - mysql_data:/var/lib/mysql
     networks:
-      - symfony_network
+      - defi_symfony_network
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: symfony_phpmyadmin
+    restart: always
+    ports:
+      - "8081:80"  # PhpMyAdmin accessible sur http://localhost:8081
+    environment:
+      PMA_HOST: mysql  # Correspond au nom du service MySQL
+      PMA_PORT: 3306
+      PMA_USER: symfony_user  # L'utilisateur défini dans le service MySQL
+      PMA_PASSWORD: symfony_password  # Le mot de passe défini dans le service MySQL
+    depends_on:
+      - mysql
+    networks:
+      - defi_symfony_network
 
 networks:
-  symfony_network:
+  defi_symfony_network:
     driver: bridge
+
 volumes:
   mysql_data:
     driver: local

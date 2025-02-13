@@ -1,9 +1,9 @@
 # Utiliser une image PHP avec FPM
 FROM php:8.3-fpm
 
-# Installer les dépendances système
+# Installer les dépendances système et PHP
 RUN apt-get update && apt-get install -y \
-    default-mysql-client\
+    default-mysql-client \
     git \
     unzip \
     libzip-dev \
@@ -11,10 +11,15 @@ RUN apt-get update && apt-get install -y \
     libonig-dev \
     libxml2-dev \
     libpq-dev \
-    nginx \
-    libmysqlclient-dev && \  
-    docker-php-ext-configure gd --with-freetype --with-jpeg && \  
-    docker-php-ext-configure pdo_mysql && docker-php-ext-install pdo pdo_mysql
+    mariadb-client \
+    libmariadb-dev \
+    libmariadb-dev-compat \
+    && docker-php-ext-install pdo_mysql
+# Nettoyage des fichiers inutiles pour réduire la taille du conteneur
+RUN apt-get clean && rm -rf /var/lib/apt/lists/*
+
+# Vérification de pdo_mysql après installation
+RUN php -m | grep pdo
 
 # Installer Composer
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
@@ -35,11 +40,8 @@ RUN composer install --no-dev --optimize-autoloader --no-scripts
 # Configurer les permissions
 RUN chown -R www-data:www-data /var/www/html/var
 
-# Configurer Nginx
-COPY ./nginx/default.conf /etc/nginx/sites-available/default
+# Exposer le port 9000 pour PHP-FPM
+EXPOSE 9000
 
-# Exposer le port 80 pour Nginx
-EXPOSE 80
-
-# Démarrer Nginx et PHP-FPM
-CMD service nginx start && php-fpm
+# Lancer PHP-FPM
+CMD ["php-fpm"]
