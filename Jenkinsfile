@@ -1,52 +1,29 @@
 pipeline {
     agent any
 
-    environment {
-        IMAGE_NAME = "mon-app-symfony"
-        CONTAINER_NAME = "mon-app-container"
-    }
-
     stages {
         stage('Checkout') {
             steps {
-                git branch: 'main', url: 'https://github.com//SaoussenBayar/Jenkins.git'
+                git branch: 'main', url: 'https://github.com/utilisateur/mon-projet.git'
             }
         }
 
         stage('Build Docker Image') {
             steps {
-                sh 'docker build -t $IMAGE_NAME .'
-            }
-        }
-
-        stage('Run Tests') {
-            steps {
-                sh 'docker run --rm $IMAGE_NAME php bin/phpunit'
+                sh 'docker build -t DEFI .'
             }
         }
 
         stage('Stop Old Container') {
             steps {
-                script {
-                    sh "docker stop $CONTAINER_NAME || true"
-                    sh "docker rm $CONTAINER_NAME || true"
-                }
+                sh 'docker stop DEFI || true && docker rm DEFI || true'
             }
         }
 
         stage('Run New Container') {
             steps {
-                sh "docker run -d --name $CONTAINER_NAME -p 8080:80 $IMAGE_NAME"
+                sh 'docker run -d --name DEFI -p 8080:80 DEFI'
             }
-        }
-    }
-
-    post {
-        success {
-            echo "Déploiement réussi !"
-        }
-        failure {
-            echo "Échec du déploiement !"
         }
     }
 }
