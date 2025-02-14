@@ -1,5 +1,5 @@
 pipeline {
-    agent none  // On n'affecte pas un agent global ici, mais on le définit dans chaque stage
+    agent any  // On n'affecte pas un agent global ici, mais on le définit dans chaque stage
 
     environment {
         // Définition des variables d'environnement
