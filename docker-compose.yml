@@ -34,18 +34,18 @@ services:
 
   jenkins:
     image: jenkins/jenkins:lts
-    container_name: jenkins
-    ports:
-      - "9090:8080"  # Jenkins sera accessible sur http://localhost:9090
-      - "50000:50000" # Utilisé pour les agents Jenkins
+    container_name: jenkins-server
+    privileged: true  # Nécessaire pour Docker-in-Docker
     volumes:
-      - jenkins_home:/var/jenkins_home  # Pour stocker les configurations et jobs de Jenkins
+      - jenkins_home:/var/jenkins_home
+      - /var/run/docker.sock:/var/run/docker.sock  # Permet à Jenkins de communiquer avec Docker sur l'hôte
+    ports:
+      - "8080:8080"
+      - "50000:50000"
+    environment:
+      DOCKER_TLS_CERTDIR: ""  # Désactive la sécurité TLS (si nécessaire)
     networks:
       - defi_symfony_network
-    environment:
-      JENKINS_OPTS: "--httpPort=8080"  # Choisir le port sur lequel Jenkins va tourner
-    restart: unless-stopped  # Redémarre Jenkins en cas d'échec
-
 networks:
   defi_symfony_network:
     driver: bridge
