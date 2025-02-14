@@ -14,7 +14,7 @@ RUN apt-get update && apt-get install -y \
     && echo "deb [arch=amd64] https://download.docker.com/linux/debian $(lsb_release -cs) stable" > /etc/apt/sources.list.d/docker.list \
     && apt-get update \
     && apt-get install -y docker-ce docker-ce-cli containerd.io \
-    && rm -rf /var/lib/apt/lists/*  # Nettoyage des caches pour réduire la taille de l'image
+    && rm -rf /var/lib/apt/lists/*  
 
 # Donner à l'utilisateur Jenkins l'accès au socket Docker
 RUN usermod -aG docker jenkins
