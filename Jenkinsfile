@@ -1,5 +1,10 @@
 pipeline {
-    agent any
+    agent {
+        docker {
+            image 'php:8.2-apache'  // Exemple d'image Docker, remplace par ton image Docker nécessaire
+            args '-v /var/run/docker.sock:/var/run/docker.sock'  // Pour Docker-in-Docker
+        }
+    }
 
     environment {
         // Définition des variables d'environnement, tu peux les ajuster si nécessaire
