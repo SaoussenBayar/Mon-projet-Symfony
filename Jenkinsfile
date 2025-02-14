@@ -1,10 +1,6 @@
 pipeline {
-    agent {
-        docker {
-            image 'php:8.2-apache'  // Exemple d'image Docker, remplace par ton image Docker nécessaire
-            args '-v /var/run/docker.sock:/var/run/docker.sock'  // Pour Docker-in-Docker
-        }
-    }
+    agent none
+ 
 
     environment {
         // Définition des variables d'environnement, tu peux les ajuster si nécessaire
@@ -14,6 +10,9 @@ pipeline {
 
     stages {
         stage('Checkout') {
+            docker {
+            image 'php:8.2-apache'  // Exemple d'image Docker, remplace par ton image Docker nécessaire
+        }
             steps {
                 // Récupère le code depuis le dépôt Git
                 git branch: 'main', url: 'https://github.com/SaoussenBayar/Mon-projet-Symfony.git'
@@ -21,6 +20,9 @@ pipeline {
         }
 
         stage('Build Docker Image') {
+              docker {
+            image 'php:8.2-apache'  // Exemple d'image Docker, remplace par ton image Docker nécessaire
+        }
             steps {
                 // Construction de l'image Docker
                 sh 'docker build -t babycare-hub .'
@@ -28,6 +30,9 @@ pipeline {
         }
 
         stage('Stop Old Container') {
+              docker {
+            image 'php:8.2-apache'  // Exemple d'image Docker, remplace par ton image Docker nécessaire
+        }
             steps {
                 // Arrêt et suppression de l'ancien conteneur Docker
                 sh 'docker stop babycare-hub || true && docker rm babycare-hub || true'
@@ -35,6 +40,9 @@ pipeline {
         }
 
         stage('Run New Container') {
+              docker {
+            image 'php:8.2-apache'  // Exemple d'image Docker, remplace par ton image Docker nécessaire
+        }
             steps {
                 // Lancement du nouveau conteneur Docker
                 sh 'docker run -d --name babycare-hub -p 8080:80 babycare-hub'
@@ -42,6 +50,9 @@ pipeline {
         }
 
         stage('Install Dependencies') {
+              docker {
+            image 'php:8.2-apache'  // Exemple d'image Docker, remplace par ton image Docker nécessaire
+        }
             steps {
                 // Installation des dépendances PHP (via Composer)
                 sh 'docker exec babycare-hub composer install --no-interaction'
@@ -49,6 +60,9 @@ pipeline {
         }
 
         stage('Run Unit Tests with PHPUnit') {
+              docker {
+            image 'php:8.2-apache'  // Exemple d'image Docker, remplace par ton image Docker nécessaire
+        }
             steps {
                 // Exécution des tests unitaires avec PHPUnit dans le conteneur
                 sh 'docker exec babycare-hub vendor/bin/phpunit --configuration phpunit.xml.dist --coverage-html=build/coverage'
@@ -56,6 +70,9 @@ pipeline {
         }
 
         stage('Run Functional Tests with Symfony Panther') {
+              docker {
+            image 'php:8.2-apache'  // Exemple d'image Docker, remplace par ton image Docker nécessaire
+        }
             steps {
                 // Exécution des tests fonctionnels avec Symfony Panther
                 sh 'docker exec babycare-hub bin/phpunit --testdox --coverage-html=build/functional_coverage'
@@ -63,6 +80,9 @@ pipeline {
         }
 
         stage('Publish Test Results') {
+              docker {
+            image 'php:8.2-apache'  // Exemple d'image Docker, remplace par ton image Docker nécessaire
+        }
             steps {
                 // Publication des résultats de tests (ex. PHPUnit)
                 junit '**/build/test-*.xml'
