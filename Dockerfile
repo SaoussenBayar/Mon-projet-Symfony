@@ -1,23 +1,28 @@
-FROM php:8.2-apache
+# Utiliser l'image officielle Jenkins LTS comme base
+FROM jenkins/jenkins:lts
 
-# Installer les extensions nécessaires
-RUN docker-php-ext-install pdo pdo_mysql
+# Passer à l'utilisateur root pour installer Docker
+USER root
 
-# Installer Composer
-COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
+# Installer les paquets nécessaires pour Docker
+RUN apt-get update && apt-get install -y \
+    ca-certificates \
+    curl \
+    gnupg \
+    lsb-release \
+    && curl -fsSL https://download.docker.com/linux/debian/gpg | apt-key add - \
+    && echo "deb [arch=amd64] https://download.docker.com/linux/debian $(lsb_release -cs) stable" > /etc/apt/sources.list.d/docker.list \
+    && apt-get update \
+    && apt-get install -y docker-ce docker-ce-cli containerd.io
 
-# Copier les fichiers Symfony
-WORKDIR /var/www/html
-COPY . .
+# Donner à l'utilisateur Jenkins l'accès au socket Docker
+RUN usermod -aG docker jenkins
 
-# Installer les dépendances Symfony
-RUN composer install --no-dev --optimize-autoloader
+# Passer à l'utilisateur Jenkins
+USER jenkins
 
-# Donner les bons droits aux dossiers de cache et logs
-RUN chown -R www-data:www-data /var/www/html/var
+# Exposer le port 8080 pour Jenkins
+EXPOSE 8080
 
-# Exposer le port Apache
-EXPOSE 80
-
-# Démarrer Apache
-CMD ["apache2-foreground"]
+# Démarrer Jenkins
+ENTRYPOINT ["/bin/tini", "--", "/usr/local/bin/jenkins.sh"]
