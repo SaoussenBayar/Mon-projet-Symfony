@@ -1,4 +1,4 @@
-version: '4.38'
+version: '3.8'
 
 services:
   mysql:
@@ -46,6 +46,7 @@ services:
       DOCKER_TLS_CERTDIR: ""  # Désactive la sécurité TLS (si nécessaire)
     networks:
       - defi_symfony_network
+
 networks:
   defi_symfony_network:
     driver: bridge

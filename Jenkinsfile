@@ -4,7 +4,7 @@ pipeline {
     environment {
         // Définition des variables d'environnement
         COMPOSER_HOME = "${WORKSPACE}/composer"
-        DATABASE_URL = "mysql://$MYSQL_USER:$MYSQL_PASSWORD@mysql:3306/$MYSQL_DATABASE"
+        DATABASE_URL = "mysql://${MYSQL_USER}:${MYSQL_PASSWORD}@mysql:3306/${MYSQL_DATABASE}"
     }
 
     stages {
