@@ -46,6 +46,11 @@ services:
       DOCKER_TLS_CERTDIR: ""  # Désactive la sécurité TLS (si nécessaire)
     networks:
       - defi_symfony_network
+    # Ajout de la partie suivante pour installer Docker dans le conteneur Jenkins
+    build:
+      context: .
+      dockerfile: Dockerfile.jenkins
+
 
 networks:
   defi_symfony_network:
