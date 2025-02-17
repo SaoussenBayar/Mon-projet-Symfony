@@ -4,7 +4,7 @@ FROM jenkins/jenkins:lts
 # Passer à l'utilisateur root pour ajouter Jenkins au groupe docker et installer Docker
 USER root
 
-# Installer Docker dans le conteneur Jenkins
+# Installer Docker dans le conteneur Jenkins et ajouter Jenkins au groupe Docker
 RUN apt-get update && apt-get install -y \
     ca-certificates \
     curl \
@@ -14,10 +14,8 @@ RUN apt-get update && apt-get install -y \
     && echo "deb [arch=amd64] https://download.docker.com/linux/debian $(lsb_release -cs) stable" > /etc/apt/sources.list.d/docker.list \
     && apt-get update \
     && apt-get install -y docker-ce docker-ce-cli containerd.io \
+    && usermod -aG docker jenkins \
     && rm -rf /var/lib/apt/lists/*
-
-# Ajouter Jenkins au groupe Docker
-RUN usermod -aG docker jenkins
 
 # Passer à l'utilisateur Jenkins pour plus de sécurité
 USER jenkins
