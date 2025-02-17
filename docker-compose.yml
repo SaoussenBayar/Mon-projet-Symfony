@@ -49,7 +49,7 @@ services:
     # Ajout de la partie suivante pour installer Docker dans le conteneur Jenkins
     build:
       context: .
-      dockerfile: Dockerfile.jenkins
+      dockerfile: Dockerfile
 
 
 networks:
