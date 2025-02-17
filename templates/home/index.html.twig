@@ -161,11 +161,11 @@
                     {% if is_granted('IS_AUTHENTICATED_FULLY') %}
                         <!-- Afficher le contenu si l'utilisateur est connecté -->
                         <div class="article-full-content">
-                            <a href="{{ article.contenu|raw }}" class="btn btn-primary">Lire la suite</a>
+                            <a href="{{ article.contenu|raw }}" class="btn btn-primary">Lire l'article'</a>
                         </div>
                     {% else %}
                         <!-- Bouton qui déclenche une alerte si l'utilisateur n'est pas connecté -->
-                        <button class="btn btn-primary" onclick="showLoginPopup()">Lire la suite</button>
+                        <button class="btn btn-primary" onclick="showLoginPopup()">Lire l'article'</button>
                     {% endif %}
                 </div>
             </div>    

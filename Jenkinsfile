@@ -18,7 +18,7 @@ pipeline {
         stage('Build Docker Image') {
             steps {
                 // Construction de l'image Docker
-                sh 'sudo docker build -t babycare-hub .'
+                sh 'docker build -t babycare-hub .'
             }
         }
 
