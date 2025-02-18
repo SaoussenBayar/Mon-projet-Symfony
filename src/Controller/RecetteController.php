@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Controller;
-
+use App\Form\RecetteType;
 use App\Entity\CommentairesRecette; 
 use App\Entity\Recette;
 use App\Form\CommentairesRecetteType;
@@ -120,10 +120,34 @@ class RecetteController extends AbstractController
         $recette = new Recette();
         $form = $this->createForm(RecetteType::class, $recette);
         $form->handleRequest($request);
-    
         if ($form->isSubmitted() && $form->isValid()) {
+    
+            // Récupérer l'image téléchargée
+            $imageFile = $form->get('image')->getData();
+            
+            if ($imageFile) {
+                // Dossier où l'image sera stockée
+                $uploadsDirectory = $this->getParameter('kernel.project_dir') . '/public/assets/images';
+        
+                // Générer un nom unique pour l'image
+                $newFilename = uniqid() . '.' . $imageFile->guessExtension();
+    
+                try {
+                    // Déplacer le fichier téléchargé dans le dossier "uploads"
+                    $imageFile->move($uploadsDirectory, $newFilename);
+        
+                    // Enregistrer le nom de l'image dans l'entité Recette
+                    $recette->setImage($newFilename);
+                } catch (\Exception $e) {
+                    // Ajouter un message d'erreur si l'upload échoue
+                    $this->addFlash('error', 'Failed to upload image.');
+                }
+            }
+
+            // Persist the recette and flush
             $em->persist($recette);
             $em->flush();
+
             $this->addFlash('success', 'Recette enregistrée avec succès !');
             return $this->redirectToRoute('recette_gestion');
         }
@@ -133,19 +157,32 @@ class RecetteController extends AbstractController
             'form' => $form->createView(),
         ]);
     }
-    
     #[Route('/recette/{id}/edit', name: 'recette_edit')]
     public function editRecette(Recette $recette, Request $request, EntityManagerInterface $em): Response
     {
         $form = $this->createForm(RecetteType::class, $recette);
         $form->handleRequest($request);
-    
+        if ($uploadedFile) {
+            // Gérer l'upload du fichier
+            $uploadsDirectory = $this->getParameter('uploads_directory'); // Dossier des uploads
+            $newFilename = uniqid().'.'.$uploadedFile->guessExtension();
+        
+            // Déplacer le fichier vers le dossier de téléchargement
+            $uploadedFile->move($uploadsDirectory, $newFilename);
+        
+            // Mettre à jour le chemin de l'image dans l'article
+            $recette->setImage($newFilename);
+        } else {
+            // Conserver l'ancienne image si aucune nouvelle image n'est téléchargée
+            $recette->setImage($article->getImage()); // Cela évite de perdre l'ancienne image
+        }
         if ($form->isSubmitted() && $form->isValid()) {
             $em->flush();
             $this->addFlash('success', 'Recette modifiée avec succès !');
             return $this->redirectToRoute('recette_gestion');
         }
-    
+  
+
         return $this->render('recette/gestion.html.twig', [
             'form' => $form->createView(),
             'recettes' => $em->getRepository(Recette::class)->findAll(),

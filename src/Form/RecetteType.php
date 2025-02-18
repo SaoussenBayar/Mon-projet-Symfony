@@ -8,6 +8,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 
 class RecetteType extends AbstractType
 {
@@ -23,9 +24,21 @@ class RecetteType extends AbstractType
             ->add('detail', TextareaType::class, [
                 'label' => 'Détails de la recette'
             ])
-            ->add('age_recommende', IntegerType::class, [
+            ->add('age_recommende', TextType::class, [
                 'label' => 'Âge recommandé'
+            ])
+            ->add('image', FileType::class, [
+                'label' => 'Image de la recette',
+                'required' => true,
+                'mapped' => false, 
+                'attr' => ['accept' => 'image/*']
+
+            ])
+            ->add('tempsPrep', IntegerType::class, [
+                'label' => 'Temps de préparation (en minutes)'
             ]);
+            
+
     }
 
     public function configureOptions(OptionsResolver $resolver): void

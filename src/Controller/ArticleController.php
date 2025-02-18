@@ -40,7 +40,7 @@ class ArticleController extends AbstractController
             
             if ($imageFile) {
                 // Dossier où l'image sera stockée
-                $uploadsDirectory = $this->getParameter('kernel.project_dir') . '/public/uploads';
+                $uploadsDirectory = $this->getParameter('kernel.project_dir') . 'assets/images';
         
                 // Générer un nom unique pour l'image
                 $newFilename = uniqid() . '.' . $imageFile->guessExtension();
@@ -74,15 +74,17 @@ class ArticleController extends AbstractController
         ]);
     }
     
-    #[Route('/{id}/edit', name: 'article_edit', methods: ['GET', 'POST'])] // La route '/{id}/edit' permet de modifier un utilisateur existant
-    public function edit(Article $article, Request $request, EntityManagerInterface $em): Response // La méthode edit() permet de modifier les informations d'un utilisateur existant
+    #[Route('/{id}/edit', name: 'article_edit', methods: ['GET', 'POST'])]
+    public function edit(Article $article, Request $request, EntityManagerInterface $em): Response
     {
-        if ($request->isMethod('POST')) { // Si la requête est de type POST (formulaire soumis)
-            // Récupère et met à jour les informations de l'utilisateur
-            $article->setTitre($request->request->get('titre')); 
-            $article->setContenu($request->request->get('contenu')); 
+        if ($request->isMethod('POST')) {
+            // Récupère et met à jour les informations de l'article
+            $article->setTitre($request->request->get('titre'));
+            $article->setContenu($request->request->get('contenu'));
+    
+            // Gérer l'upload de l'image uniquement si une nouvelle image est soumise
             $uploadedFile = $request->files->get('image');
-        
+            
             if ($uploadedFile) {
                 // Gérer l'upload du fichier
                 $uploadsDirectory = $this->getParameter('uploads_directory'); // Dossier des uploads
@@ -93,15 +95,22 @@ class ArticleController extends AbstractController
     
                 // Mettre à jour le chemin de l'image dans l'article
                 $article->setImage($newFilename);
+            } else {
+                // Conserver l'ancienne image si aucune nouvelle image n'est téléchargée
+                $article->setImage($article->getImage()); // Cela évite de perdre l'ancienne image
             }
-            $em->flush(); // Sauvegarde les modifications apportées dans la base de données
-
-            return $this->redirectToRoute('view_article'); // Redirige vers la page de la liste des utilisateurs après modification
+    
+            // Sauvegarde les modifications apportées dans la base de données
+            $em->flush();
+    
+            // Redirige vers la page de la liste des articles après modification
+            return $this->redirectToRoute('view_article');
         }
-
-        return $this->render('article/edit.html.twig', ['article' => $article]); // Affiche le formulaire avec les données de l'utilisateur à modifier
+    
+        // Affiche le formulaire avec les données de l'article à modifier
+        return $this->render('article/edit.html.twig', ['article' => $article]);
     }
-
+    
     #[Route('/{id}/delete', name: 'article_delete', methods: ['POST'])] // La route '/{id}/delete' permet de supprimer un utilisateur
     public function delete(Article $article, EntityManagerInterface $em): Response // La méthode delete() permet de supprimer un utilisateur existant
     {

@@ -4,7 +4,7 @@ pipeline {
     environment {
         GIT_REPO = "https://github.com/SaoussenBayar/Mon-projet-Symfony.git"
         GIT_BRANCH = "main"
-        DEPLOY_DIR = "saw"
+        DEPLOY_DIR = "web007"
     }
 
     stages {
