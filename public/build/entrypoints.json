@@ -1,0 +1,54 @@
+{
+  "entrypoints": {
+    "app": {
+      "js": [
+        "/build/runtime.cf597b70.js",
+        "/build/704.02c5185d.js",
+        "/build/app.4513ab6f.js"
+      ],
+      "css": [
+        "/build/704.5caa44af.css"
+      ]
+    },
+    "Home": {
+      "js": [
+        "/build/runtime.cf597b70.js"
+      ],
+      "css": [
+        "/build/Home.430d04ff.css"
+      ]
+    },
+    "Inscription": {
+      "js": [
+        "/build/runtime.cf597b70.js"
+      ],
+      "css": [
+        "/build/Inscription.85014eff.css"
+      ]
+    },
+    "Connexion": {
+      "js": [
+        "/build/runtime.cf597b70.js"
+      ],
+      "css": [
+        "/build/Connexion.47c6f21a.css"
+      ]
+    },
+    "recette": {
+      "js": [
+        "/build/runtime.cf597b70.js"
+      ],
+      "css": [
+        "/build/recette.639d175c.css"
+      ]
+    },
+    "recetteDetail": {
+      "js": [
+        "/build/runtime.cf597b70.js"
+      ],
+      "css": [
+        "/build/recetteDetail.8b13d704.css"
+      ]
+    }
+  }
+}
