@@ -22,6 +22,18 @@ pipeline {
                 }
             }
         }
+                stage('Installation des dépendances Node.js et Build des assets') {
+            steps {
+                dir("${DEPLOY_DIR}") {
+                    // Installer les dépendances Node.js
+                    sh 'npm install' 
+                    
+                    // Générer les fichiers d'assets (webpack encore)
+                    sh 'npm run build'
+                }
+            }
+        }
+
 
         stage('Configuration de l\'environnement') {
             steps {
