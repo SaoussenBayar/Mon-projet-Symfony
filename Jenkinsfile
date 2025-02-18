@@ -1,99 +1,76 @@
 pipeline {
-    agent any  // On n'affecte pas un agent global ici, mais on le définit dans chaque stage
+    agent any
 
     environment {
-        // Définition des variables d'environnement
-        COMPOSER_HOME = "${WORKSPACE}/composer"
-        DATABASE_URL = "mysql://${MYSQL_USER}:${MYSQL_PASSWORD}@mysql:3306/${MYSQL_DATABASE}"
+        GIT_REPO = "https://github.com/SaoussenBayar/Mon-projet-Symfony.git"
+        GIT_BRANCH = "main"
+        DEPLOY_DIR = "saw"
     }
 
     stages {
-        stage('Checkout') {
+        stage('Cloner le dépôt') {
             steps {
-                // Récupère le code depuis le dépôt Git
-                git branch: 'main', url: 'https://github.com/SaoussenBayar/Mon-projet-Symfony.git'
+                sh "rm -rf ${DEPLOY_DIR}" // Nettoyage du précédent build
+                sh "git clone -b ${GIT_BRANCH} ${GIT_REPO} ${DEPLOY_DIR}"
             }
         }
 
-        stage('Build Docker Image') {
+        stage('Installation des dépendances') {
             steps {
-                // Construction de l'image Docker
-                sh 'docker build -t babycare-hub .'
+                dir("${DEPLOY_DIR}") {
+                    sh 'composer install --optimize-autoloader'
+                }
             }
         }
 
-        stage('Stop Old Container') {
+        stage('Configuration de l\'environnement') {
             steps {
-                // Arrêt et suppression de l'ancien conteneur Docker
-                sh 'docker stop babycare-hub || true && docker rm babycare-hub || true'
+                script {
+                    def envLocal = """
+                    APP_ENV=prod
+                    APP_DEBUG=1
+                    DATABASE_URL=mysql://root:routitop@127.0.0.1:3306/${DEPLOY_DIR}?serverVersion=8.3.0&charset=utf8mb4
+                    """.stripIndent()
+
+                    writeFile file: "${DEPLOY_DIR}/.env.local", text: envLocal
+                }
             }
         }
 
-        stage('Run New Container') {
+        stage('Migration de la base de données') {
             steps {
-                // Lancement du nouveau conteneur Docker
-                sh 'docker run -d --name babycare-hub -p 8080:80 babycare-hub'
+                dir("${DEPLOY_DIR}") {
+                    sh 'php bin/console doctrine:database:create --if-not-exists --env=prod'
+                    sh 'php bin/console doctrine:migrations:migrate --no-interaction --env=prod'
+                }
             }
         }
 
-        stage('Install Dependencies') {
+        stage('Nettoyage du cache') {
             steps {
-                // Installation des dépendances PHP via Composer
-                sh 'docker exec babycare-hub composer install --no-interaction'
+                dir("${DEPLOY_DIR}") {
+                    sh 'php bin/console cache:clear --env=prod'
+                    sh 'php bin/console cache:warmup'
+                }
             }
         }
 
-        stage('Run Unit Tests with PHPUnit') {
+        stage('Déploiement') {
             steps {
-                // Exécution des tests unitaires avec PHPUnit dans le conteneur
-                sh 'docker exec babycare-hub vendor/bin/phpunit --configuration phpunit.xml.dist --coverage-html=build/coverage'
-            }
-        }
-
-        stage('Run Functional Tests with Symfony Panther') {
-            steps {
-                // Exécution des tests fonctionnels avec Symfony Panther
-                sh 'docker exec babycare-hub bin/phpunit --testdox --coverage-html=build/functional_coverage'
-            }
-        }
-
-        stage('Publish Test Results') {
-            steps {
-                // Publication des résultats des tests (ex. PHPUnit)
-                junit '**/build/test-*.xml'
-                // Publication des rapports de couverture de tests
-                publishHTML(target: [
-                    reportName: 'PHPUnit Test Coverage',
-                    reportDir: 'build/coverage',
-                    reportFiles: 'index.html',
-                    keepAll: true
-                ])
-                publishHTML(target: [
-                    reportName: 'Functional Test Coverage',
-                    reportDir: 'build/functional_coverage',
-                    reportFiles: 'index.html',
-                    keepAll: true
-                ])
+                sh "rm -rf /var/www/html/${DEPLOY_DIR}" // Supprime le dossier de destination
+                sh "mkdir /var/www/html/${DEPLOY_DIR}" // Recréé le dossier de destination
+                sh "cp -rT ${DEPLOY_DIR} /var/www/html/${DEPLOY_DIR}"
+                sh "chmod -R 775 /var/www/html/${DEPLOY_DIR}/var"
             }
         }
     }
 
     post {
-        always {
-            // Nettoyage après exécution du pipeline
-            cleanWs()  // Nettoie l'espace de travail
-        }
         success {
-            // Notification en cas de succès
-            echo 'Le pipeline a réussi, tout est bon !'
+            echo 'Déploiement réussi !'
         }
         failure {
-            // Notification en cas d'échec
-            emailext (
-                subject: 'Échec des tests dans Babycare Hub',
-                body: 'Le pipeline d\'intégration continue a échoué. Consultez les logs pour plus de détails.',
-                to: 'developer@domaine.com'
-            )
+            echo 'Erreur lors du déploiement.'
         }
     }
 }

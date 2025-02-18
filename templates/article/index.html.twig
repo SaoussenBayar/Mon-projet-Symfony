@@ -2,7 +2,7 @@
 
 {% block body %}
 <div class="container mt-5">
-    <h1 class="mb-4">Liste des utilisateurs</h1>
+    <h1 class="mb-4">Liste des articles</h1>
     <table class="table table-striped">
         <thead>
             <tr>
@@ -22,7 +22,7 @@
                     <td>
                         {% if article.image %}
                             <!-- Affichage de l'image dans une cellule de tableau -->
-                            <img src="{{ asset('uploads/' ~ article.image) }}" alt="IMG" style="width: 50px; height: auto;">
+                            <img src="{{ asset('images/' ~ article.image) }}" alt="IMG" style="width: 50px; height: auto;">
                         {% else %}
                             <span>No image</span>
                         {% endif %}
@@ -31,7 +31,6 @@
                     <a href="{{ path('article_edit', {id: article.id}) }}" class="btn btn-primary btn-sm">Modifier</a>
                         <form action="{{ path('article_delete', {id: article.id}) }}" method="post" style="display: inline;">
                             <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ article.id) }}">
-                            <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cet article ?');">Supprimer</button>
                         </form>                    </td>
             </tr>
             {% endfor %}

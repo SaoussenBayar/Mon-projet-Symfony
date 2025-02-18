@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Gestion des Recettes</h1>
+
+    {# Formulaire d'ajout/modification de recette #}
+    <h2>{% if recette is defined %}Modifier{% else %}Ajouter{% endif %} une recette</h2>
+    {{ form_start(form) }}
+        {{ form_widget(form) }}
+        <button type="submit" class="btn btn-success">Enregistrer</button>
+    {{ form_end(form) }}
+
+    <hr>
+
+    {# Liste des recettes existantes #}
+    <h2>Liste des Recettes</h2>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Titre</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for recette in recettes %}
+                <tr>
+                    <td>{{ recette.id }}</td>
+                    <td>{{ recette.titre }}</td>
+                    <td>
+                        <a href="{{ path('recette_edit', {'id': recette.id}) }}" class="btn btn-primary">Modifier</a>
+                        <form action="{{ path('recette_delete', {'id': recette.id}) }}" method="post" style="display:inline;">
+                            <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ recette.id) }}">
+                            <button type="submit" class="btn btn-danger" onclick="return confirm('Voulez-vous vraiment supprimer cette recette ?');">Supprimer</button>
+                        </form>
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="3">Aucune recette trouvée.</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

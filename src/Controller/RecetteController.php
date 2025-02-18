@@ -112,6 +112,60 @@ class RecetteController extends AbstractController
         ]);
     }
 
+    #[Route('/recettes/gestion', name: 'recette_gestion')]
+    public function gestionRecettes(Request $request, EntityManagerInterface $em): Response
+    {
+        $recettes = $em->getRepository(Recette::class)->findAll();
+        
+        $recette = new Recette();
+        $form = $this->createForm(RecetteType::class, $recette);
+        $form->handleRequest($request);
+    
+        if ($form->isSubmitted() && $form->isValid()) {
+            $em->persist($recette);
+            $em->flush();
+            $this->addFlash('success', 'Recette enregistrée avec succès !');
+            return $this->redirectToRoute('recette_gestion');
+        }
+    
+        return $this->render('recette/gestion.html.twig', [
+            'recettes' => $recettes,
+            'form' => $form->createView(),
+        ]);
+    }
+    
+    #[Route('/recette/{id}/edit', name: 'recette_edit')]
+    public function editRecette(Recette $recette, Request $request, EntityManagerInterface $em): Response
+    {
+        $form = $this->createForm(RecetteType::class, $recette);
+        $form->handleRequest($request);
+    
+        if ($form->isSubmitted() && $form->isValid()) {
+            $em->flush();
+            $this->addFlash('success', 'Recette modifiée avec succès !');
+            return $this->redirectToRoute('recette_gestion');
+        }
+    
+        return $this->render('recette/gestion.html.twig', [
+            'form' => $form->createView(),
+            'recettes' => $em->getRepository(Recette::class)->findAll(),
+            'recette' => $recette,
+        ]);
+    }
+    
+    #[Route('/recette/{id}/delete', name: 'recette_delete', methods: ['POST'])]
+    public function deleteRecette(Recette $recette, Request $request, EntityManagerInterface $em): Response
+    {
+        if ($this->isCsrfTokenValid('delete' . $recette->getId(), $request->request->get('_token'))) {
+            $em->remove($recette);
+            $em->flush();
+            $this->addFlash('success', 'Recette supprimée avec succès !');
+        }
+    
+        return $this->redirectToRoute('recette_gestion');
+    }
+    
+
     #[Route('/commentaire/{id}/editer', name: 'commentaire_edit')]
     public function editer(CommentairesRecette $commentaire, Request $request, EntityManagerInterface $em): Response
     {
