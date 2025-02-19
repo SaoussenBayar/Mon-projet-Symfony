@@ -8,7 +8,7 @@
 {% endblock %}
 
 {% block body %}
-    <h1>Liste des Recettes pour Bébés</h1>
+    <h1 class="text-h1">Savoure les meilleures recettes pour ton bébé ! 😋</h1>
 
     <!-- Barre de recherche et filtre -->
     <form method="get" action="{{ path('recette_liste') }}" class="search-filter-form">
@@ -17,7 +17,7 @@
             <button type="submit">Rechercher</button>
         </div>
         <div class="filter">
-            <label for="age">Filtrer par âge :</label>
+            <label for="age">L'âge :</label>
             <select id="age" name="age" onchange="this.form.submit()">
                 <option value="">Tous les âges</option>
                 <option value="4 à 6 mois" {% if age == '4 à 6 mois' %}selected{% endif %}>4 à 6 mois</option>
