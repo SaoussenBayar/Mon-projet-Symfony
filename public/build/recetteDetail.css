@@ -1,0 +1,175 @@
+/*!************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[1].oneOf[1].use[1]!./assets/styles/RecetteDetail.css ***!
+  \************************************************************************************************************************/
+.recette-details {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .recette-header {
+    display: flex;
+    margin-bottom: 40px;
+    align-items: center;
+    gap: 20px;
+    background-color: #ffffff;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  
+    .recette-image {
+      max-width: 150px;
+      max-height: 150px;
+      object-fit: cover;
+      border-radius: 8px;
+    }
+  
+    .recette-info {
+      flex-grow: 1;
+  
+      h1 {
+        font-size: 2rem;
+        color: #333;
+        margin-bottom: 10px;
+      }
+  
+      p {
+        font-size: 1rem;
+        color: #555;
+        margin: 5px 0;
+      }
+    }
+  }
+  
+  .recette-ingredients,
+  .recette-detail {
+    margin-top: 30px;
+    background-color: #ffffff;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  
+    h2 {
+      font-size: 1.6rem;
+      color: #333;
+      margin-bottom: 15px;
+    }
+  
+    ul {
+      list-style: none;
+      padding: 0;
+  
+      li {
+        font-size: 1rem;
+        color: #555;
+        margin-bottom: 5px;
+      }
+    }
+  }
+  
+  .recette-commentaires {
+    margin-top: 40px;
+    background-color: #ffffff;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  
+    h2 {
+      font-size: 1.6rem;
+      color: #333;
+      margin-bottom: 20px;
+    }
+  
+    .commentaires-list {
+      .commentaire {
+        margin-bottom: 20px;
+        padding: 15px;
+        background-color: #f7f7f7;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  
+        p {
+          font-size: 1rem;
+          color: #555;
+        }
+  
+        .btn {
+          margin-right: 10px;
+          padding: 5px 10px;
+          font-size: 0.875rem;
+        }
+  
+        .btn-warning {
+          background-color: #f0ad4e;
+          border-color: #f0ad4e;
+        }
+  
+        .btn-danger {
+          background-color: #d9534f;
+          border-color: #d9534f;
+        }
+  
+        .rating-stars {
+          display: flex;
+          gap: 5px;
+          margin-bottom: 5px;
+  
+          .star {
+            width: 20px;
+            height: 20px;
+            background-color: #ddd;
+            clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+            transition: background-color 0.2s ease;
+          }
+  
+          .star.filled {
+            background-color: gold;
+          }
+        }
+      }
+    }
+  
+    .form-group {
+      margin-bottom: 20px;
+    }
+  
+    .form-control {
+      padding: 10px;
+      font-size: 1rem;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      width: 100%;
+    }
+  
+    .btn-primary {
+      background-color: #5bc0de;
+      border-color: #46b8da;
+    }
+  }
+  
+  /* Étoiles de notation */
+  .stars-rating {
+    display: flex;
+    justify-content: center;
+    gap: 5px;
+}
+
+.star {
+    width: 30px;
+    height: 30px;
+    background-color: #ddd;
+    clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.star.filled {
+    background-color: gold; /* Couleur de l'étoile pleine */
+}
+
+
+  
+  

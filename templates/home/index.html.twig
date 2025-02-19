@@ -55,18 +55,22 @@
 {# Section top #}
 <section class="top-section">
     <div class="container-fluid image-header">
-    {% if not is_granted('IS_AUTHENTICATED_FULLY') %}
-        <h1 class="text-h1">Rejoignez-nous !</h1>
-        <p class="text-p2">Inscrivez-vous dès maintenant pour échanger des jouets, partager des astuces, et découvrir des recettes et jeux éducatifs adaptés à l'âge de vos enfants !</p>
-        <form class="d-flex justify-content-center" >
-            <a class="btn btn-primary" href="{{ path('app_register') }}">S'inscrire</a>
-        </form>
+        {% if not is_granted('IS_AUTHENTICATED_FULLY') %}
+            <div class="welcome-text">
+                <h1 class="text-h1">Rejoignez-nous !</h1>
+                <p class="text-p2">Inscrivez-vous dès maintenant pour échanger des jouets, partager des astuces, et découvrir des recettes et jeux éducatifs adaptés à l'âge de vos enfants !</p>
+                <form class="d-flex justify-content-center">
+                    <a class="btn btn-primary" href="{{ path('app_register') }}">S'inscrire</a>
+                </form>
+            </div>
+        {% else %}
+            <div class="welcome-text">
+                <h1 class="text-h1">Bienvenue sur BabyCare Hub! 😃</h1>
+                <p class="text-p2">Nous sommes heureux de vous accueillir parmi nous. Prenez le temps d'explorer notre site, et profitez pleinement de l'expérience que nous avons conçue pour vous. <br>
+                Bonne navigation !</p>
+            </div>
+        {% endif %}
     </div>
-    {% else %}
-        <h1 class="text-h1">Bienvenue sur BabyCare Hub! 😃</h1>
-        <p class="text-p2">Nous sommes heureux de vous accueillir parmi nous. Prenez le temps d'explorer notre site, et profitez pleinement de l'expérience que nous avons conçue pour vous. <br>
-        Bonne navigation !</p>
-    {% endif %}    
 </section>
 {# Section des services et du carousel #}
 <section class="bottom-section">
