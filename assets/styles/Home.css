@@ -12,7 +12,7 @@ body {
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  opacity: 0.968;
+  opacity: 0.9435;
 }
 
 /* Boutons */
@@ -70,7 +70,6 @@ body {
 /* Textes principaux */
 .text-h1 {
   text-align: center;
-  padding-top: 25px;
   margin-bottom: 20px;
   font-family: "Kanit", sans-serif;
   font-size: 48px;
@@ -93,7 +92,7 @@ body {
   background-position: center;
   height: auto;
   background-repeat: no-repeat;
-  min-height: 600px;
+  min-height: 620px;
 }
 
 /* Sections */
@@ -186,8 +185,10 @@ body {
   padding: 10px;
   box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.2);
   margin-bottom: 100px;
+  left: 50%; /* Ajouté pour centrer horizontalement */
+  transform: translateX(-50%); /* Ajouté pour un centrage parfait */
+  z-index: 10; /* Ajouté pour assurer la visibilité */
 }
-
 .carousel-caption .btn {
   margin-top: 10px;
   background-color: #f28c6e;
@@ -470,7 +471,13 @@ body {
     width: 360px;
     height: 548px;
   }
-
+  .carousel-caption {
+    width: 85%;
+    height: auto;
+    min-height: 150px;
+    bottom: 10%;
+    margin-bottom: 0;
+  }
 
   /* 🔹 Navbar plus compacte */
   .navbar {
@@ -517,8 +524,8 @@ body {
   }
 
   .logo {
-    width: 120px;
-    height: 120px;
+    width: 80px;
+    height: 80px;
   }
 }
 

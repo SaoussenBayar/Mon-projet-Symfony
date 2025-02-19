@@ -114,7 +114,7 @@
                     {% for slide in slides %}
                         <div class="carousel-item {% if loop.first %}active{% endif %}">
                             <img src="{{ asset(slide.image) }}" class="d-block w-100" alt="{{ slide.title }}">
-                            <div class="carousel-caption d-none d-md-block bg-dark opacity-75 p-3 rounded">
+                            <div class="carousel-caption bg-dark opacity-75 p-3 rounded">
                                 <h5>{{ slide.title }}</h5>
                                 <p>{{ slide.text }}</p>
 
@@ -240,7 +240,7 @@
             <div class="col-12 text-center">
                 <p class="mb-2">© {{ "now"|date("Y") }} - Tous droits réservés</p>
                 <div class="small">
-                    <a href="#" class="me-3">Mentions légales</a>
+                    <a href="{{ path('legal_notice') }}" class="me-3">Mentions légales</a>
                     <a href="#" class="me-3">Politique de confidentialité</a>
                     <a href="#">CGU</a>
                 </div>
