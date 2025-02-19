@@ -76,9 +76,8 @@ body {
 
 .text-p2 {
   text-align: center;
-  max-width: 700px;
+  max-width: 90%;
   margin: 10px auto; 
-
   line-height: 1.6;
   font-size: 19px;
 }
@@ -112,9 +111,8 @@ body {
 /* Services */
 .services-section {
   display: flex;
-  justify-content: space-between;
-  gap: 30px;
-
+  flex-wrap: wrap;
+  justify-content: center;
 }
 
 .service {
@@ -426,61 +424,86 @@ body {
   display: none;
 }
 
-/* Responsive adjustments */
 @media (max-width: 768px) {
-  /* Reduire la taille des titres et des textes */
+  /* 🔹 Ajustement des textes */
   .text-h1 {
-    font-size: 32px; /* Réduction de la taille sur petits écrans */
+    font-size: 28px; /* Réduction du titre */
+    text-align: center;
   }
 
   .text-p2 {
-    font-size: 16px; /* Plus petit sur téléphone */
+    font-size: 16px;
     margin: 0 15px; /* Réduire les marges */
+    text-align: center;
   }
 
+  /* 🔹 Réorganisation des Sections */
   .services-section {
-    flex-direction: column; /* Placer les services en colonne */
-    align-items: center; 
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
   }
 
   .service {
-    flex-direction: column; /* Ajustement pour un affichage en colonne */
-    align-items: center; 
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
   }
 
+  .articles-grid {
+    grid-template-columns: 1fr; /* Une seule colonne */
+    gap: 15px; /* Moins d’espace entre les articles */
+  }
+
+  /* 🔹 Optimisation des images et du carrousel */
   .carousel {
     width: 100%;
     height: auto;
-    margin: 10px 0;
   }
 
   .carousel-item img {
     width: 100%;
-    height: auto; /* Ajuster l'image pour qu'elle prenne toute la largeur sans déformer */
+    height: auto; /* Ajustement dynamique */
   }
 
-  .articles-grid {
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Ajouter une taille plus petite pour les articles */
-    gap: 15px; /* Réduire l'écart entre les articles */
+  /* 🔹 Navbar plus compacte */
+  .navbar {
+    padding: 10px 15px;
   }
 
+  .nav-link {
+    font-size: 16px;
+    padding: 6px 10px;
+  }
+
+  /* 🔹 Footer adapté aux petits écrans */
   .footer {
-    padding: 3rem 0;
+    text-align: center;
+    padding: 2rem;
   }
 
-  .footer h5 {
-    font-size: 20px; /* Ajustement de la taille du titre */
-  }
-
-  .footer ul.list-unstyled {
-    text-align: center; /* Centrer les éléments */
+  .footer ul {
+    padding: 0;
   }
 
   .footer .bottom-footer a {
     display: block;
-    margin: 10px 0;
+    margin-bottom: 10px;
   }
 
+  /* 🔹 Ajustements pour le profil (si nécessaire) */
+  .profile-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .dropdown-menu {
+    width: 100%;
+    text-align: center;
+  }
+
+  /* 🔹 Autres ajustements */
   .circle {
     width: 50px;
     height: 50px;
@@ -492,3 +515,4 @@ body {
     height: 120px;
   }
 }
+
