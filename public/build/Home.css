@@ -6,6 +6,10 @@
   !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[1].oneOf[1].use[1]!./assets/styles/Home.css (1) ***!
   \*******************************************************************************************************************/
 /* Appliquer la police et la couleur à tout le corps de la page */
+html, body {
+  overflow-x: hidden;
+  max-width: 100%;
+}
 body {
   font-family: "Kanit", sans-serif;
   color: #874e4e; /* Utilisation de la couleur définie précédemment (couleur par défaut) */
@@ -434,6 +438,17 @@ body {
 }
 
 @media (max-width: 768px) {
+  .navbar {
+    opacity: 0.97;
+}
+  
+
+  .navbar-toggler {
+    display: none;
+}
+  .btn {
+    position: static;
+  }
   /* 🔹 Ajustement des textes */
   .text-h1 {
     font-size: 28px; /* Réduction du titre */

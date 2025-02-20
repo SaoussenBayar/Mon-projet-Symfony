@@ -12,13 +12,14 @@
 <nav class="navbar navbar-expand-lg">
     <div class="container-fluid">
         <img src="{{ asset('images/logo2.png') }}" alt="logo" class="img-fluid logo" width="85" height="85">
+        {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
                 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
+          <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mx-auto me-auto mb-2 mb-lg-0">
-            {% if is_granted('IS_AUTHENTICATED_FULLY') %}
                 <li class="nav-item">
                     <a class="nav-link d-flex flex-column align-items-center text-p" href="/recettes">Recettes</a>
                 </li>
@@ -46,7 +47,7 @@
                     </div>
 
                 {% else %}
-                    <a class="btn btn-primary d-flex position-absolute top-0 end-0 m-3" href="{{ path('app_login') }}">Se connecter</a>
+                    <a class="btn btn-primary btn-sm px-2 py-2 text-white" href="{{ path('app_login') }}">Se connecter</a>
                 {% endif %}                
             </form>
         </div>
