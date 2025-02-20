@@ -166,6 +166,8 @@ body {
 
 }
 
+
+
 /* Images */
 .carousel-item img {
   width: 460px; /* Occupe toute la largeur */
@@ -461,12 +463,17 @@ body {
     flex-direction: column;
     align-items: center;
     gap: 20px;
+    margin-bottom: 5px;
+    margin-top: ;
   }
-
+  .left{
+    padding-top: 40px;
+  }
   .service {
     flex-direction: column;
     align-items: center;
     text-align: center;
+    margin-bottom: 5px;
   }
 
   .articles-grid {
@@ -480,6 +487,8 @@ body {
     height: 548px; /* Hauteur automatique */
     width: 360px; /* Largeur maximale égale à la version desktop */
     aspect-ratio: 360/648; /* Maintient le ratio hauteur/largeur */
+    margin-top: 0px;
+    margin-bottom: 50px;
   }
 
   .carousel-item img {
