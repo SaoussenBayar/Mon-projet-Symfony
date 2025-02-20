@@ -468,7 +468,12 @@ body {
   }
   .left{
     padding-top: 40px;
-  }
+    padding-bottom: 10px; /* Réduit l’espace sous le texte */
+}
+
+.right {
+    padding-top: 10px; /* Réduit l’espace au-dessus du carrousel */
+}
   .service {
     flex-direction: column;
     align-items: center;
@@ -483,7 +488,7 @@ body {
 
   /* 🔹 Optimisation des images et du carrousel */
   .carousel {
-    width: 90%; /* Prend toute la largeur disponible */
+    width: 80%; /* Prend toute la largeur disponible */
     height: 548px; /* Hauteur automatique */
     width: 360px; /* Largeur maximale égale à la version desktop */
     aspect-ratio: 360/648; /* Maintient le ratio hauteur/largeur */
