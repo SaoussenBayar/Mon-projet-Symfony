@@ -122,6 +122,34 @@
   }
 
 }
+.form-check {
+  display: flex;
+  align-items: center;
+  margin-left: -18px;  /* Décalage vers la gauche */
+  margin-top: 15px;    /* Décalage vers le bas */
+  
+  .form-check-input {
+      width: 1rem;
+      height: 1rem;
+      margin: 0;
+      cursor: pointer;
+      appearance: checkbox;
+      -webkit-appearance: checkbox;
+      border: 1px solid #dee2e6;
+      
+      &:checked {
+          background-color: #0d6efd;
+          border-color: #0d6efd;
+      }
+  }
+
+  .form-check-label {
+      font-size: 16px;
+      margin: 0 0 0 0.05rem;
+      color: #5E3B76;
+      cursor: pointer;
+  }
+}
 @media (min-width: 481px) and (max-width: 768px) {
   .container {
     grid-template-columns: 1fr 1fr;

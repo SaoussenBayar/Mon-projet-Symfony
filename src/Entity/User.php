@@ -46,15 +46,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column]
     private ?string $password = null;
 
-    #[ORM\Column(length: 50)]
-    private ?string $Nom = null;
-
-    #[ORM\Column(length: 255)]
-    private ?string $Prenom = null;
-
-   #[ORM\Column(type: Types::DATE_MUTABLE)]
-    private ?\DateTimeInterface $Date_naissance = null;
-
    #[ORM\Column(type: 'string', length: 255, nullable: true)]
    private ?string $pseudo = null;
 
@@ -118,6 +109,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     #[ORM\ManyToMany(targetEntity: Article::class, mappedBy: 'user')]
     private Collection $articles;
+
 
     public function __construct()
     {
@@ -200,19 +192,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * @see UserInterface
      */ 
     
-
-    public function getNom(): ?string
-    {
-        return $this->Nom;
-    }
-
-    public function setNom(string $Nom): static
-    {
-        $this->Nom = $Nom;
-
-        return $this;
-    }
-
     public function eraseCredentials(): void
     {
         // If you store any temporary, sensitive data on the user, clear it here
@@ -222,31 +201,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function getUserIdentifier(): string
     {
         return (string) $this->email;
-    }
-
-
-    public function getPrenom(): ?string
-    {
-        return $this->Prenom;
-    }
-
-    public function setPrenom(string $Prenom): static
-    {
-        $this->Prenom = $Prenom;
-
-        return $this;
-    }
-
-    public function getDateNaissance(): ?\DateTimeInterface
-    {
-        return $this->Date_naissance;
-    }
-
-    public function setDateNaissance(\DateTimeInterface $Date_naissance): static
-    {
-        $this->Date_naissance = $Date_naissance;
-
-        return $this;
     }
 
 
@@ -382,7 +336,20 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    
+
+    #[Assert\IsTrue(message: "Vous devez accepter les conditions d'utilisation.")]
+    private ?bool $acceptTerms = null;
+
+    public function getAcceptTerms(): ?bool
+    {
+        return $this->acceptTerms;
+    }
+
+    public function setAcceptTerms(?bool $acceptTerms): self
+    {
+        $this->acceptTerms = $acceptTerms;
+        return $this;
+    }
 
     
 }

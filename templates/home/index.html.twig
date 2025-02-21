@@ -38,7 +38,7 @@
                 {% if is_granted('IS_AUTHENTICATED_FULLY') %}
                     <div class="profile-container">
                         <div class="circle" onclick="toggleMenu()">
-                            <span>{{ app.user.prenom|first|upper }}</span>
+                            <span>{{ app.user.pseudo|first|upper }}</span>
                         </div>
                         <div id="dropdown-menu" class="dropdown-menu d-none">
                             <a href="#">Profil</a>
