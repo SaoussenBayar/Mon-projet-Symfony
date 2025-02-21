@@ -109,7 +109,7 @@
                 <div class="carousel-inner">
                     {% set slides = [
                         {image: 'images/echanger.jpg', title: 'Echanger des Jouets', text: 'Echangez des jouets de manière sécurisée', link: '#'},
-                        {image: 'images/recette.avif', title: 'Recettes Saines', text: 'Découvrez des recettes nutritives', link: "{{ path('recette_liste') }}"},
+                        {image: 'images/recette.avif', title: 'Recettes Saines', text: 'Découvrez des recettes nutritives', link: path('recette_liste')},
                         {image: 'images/jeux.avif', title: 'Jeux Éducatifs', text: 'Stimulez l’éveil de vos enfants', link: '#'}
                     ] %}
                     {% for slide in slides %}
