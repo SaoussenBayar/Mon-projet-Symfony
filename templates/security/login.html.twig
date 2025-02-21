@@ -52,10 +52,17 @@
             </div>
         </form>
 
+
         <!-- Lien pour le mot de passe oublié -->
         <div class="login-link text-center mt-5">
             Mot de passe oublié? <a href="/reset-password">cliquez ici</a>
         </div>
     </div>
-</div>
+</div>   
+    {% if error %}
+        <script type="text/javascript">
+            alert("Oops! 😔 L'email ou le mot de passe est incorrect. !");
+        </script>
+    {% endif %}
+ 
 {% endblock %}
