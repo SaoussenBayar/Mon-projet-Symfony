@@ -8,11 +8,13 @@ use Symfony\Component\Routing\Attribute\Route;
 use App\Repository\ArticleRepository; // Importation du repository pour accéder aux articles
 use App\Entity\Article;
 use Doctrine\ORM\EntityManagerInterface;
+use App\Service\MongoDBService;
 class HomeController extends AbstractController
 {
     #[Route('/', name: 'app_home')]
-    public function index(ArticleRepository $articleRepository): Response
-    {
+    public function index(ArticleRepository $articleRepository, MongoDBService $mongoDbService): Response
+    {   $mongoDbService->insertVisit('app_home');
+
         // Récupérer tous les articles depuis la base de données
         $articles = $articleRepository->findAll();
 
