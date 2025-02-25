@@ -1,4 +1,10 @@
-@import url('https://fonts.googleapis.com/css2?family=Kanit:wght@400;700&display=swap');
+/*!********************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[1].oneOf[1].use[1]!./assets/styles/Connexion.css ***!
+  \********************************************************************************************************************/
+@import url(https://fonts.googleapis.com/css2?family=Kanit:wght@400;700&display=swap);
+/*!************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[1].oneOf[1].use[1]!./assets/styles/Connexion.css (1) ***!
+  \************************************************************************************************************************/
 .container {
   display: grid;
   grid-template-columns: 1fr 1fr; 
@@ -20,7 +26,6 @@
   width: 70%;
 }
 .right {
-  font-family: "kanit", sans-serif;
   flex: 1;
   padding: 40px;
   margin-left: 60px;
@@ -32,6 +37,7 @@
   color: #85106e;
   margin-bottom: 40px;
   text-align: center;
+  font-family: "kanit", sans-serif;
   font-weight: 200;
 }
 .form-group {
@@ -69,10 +75,11 @@
   box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
 }
 
-.registerbtn {
+.register-btn {
+  width: 50%;
   padding: 0.375rem 0.75rem;
   background-color: #82C563;
-  color: white;
+  color: #fff;
   border: none;
   border-radius: 1rem;
   font-size: 16px;
@@ -80,16 +87,10 @@
   cursor: pointer;
 }
 
-.registerbtn:hover {
+.register-btn:hover {
   background-color: #5bba2e;
 }
 
-/* Style du bouton désactivé */
-.registerbtn:disabled {
-  background-color: #b5d6a7; /* Couleur plus claire pour indiquer qu'il est inactif */
-  cursor: not-allowed; /* Change le curseur pour montrer que le bouton est désactivé */
-  opacity: 0.6; /* Rend le bouton un peu transparent */
-}
 .login-link {
   text-align: center;
   margin-top: 10px;
@@ -113,10 +114,6 @@
   cursor: not-allowed; /* Curseur de type "non permis" */
   opacity: 0.7; /* Légère transparence pour renforcer l'effet désactivé */
 }
-
-.form-error {
-  color: red;
-}
 @media (max-width: 480px) {
   .right {
     margin-left: 5px;
@@ -127,43 +124,10 @@
   }
 
 }
-.form-check {
-  display: flex;
-  align-items: center;
-  margin-left: -18px;  /* Décalage vers la gauche */
-  margin-top: 15px;    /* Décalage vers le bas */
-  
-  .form-check-input {
-      width: 1rem;
-      height: 1rem;
-      margin: 0;
-      cursor: pointer;
-      appearance: checkbox;
-      -webkit-appearance: checkbox;
-      border: 1px solid #dee2e6;
-      
-      &:checked {
-          background-color: #0d6efd;
-          border-color: #0d6efd;
-      }
-  }
-
-  .form-check-label {
-      font-size: 16px;
-      margin: 0 0 0 0.05rem;
-      color: #5E3B76;
-      cursor: pointer;
-  }
-}
 @media (min-width: 481px) and (max-width: 768px) {
   .container {
     grid-template-columns: 1fr 1fr;
   }
 }
 
-@media (min-width: 769px) {
-    .container {
-      grid-template-columns: 1fr 1fr;
-    }
-  }
 

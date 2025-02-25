@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Controller;
 
 use App\Entity\User;
@@ -8,42 +7,39 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
-
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 class RegistrationController extends AbstractController
 {
     #[Route('/inscription', name: 'app_register', methods: ['GET', 'POST'])]
-    public function register(
-        Request $request,
-        UserPasswordHasherInterface $passwordHasher,
-        EntityManagerInterface $entityManager
-    ): Response {
+    public function register(Request $request, EntityManagerInterface $entityManager, UserPasswordHasherInterface $passwordHasher): Response
+    {
         $user = new User();
-    
         $form = $this->createForm(RegistrationFormType::class, $user);
-        
-        $user->setRoles(['ROLE_USER']);
-
-        $user->setDateInscription(new \DateTime());
- 
         $form->handleRequest($request);
     
-        if ($form->isSubmitted()) {
-            if ($form->isValid()) {
-                // Hachage du mot de passe
-                $hashedPassword = $passwordHasher->hashPassword($user, $form->get('password')->getData());
-                $user->setPassword($hashedPassword);
-                
-                $entityManager->persist($user);
-                $entityManager->flush();
+        if ($form->isSubmitted() && $form->isValid()) {
+            // Assigner les valeurs manquantes
+            $user->setDateInscription(new \DateTime());
+            $user->setRoles(['ROLE_USER']); // Assurer un rôle par défaut
+            $user->setIsVerified(true);  // Marquer l'utilisateur comme vérifié (si applicable)
+            
+            // Encoder le mot de passe
+            $user->setPassword(
+                $passwordHasher->hashPassword(  // Utilise hashPassword
+                    $user,
+                    $form->get('password')->getData()
+                )
+            );
     
-                $this->addFlash('success', 'Utilisateur enregistré avec succès !');
-                
-                return $this->redirectToRoute('app_home');
-            } else {
-                $this->addFlash('error', 'Il y a des erreurs dans votre formulaire. Veuillez les corriger.');
-            }
+            // Sauvegarder l'utilisateur
+            $entityManager->persist($user);
+            $entityManager->flush();
+    
+            $this->addFlash('success', 'Inscription réussie ! Vous pouvez vous connecter.');
+    
+            // Redirection vers la page de connexion ou page d'accueil
+            return $this->redirectToRoute('app_login');
         }
     
         return $this->render('registration/register.html.twig', [

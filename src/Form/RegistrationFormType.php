@@ -21,10 +21,12 @@ class RegistrationFormType extends AbstractType
             ->add('pseudo', TextType::class, [
                 'label' => 'Pseudo',
                 'attr' => ['placeholder' => 'Pseudo'],
+                'required' => true,
             ])
             ->add('email', EmailType::class, [
                 'label' => 'Email',
                 'attr' => ['placeholder' => 'Votre email'],
+                'required' => true,
             ])
             ->add('password', RepeatedType::class, [
                 'type' => PasswordType::class,
@@ -37,6 +39,8 @@ class RegistrationFormType extends AbstractType
                     'label' => 'Confirmer le mot de passe',
                     'attr' => ['placeholder' => 'Confirmer votre mot de passe'],
                 ],
+                'required' => true,
+
                 'constraints' => [
                     new Assert\NotBlank([
                         'message' => 'Le mot de passe ne peut pas être vide.',
@@ -67,6 +71,7 @@ class RegistrationFormType extends AbstractType
             ])
             ->add('acceptTerms', CheckboxType::class, [
                 'mapped' => false,
+                'required' => true,
                 'constraints' => [
                     new IsTrue([
                         'message' => 'Vous devez accepter les conditions d\'utilisation.',
@@ -79,9 +84,8 @@ class RegistrationFormType extends AbstractType
                 'label_attr' => [
                     'class' => 'form-check-label'
                 ],
-            
             ])
-        ;
+                ;
 
 
 
