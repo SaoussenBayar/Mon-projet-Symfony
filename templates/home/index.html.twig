@@ -7,36 +7,58 @@
     {{ encore_entry_link_tags('Home') }}    
 {% endblock %}
 
+
 {% block body %}
     {# Section de la barre de navigation #}
 <nav class="navbar navbar-expand-lg">
     <div class="container-fluid">
         <img src="{{ asset('images/logo2.png') }}" alt="logo" class="img-fluid logo" width="85" height="85">
+        
         {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+            <!-- Remplacer le bouton hamburger par le cercle en version mobile -->
+            <div class="d-lg-none">
+                <div class="circle" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent">
+                    <span>{{ app.user.pseudo|first|upper }}</span>
+                </div>
+            </div>
+            
 
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
-                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav mx-auto me-auto mb-2 mb-lg-0">
-                <li class="nav-item">
-                    <a class="nav-link d-flex flex-column align-items-center text-p" href="/recettes">Recettes</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link d-flex flex-column align-items-center text-p" href="#">Jeux éducatifs</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link d-flex flex-column align-items-center text-p" href="#">Échange jouets</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link d-flex flex-column align-items-center text-p" href="#">Forum</a>
-                </li>
-            </ul>
-            {% endif %}
-            <form class="d-flex align-items-center">
-                {% if is_granted('IS_AUTHENTICATED_FULLY') %}
-                    <div class="profile-container">
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <!-- Menu de navigation -->
+                <ul class="navbar-nav mx-auto me-auto mb-2 mb-lg-0">
+                    <li class="nav-item d-lg-none mt-3">
+                        <p class="text-center mt-3 mb-2 fw-bold">Services</p>
+                    </li>
+ 
+                    <li class="nav-item">
+                        <a class="nav-link d-flex flex-column align-items-center text-p" href="/recettes">Recettes</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link d-flex flex-column align-items-center text-p" href="#">Jeux éducatifs</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link d-flex flex-column align-items-center text-p" href="#">Échange jouets</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link d-flex flex-column align-items-center text-p" href="#">Forum</a>
+                    </li>
+                    
+                    <!-- Options de profil (visible uniquement en mobile) -->
+                    <li class="nav-item d-lg-none mt-3">
+                        <div class="dropdown-divider"></div>
+                        <p class="text-center mt-3 mb-2 fw-bold">Mon compte</p>
+                    </li>
+                    <li class="nav-item d-lg-none">
+                        <a class="nav-link d-flex flex-column align-items-center text-p" href="#">Profil</a>
+                    </li>
+                    <li class="nav-item d-lg-none">
+                        <a class="nav-link d-flex flex-column align-items-center text-p" href="{{ path('app_logout') }}">Déconnexion</a>
+                    </li>
+                </ul>
+                
+                <!-- Conteneur de profil (visible uniquement en desktop) -->
+                <form class="d-flex align-items-center">
+                    <div class="profile-container d-none d-lg-block">
                         <div class="circle" onclick="toggleMenu()">
                             <span>{{ app.user.pseudo|first|upper }}</span>
                         </div>
@@ -45,12 +67,12 @@
                             <a href="{{ path('app_logout') }}">Déconnexion</a>
                         </div>
                     </div>
-
-                {% else %}
-                    <a class="btn btn-primary btn-sm d-flex align-items-center justify-content-center" href="{{ path('app_login') }}">Se connecter</a>
-                {% endif %}                
-            </form>
-        </div>
+                </form>
+            </div>
+        {% else %}
+            <!-- Version non connectée -->
+            <a class="btn btn-primary btn-sm d-flex align-items-center justify-content-center" href="{{ path('app_login') }}">Se connecter</a>
+        {% endif %}
     </div>
 </nav>
 {# Section top #}
@@ -180,8 +202,6 @@
     </div>
 </section>
 
-
-
           
 <footer class="footer py-5">
     <div class="container">
@@ -249,27 +269,32 @@
         </div>
     </div>
 </footer>
-<script>
 
+<script>
     function showLoginPopup() {
         alert("Oops! 😔 Vous devez vous connecter pour voir ce contenu.");
         window.location.href = "{{ path('app_login') }}"; // Rediriger vers la page de connexion
     }
 
-    function toggleMenu() {
-        var menu = document.getElementById("dropdown-menu");
-        menu.classList.toggle("d-none");
+
+function toggleMenu() {
+    console.log("Toggle menu called");
+    var menu = document.getElementById("dropdown-menu");
+    menu.classList.toggle("d-none");
+    // Empêcher la propagation de l'événement pour éviter que le document click handler ne s'active
+    event.stopPropagation(); 
+}
+
+document.addEventListener("click", function(event) {
+    var desktopCircle = document.querySelector(".profile-container .circle");
+    var menu = document.getElementById("dropdown-menu");
+
+    // Si le menu est visible et que le clic n'est ni sur le menu ni sur le cercle desktop
+    if (!menu.classList.contains("d-none") && 
+        !desktopCircle.contains(event.target) && 
+        !menu.contains(event.target)) {
+        menu.classList.add("d-none");
     }
-
-    document.addEventListener("click", function(event) {
-        var circle = document.querySelector(".circle");
-        var menu = document.getElementById("dropdown-menu");
-
-        // Vérifie si le clic est en dehors du menu et du cercle
-        if (!circle.contains(event.target) && !menu.contains(event.target)) {
-            menu.classList.add("d-none");
-        }
-    });
-</script>
+});</script>
      
 {% endblock %}
