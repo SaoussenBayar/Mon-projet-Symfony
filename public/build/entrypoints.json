@@ -2,52 +2,52 @@
   "entrypoints": {
     "app": {
       "js": [
-        "/build/runtime.cf597b70.js",
-        "/build/704.02c5185d.js",
-        "/build/app.4513ab6f.js"
+        "/build/runtime.js",
+        "/build/vendors-node_modules_bootstrap_dist_js_bootstrap_esm_js-node_modules_fortawesome_fontawesome--dc96b7.js",
+        "/build/app.js"
       ],
       "css": [
-        "/build/704.5caa44af.css"
+        "/build/vendors-node_modules_bootstrap_dist_js_bootstrap_esm_js-node_modules_fortawesome_fontawesome--dc96b7.css"
       ]
     },
     "Home": {
       "js": [
-        "/build/runtime.cf597b70.js"
+        "/build/runtime.js"
       ],
       "css": [
-        "/build/Home.cf755c31.css"
+        "/build/Home.css"
       ]
     },
     "Inscription": {
       "js": [
-        "/build/runtime.cf597b70.js"
+        "/build/runtime.js"
       ],
       "css": [
-        "/build/Inscription.c49b694a.css"
+        "/build/Inscription.css"
       ]
     },
     "Connexion": {
       "js": [
-        "/build/runtime.cf597b70.js"
+        "/build/runtime.js"
       ],
       "css": [
-        "/build/Connexion.47c6f21a.css"
+        "/build/Connexion.css"
       ]
     },
     "recette": {
       "js": [
-        "/build/runtime.cf597b70.js"
+        "/build/runtime.js"
       ],
       "css": [
-        "/build/recette.e31515c6.css"
+        "/build/recette.css"
       ]
     },
     "recetteDetail": {
       "js": [
-        "/build/runtime.cf597b70.js"
+        "/build/runtime.js"
       ],
       "css": [
-        "/build/recetteDetail.8b13d704.css"
+        "/build/recetteDetail.css"
       ]
     }
   }
