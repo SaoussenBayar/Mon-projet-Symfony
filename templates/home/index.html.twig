@@ -104,8 +104,8 @@
             <div class="services-section">
                 <div class="services">
                     {% set services = [
-                        {icon: '🧸', title: 'Echange de Jouets', description: 'Partagez et recevez des jouets en bon état.'},
                         {icon: '📚', title: 'Recettes et Activités', description: 'Explorez nos idées pour cuisiner et apprendre ensemble.'},
+                        {icon: '🧸', title: 'Echange de Jouets', description: 'Partagez et recevez des jouets en bon état.'},
                         {icon: '🤝', title: 'Forum et Communauté', description: 'Connectez-vous avec des parents qui partagent vos valeurs.'},
                         {icon: '💡', title: 'Conseils et Astuces', description: 'Obtenez des conseils et astuces pour le développement de vos enfants.'}
                     ] %}
@@ -124,15 +124,16 @@
         <div class="col-md-5 right">
             <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
                 <ol class="carousel-indicators">
-                    {% for i in 0..2 %}
+                    {% for i in 0..3 %}
                         <li data-bs-target="#carouselExampleIndicators" data-bs-slide-to="{{ i }}" class="{% if i == 0 %}active{% endif %}"></li>
                     {% endfor %}
                 </ol>
                 <div class="carousel-inner">
                     {% set slides = [
-                        {image: 'images/echanger.jpg', title: 'Echanger des Jouets', text: 'Echangez des jouets de manière sécurisée', link: '#'},
                         {image: 'images/recette.avif', title: 'Recettes Saines', text: 'Découvrez des recettes nutritives', link: path('recette_liste')},
-                        {image: 'images/jeux.avif', title: 'Jeux Éducatifs', text: 'Stimulez l’éveil de vos enfants', link: '#'}
+                        {image: 'images/echanger.jpg', title: 'Echanger des Jouets', text: 'Echangez des jouets de manière sécurisée', link: '#'},
+                        {image: 'images/jeux.avif', title: 'Jeux Éducatifs', text: 'Stimulez l’éveil de vos enfants', link: '#'},
+                        {image: 'images/forum.png', title: 'Forum et Communauté', text: 'Partagez vos expériences et conseils', link: '#'}
                     ] %}
                     {% for slide in slides %}
                         <div class="carousel-item {% if loop.first %}active{% endif %}">
