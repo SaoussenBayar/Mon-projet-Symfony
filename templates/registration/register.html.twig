@@ -21,6 +21,13 @@
         <!-- Colonne droite: Formulaire d'inscription -->
         <div class="right p-5">
             <h1>Bienvenue ! 😊</h1>
+            <!-- Affichage des messages d'erreur -->
+            {% for message in app.flashes('error') %}
+                <div class="alert alert-danger">
+                    {{ message }}
+                </div>
+            {% endfor %}
+
 
             <!-- Formulaire d'inscription -->
             <div class="form-group">

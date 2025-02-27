@@ -15,7 +15,12 @@
     <!-- Section droite avec le formulaire -->
     <div class="right p-5">
         <h1>Heureux de te revoir ! 😊</h1>
-
+                    
+            {% for message in app.flashes('success') %}
+                <div class="alert alert-success">
+                    {{ message }}
+                </div>
+            {% endfor %}
         <!-- Formulaire de connexion -->
         <form method="post" action="{{ path('app_login') }}">
             <!-- Champ pour l'email -->
