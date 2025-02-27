@@ -14,12 +14,14 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Serializer\SerializerInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+use Knp\Component\Pager\PaginatorInterface;
+
 
 
 class RecetteController extends AbstractController
 {
     #[Route('/recettes', name: 'recette_liste')]
-    public function liste(Request $request, EntityManagerInterface $em): Response
+    public function liste(Request $request, EntityManagerInterface $em, PaginatorInterface $paginator): Response
     {
         // Récupérer les valeurs des paramètres de recherche et du filtre d'âge
         $search = $request->query->get('search', '');
@@ -41,8 +43,14 @@ class RecetteController extends AbstractController
                          ->setParameter('age', $age);
         }
         // Exécuter la requête et récupérer les résultats
-        $recettes = $queryBuilder->getQuery()->getResult();
+        $query = $queryBuilder->getQuery();
 
+        // Paginer les résultats
+        $recettes = $paginator->paginate(
+            $query, // Requête Doctrine
+            $request->query->getInt('page', 1), // Page actuelle (par défaut 1)
+            9 // Nombre de recettes par page
+        );
         // Retourner la réponse avec les résultats de recherche et de filtrage
         return $this->render('recette/liste.html.twig', [
             'recettes' => $recettes,

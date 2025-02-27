@@ -132,3 +132,22 @@ body {
 .search-bar button:hover {
   background-color: #D88B84;
 }
+
+.pagination {
+  margin-top: 20px; /* Ajuste la distance avec les cartes */
+}
+
+.pagination .page-item .page-link {
+  border-color: #E8A39E;
+  color: #E8A39E;
+}
+
+.pagination .page-item.active .page-link {
+  background-color: #E8A39E; /* Rose plus foncé pour la page active */
+  border-color: #E8A39E;
+  color: #fff;
+}
+
+.pagination .page-item .page-link:hover {
+  border-color: #f29089;
+}
