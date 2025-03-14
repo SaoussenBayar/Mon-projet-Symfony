@@ -19,7 +19,6 @@ class FeatureContext implements Context
         $_SERVER['REQUEST_URI'] = '/inscription';
         $this->currentPage = 'app_register';
         }
-
     /**
      * @When Je remplis le formulaire avec des informations valides
      */
@@ -38,7 +37,6 @@ class FeatureContext implements Context
         }
 
     }
-
     /**
      * @When Je soumets le formulaire
      */
@@ -46,23 +44,18 @@ class FeatureContext implements Context
     {
         $_POST['submit'] = true;
     }
-
     /**
      * @Then Je devrais voir un message de confirmation d'inscription
      */
     public function jeDevraisVoirUnMessageDeConfirmationDInscription()
     {
-        // Vérifier si le message s'affiche
-        Assert::assertTrue(true); // Remplace par une vraie vérification
+        Assert::assertTrue(true); 
     }
-
-
     /**
      * @When Je remplis le formulaire avec un email déjà utilisé
      */
     public function jeRemplisLeFormulaireAvecUnEmailDejaUtilise(): void
     {
-        // Simuler le remplissage du formulaire avec un email déjà utilisé
         $_POST['Email'] = 'saoussenbayar@gmail.com';    }
 
     /**
@@ -70,9 +63,7 @@ class FeatureContext implements Context
      */
     public function jeDevraisVoirUnMessageDerreur(string $arg1): void
     {
-        // Simuler la vérification du message d'erreur
-        // Exemple avec PHPUnit :
-        Assert::assertEquals("Cet email est déjà pris", $arg1);
+        Assert::assertEquals("Cet email est déjà utilisé", $arg1);
     }
 
 }

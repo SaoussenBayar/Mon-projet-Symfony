@@ -23,39 +23,46 @@ class RegistrationController extends AbstractController
         $user = new User();
         $form = $this->createForm(RegistrationFormType::class, $user);
         $form->handleRequest($request);
-    
-        if ($form->isSubmitted() && $form->isValid()) {
-            // Vérifier si l'e-mail existe déjà
-            $existingUser = $userRepository->findOneBy(['email' => $user->getEmail()]);
-            if ($existingUser) {
-                $this->addFlash('error', 'Cet e-mail est déjà utilisé.');
-                return $this->redirectToRoute('app_register');
+
+        try {
+            if ($form->isSubmitted() && $form->isValid()) {
+                // Vérifier si l'e-mail existe déjà
+                $existingUser = $userRepository->findOneBy(['email' => $user->getEmail()]);
+                if ($existingUser) {
+                    throw new \Exception('Cet e-mail est déjà utilisé.');
+                }
+
+                // Assigner les valeurs manquantes
+                $user->setDateInscription(new \DateTime());
+                $user->setRoles(['ROLE_USER']);
+                $user->setIsVerified(true);
+
+                // Encoder le mot de passe
+                $user->setPassword(
+                    $passwordHasher->hashPassword(
+                        $user,
+                        $form->get('password')->getData()
+                    )
+                );
+
+                // Sauvegarder l'utilisateur
+                $entityManager->persist($user);
+                $entityManager->flush();
+
+                $this->addFlash('success', 'Inscription réussie ! Vous pouvez vous connecter.');
+
+                return $this->redirectToRoute('app_login');
             }
 
-            // Assigner les valeurs manquantes
-            $user->setDateInscription(new \DateTime());
-            $user->setRoles(['ROLE_USER']);
-            $user->setIsVerified(true);
-            
-            // Encoder le mot de passe
-            $user->setPassword(
-                $passwordHasher->hashPassword(
-                    $user,
-                    $form->get('password')->getData()
-                )
-            );
-    
-            // Sauvegarder l'utilisateur
-            $entityManager->persist($user);
-            $entityManager->flush();
-    
-            $this->addFlash('success', 'Inscription réussie ! Vous pouvez vous connecter.');
-    
-            return $this->redirectToRoute('app_login');
+            return $this->render('registration/register.html.twig', [
+                'registrationForm' => $form->createView(),
+            ]);
+        } catch (\Exception $e) {
+            // Ajouter un message flash pour afficher l'erreur
+            $this->addFlash('error', $e->getMessage());
+
+            // Rediriger vers la page d'inscription avec le message d'erreur
+            return $this->redirectToRoute('app_register');
         }
-    
-        return $this->render('registration/register.html.twig', [
-            'registrationForm' => $form->createView(),
-        ]);
     }
 }

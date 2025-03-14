@@ -98,7 +98,7 @@
 {# Section des services et du carousel #}
 <section class="bottom-section">
     <div class="row">
-        <div class="left col-md-7 col-sm-12">
+        <div class="left col-lg-7 col-md-7 col-sm-12">
             <h2 class="section-title">Tout ce dont vous avez besoin, au même endroit ! 😃</h2>
             <p class="section-description">Simplifiez votre quotidien avec nos services pour accompagner vos enfants à chaque étape.</p>
             <div class="services-section">
@@ -121,7 +121,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-5 right">
+        <div class="col-lg-5 col-md-5 col-sm-12 right">
             <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
                 <ol class="carousel-indicators">
                     {% for i in 0..3 %}
@@ -176,9 +176,9 @@
                 <!-- Affichage de l'image -->
                 <div class="article-image">
                     {% if article.image %}
-                        <img src="{{ asset('images/' ~ article.image) }}" alt="{{ article.titre }}">
+                        <img src="{{ asset('uploads/' ~ article.image) }}" alt="{{ article.titre }}">
                     {% else %}
-                        <img src="{{ asset('images/default.jpg') }}" alt="Image par défaut">
+                        <img src="{{ asset('uploads/default.jpg') }}" alt="Image par défaut">
                     {% endif %}
                 </div>
 
@@ -203,7 +203,7 @@
     </div>
 </section>
 
-          
+{# Section du footer #}          
 <footer class="footer py-5">
     <div class="container">
         <div class="row g-4">
@@ -296,6 +296,6 @@ document.addEventListener("click", function(event) {
         !menu.contains(event.target)) {
         menu.classList.add("d-none");
     }
-});</script>
-     
+});
+</script>     
 {% endblock %}

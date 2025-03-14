@@ -1,1 +1,1 @@
-{"version":1,"defects":[],"times":{"App\\Tests\\ArticleTest::testArticleCreation":0.254}}
+{"version":1,"defects":{"App\\Tests\\Service\\UserServiceTest::testCreateUser":8,"App\\Tests\\Service\\UserServiceTest::testUpdateUser":7,"App\\Tests\\Service\\UserServiceTest::testDeleteUser":8},"times":{"App\\Tests\\ArticleTest::testArticleCreation":0.254,"App\\Tests\\Service\\UserServiceTest::testCreateUser":0.063,"App\\Tests\\Service\\UserServiceTest::testUpdateUser":0.001,"App\\Tests\\Service\\UserServiceTest::testDeleteUser":0.001}}

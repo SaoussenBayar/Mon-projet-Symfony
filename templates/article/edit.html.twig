@@ -9,8 +9,12 @@
         <label for="titre">Titre :</label>
         <input type="text" id="titre" name="titre" value="{{ article.titre }}" required>
     </div>
+        <div>
+        <label for="description">Description:</label>
+        <textarea id="description" name="description" required>{{ article.description}}</textarea>
+    </div>
     <div>
-        <label for="contenu">Contenu :</label>
+        <label for="contenu">Contenu(lien) :</label>
         <textarea id="contenu" name="contenu" required>{{ article.contenu }}</textarea>
     </div>
     <div>
@@ -19,8 +23,9 @@
     </div>
     <div>
         <p>Image actuelle :</p>
-        <img src="{{ asset('images/' ~ article.image) }}" alt="actuelle" style="max-width: 200px;">
+            <img src="{{ asset('uploads/' ~ article.image) }}" alt="actuelle" style="width: 150px; height: auto;">
     </div>
+    <br>
     <button type="submit">Enregistrer</button>
 </form>
 {% endblock %}

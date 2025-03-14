@@ -443,25 +443,43 @@ body {
 
 
 @media (max-width: 768px) {
+  .logo {
+    width: 80px;
+    height: 80px;
+  }
+  .navbar-nav {
+    padding-top: 10px;  
+    padding-bottom: 10px;  
+  }
   .menu-item {
-    margin-bottom: 5px;  /* Réduit l'espace entre les éléments du menu */
+    margin-bottom: 5px;  
 }
+  .text-h1 {
+    font-size: 28px; 
+  }
+  .text-p2 {
+    font-size: 16px;
+    margin: 0 15px; 
+  }
+  .service {
+    margin-bottom: 5px;
+  }
+  
+  .articles-grid {
+    gap: 15px;
+  }
+  .footer {
+    text-align: center;
+    padding: 2rem;
+  }
 
-/* Réduire la hauteur de la navbar (en réduisant le padding) */
-
-
-/* Espacement et bordure pour mieux séparer les éléments du menu */
 .navbar-nav > .menu-item:first-child {
     border-bottom: none; /* Supprimer la bordure si trop grande */
 }
-
 /* Espacement entre les sections "Services" et "Mon compte" */
 .nav-item.d-lg-none.mt-3 {
     margin-top: 15px;  /* Réduit l'espacement entre "Services" et "Mon compte" */
 }
-
-
-
 /* Séparer "Services" et "Mon compte" en blocs distincts */
 .separator {
     margin-top: 20px;  /* Plus d’espace entre les sections */
@@ -477,23 +495,18 @@ body {
 .nav-item p {
   font-size: 1.1rem;  /* Taille de texte plus petite */
   margin-top: 5px; /* Espacement réduit au-dessus du texte */
-    padding-top: 10px;
-    font-size: 1.2rem;
-    font-weight: bold;
-    text-transform: uppercase;
+  padding-top: 10px;
+  font-weight: bold;
+  text-transform: uppercase;
 }
 
 /* Ajouter un peu de padding en haut et en bas de la liste de menu */
-.navbar-nav {
-  padding-top: 10px;  /* Réduit l'espacement au sommet de la navbar */
-  padding-bottom: 10px;  /* Réduit l'espacement au bas de la navbar */
-}
+
 
 /* Espacement et bordure pour mieux séparer les éléments du menu */
 .navbar-nav > .menu-item:first-child {
     border-bottom: 1px solid #f8e4e4;
 }
-
 /* Espacement supplémentaire entre "Services" et "Mon compte" */
 .nav-item.d-lg-none.mt-3 {
     margin-top: 25px;  /* Plus d’espace entre "Services" et "Mon compte" sur mobile */
@@ -507,16 +520,7 @@ body {
     position: static;
   }
   /* 🔹 Ajustement des textes */
-  .text-h1 {
-    font-size: 28px; /* Réduction du titre */
-    text-align: center;
-  }
 
-  .text-p2 {
-    font-size: 16px;
-    margin: 0 15px; /* Réduire les marges */
-    text-align: center;
-  }
   .row{
     grid-template-columns: 1fr; /* Une seule colonne */
     gap: 15px; /* Moins d’espace entre les articles */
@@ -540,24 +544,14 @@ body {
 .right {
     padding-top: 10px; /* Réduit l’espace au-dessus du carrousel */
 }
-  .service {
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    margin-bottom: 5px;
-  }
 
-  .articles-grid {
-    grid-template-columns: 1fr; /* Une seule colonne */
-    gap: 15px; /* Moins d’espace entre les articles */
-  }
 
   /* 🔹 Optimisation des images et du carrousel */
   .carousel {
 
     width: 60%; /* Prend toute la largeur disponible */
     height: 548px; /* Hauteur automatique */
-    width: 360px; /* Largeur maximale égale à la version desktop */
+    max-width: 360px; /* Largeur maximale égale à la version desktop */
     aspect-ratio: 360/648; /* Maintient le ratio hauteur/largeur */
     margin-top: 0px;
     margin-bottom: 50px;
@@ -588,10 +582,7 @@ body {
   }
 
   /* 🔹 Footer adapté aux petits écrans */
-  .footer {
-    text-align: center;
-    padding: 2rem;
-  }
+
 
   .footer ul {
     padding: 0;
@@ -601,9 +592,6 @@ body {
     display: block;
     margin-bottom: 10px;
   }
-
-
-
   .dropdown-menu {
     width: 100%;
     text-align: center;
@@ -619,9 +607,6 @@ body {
     display: block;
     width: 100%;
 }
-.logo {
-    width: 80px;
-    height: 80px;
-  }
+
 }
 

@@ -7,7 +7,7 @@
         <thead>
             <tr>
                 <th>ID</th>
-                <th>Nom</th>
+                <th>Pseudo</th>
                 <th>Email</th>
                 <th>Rôles</th>
                 <th>Actions</th>
@@ -17,7 +17,7 @@
             {% for user in users %}
                 <tr>
                     <td>{{ user.id }}</td>
-                    <td>{{ user.nom }}</td>
+                    <td>{{ user.pseudo }}</td>
                     <td>{{ user.email }}</td>
                     <td>{{ user.roles|join(', ') }}</td>
                     <td>
@@ -35,5 +35,10 @@
             {% endfor %}
         </tbody>
     </table>
+
+    <!-- Bouton Ajouter un utilisateur -->
+    <div class="text-end mt-3">
+        <a href="{{ path('user_new') }}" class="btn btn-success">Ajouter un utilisateur</a>
+    </div>
 </div>
 {% endblock %}
