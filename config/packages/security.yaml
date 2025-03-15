@@ -59,6 +59,7 @@ security:
         - { path: ^/users/\d+/edit, roles: ROLE_ADMIN }
         - { path: ^/users/\d+/delete, roles: ROLE_ADMIN }
         - { path: ^/users, roles: ROLE_ADMIN }
+        - { path: ^/articles, roles: ROLE_ADMIN }
         - { path: ^/articles/new, roles: ROLE_ADMIN }
         - { path: ^/articles/\d+/edit, roles: ROLE_ADMIN }
         - { path: ^/articles/\d+/delete, roles: ROLE_ADMIN }

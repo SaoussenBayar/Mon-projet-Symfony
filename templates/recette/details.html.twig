@@ -11,7 +11,7 @@
 <div class="recette-details">
     <!-- Section Détails de la recette -->
     <div class="recette-header">
-        <img src="{{ asset('images/' ~ recette.image) }}" alt="Image de la recette" class="recette-image">
+        <img src="{{ asset('uploads/' ~ recette.image) }}" alt="Image de la recette" class="recette-image">
         <div class="recette-info">
             <h1>{{ recette.titre }}</h1>
             <p><strong>Temps de préparation:</strong> {{ recette.tempsPrep }} minutes</p>

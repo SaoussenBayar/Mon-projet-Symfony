@@ -29,7 +29,7 @@ class RecetteType extends AbstractType
             ])
             ->add('image', FileType::class, [
                 'label' => 'Image de la recette',
-                'required' => true,
+                'required' => false,
                 'mapped' => false, 
                 'attr' => ['accept' => 'image/*']
 

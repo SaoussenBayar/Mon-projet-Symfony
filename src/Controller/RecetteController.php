@@ -168,29 +168,29 @@ class RecetteController extends AbstractController
     #[Route('/recette/{id}/edit', name: 'recette_edit')]
     public function editRecette(Recette $recette, Request $request, EntityManagerInterface $em): Response
     {
+        $ancienneImage = $recette->getImage(); // Sauvegarde l'image existante
+    
         $form = $this->createForm(RecetteType::class, $recette);
         $form->handleRequest($request);
-        if ($uploadedFile) {
-            // Gérer l'upload du fichier
-            $uploadsDirectory = $this->getParameter('uploads_directory'); // Dossier des uploads
-            $newFilename = uniqid().'.'.$uploadedFile->guessExtension();
-        
-            // Déplacer le fichier vers le dossier de téléchargement
-            $uploadedFile->move($uploadsDirectory, $newFilename);
-        
-            // Mettre à jour le chemin de l'image dans l'article
-            $recette->setImage($newFilename);
-        } else {
-            // Conserver l'ancienne image si aucune nouvelle image n'est téléchargée
-            $recette->setImage($article->getImage()); // Cela évite de perdre l'ancienne image
-        }
+    
+        $uploadedFile = $form->get('image')->getData();
+    
         if ($form->isSubmitted() && $form->isValid()) {
+            if ($uploadedFile) {
+                // Gérer l'upload du fichier
+                $uploadsDirectory = $this->getParameter('kernel.project_dir') . '/public/uploads';
+                $newFilename = uniqid() . '.' . $uploadedFile->guessExtension();
+                $uploadedFile->move($uploadsDirectory, $newFilename);
+                $recette->setImage($newFilename); // Met à jour l'image
+            } else {
+                $recette->setImage($ancienneImage); // Conserve l'ancienne image
+            }
+    
             $em->flush();
             $this->addFlash('success', 'Recette modifiée avec succès !');
             return $this->redirectToRoute('recette_gestion');
         }
-  
-
+    
         return $this->render('recette/gestion.html.twig', [
             'form' => $form->createView(),
             'recettes' => $em->getRepository(Recette::class)->findAll(),
@@ -198,6 +198,7 @@ class RecetteController extends AbstractController
         ]);
     }
     
+        
     #[Route('/recette/{id}/delete', name: 'recette_delete', methods: ['POST'])]
     public function deleteRecette(Recette $recette, Request $request, EntityManagerInterface $em): Response
     {

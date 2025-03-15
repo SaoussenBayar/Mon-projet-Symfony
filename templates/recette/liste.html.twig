@@ -34,7 +34,7 @@
             <li class="recipe-item">
                 <a href="{{ path('recette_details', { id: recette.id }) }}">
                     <div class="recipe-image">
-                        <img src="{{ asset('images/' ~ recette.image) }}" alt="Image de {{ recette.titre }}" />
+                        <img src="{{ asset('uploads/' ~ recette.image) }}" alt="Image de {{ recette.titre }}" />
                     </div>
                     <div class="recipe-details">
                         <h2>{{ recette.titre }}</h2>
