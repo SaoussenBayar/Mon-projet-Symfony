@@ -64,6 +64,6 @@ security:
         - { path: ^/articles/\d+/edit, roles: ROLE_ADMIN }
         - { path: ^/articles/\d+/delete, roles: ROLE_ADMIN }
         - { path: ^/recettes, roles: IS_AUTHENTICATED_FULLY}
-        - { path: ^/recettes/gestion, roles: ROLE_ADMIN}
+        - { path: ^/gestion_recettes, roles: ROLE_ADMIN}
         # Protection des routes API avec authentification requise
         - { path: ^/api, roles: IS_AUTHENTICATED_FULLY}

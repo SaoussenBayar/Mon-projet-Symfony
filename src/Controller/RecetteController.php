@@ -120,7 +120,7 @@ class RecetteController extends AbstractController
         ]);
     }
 
-    #[Route('/recettes/gestion', name: 'recette_gestion')]
+    #[Route('/gestion_recettes', name: 'recette_gestion')]
     public function gestionRecettes(Request $request, EntityManagerInterface $em): Response
     {
         $recettes = $em->getRepository(Recette::class)->findAll();
