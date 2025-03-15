@@ -47,23 +47,9 @@ security:
         # Firewall pour le login API avec JSON (stateless)
 
     access_control:
-        # Accès public pour les routes de login
-        #- { path: ^/api/login, roles: PUBLIC_ACCESS }
         - { path: ^/login, roles: PUBLIC_ACCESS }
-
-        # Accès anonyme pour la déconnexion
         - { path: ^/logout, roles: IS_AUTHENTICATED_ANONYMOUSLY }
-
-        # Protection des routes administratives
-        - { path: ^/users/new, roles: ROLE_ADMIN }
-        - { path: ^/users/\d+/edit, roles: ROLE_ADMIN }
-        - { path: ^/users/\d+/delete, roles: ROLE_ADMIN }
         - { path: ^/users, roles: ROLE_ADMIN }
         - { path: ^/articles, roles: ROLE_ADMIN }
-        - { path: ^/articles/new, roles: ROLE_ADMIN }
-        - { path: ^/articles/\d+/edit, roles: ROLE_ADMIN }
-        - { path: ^/articles/\d+/delete, roles: ROLE_ADMIN }
         - { path: ^/recettes, roles: IS_AUTHENTICATED_FULLY}
         - { path: ^/gestion_recettes, roles: ROLE_ADMIN}
-        # Protection des routes API avec authentification requise
-        - { path: ^/api, roles: IS_AUTHENTICATED_FULLY}
