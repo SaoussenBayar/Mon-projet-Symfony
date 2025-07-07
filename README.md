@@ -1,0 +1,5 @@
+![screencapture-web007-azure-certif-academy-2025-03-14-17_46_20](https://github.com/user-attachments/assets/569641c8-19e3-4ce2-af6b-349da2eb78ce)
+![screencapture-web007-azure-certif-academy-inscription-2025-03-14-17_40_11](https://github.com/user-attachments/assets/188e2cc6-cf89-43fd-b2de-57eec848129f)
+![screencapture-web007-azure-certif-academy-login-2025-03-14-17_41_07](https://github.com/user-attachments/assets/b6f042b2-7414-44e7-b2eb-2f7e6cfde67c)
+![screencapture-web007-azure-certif-academy-recettes-2025-03-14-17_47_52](https://github.com/user-attachments/assets/d77983c6-05ae-4d4d-ba07-3a81594db2ce)
+![screencapture-web007-azure-certif-academy-recette-123-2025-03-14-17_51_49](https://github.com/user-attachments/assets/28b62aaa-76b1-44b7-af69-c4b3ec9f3af5)
